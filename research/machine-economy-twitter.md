@@ -45,27 +45,60 @@ Agent Token / Virtuals / “$30T machine economy” 线程、咨询 TAM、原始
 
 ---
 
-## 2. 值得读的长文（同一批人，不在时间线上）
+## 2. 文章链接（可直接打开）
 
-按对监测有没有用排序，不是按热度。
+### 必读（监测/投资口径）
 
-1. Lucas Shin, [Machine Economy 2030](https://research.artemis.ai/p/machine-economy-2030) — 洗量后的真实图；价值会落在界面 / 支付 / 算力。
-2. Visa × Artemis, [Agentic Payments from the Ground Up](https://www.visa.com/en-us/thought-leadership/innovation/agentic-payments-from-the-ground-up)（Tim Conrad）— 宏观卡轨 vs 微观稳定币轨；洗量后约 $15M / 1.1 亿笔。
-3. a16z, [The honest number behind AI agent payments](https://a16zcrypto.com/posts/article/ai-agent-payments-honest-number/) — $24M → $3M → $1.6M。
-4. Gökhan Turhan, [The x402 economy — July 2026](https://gokhan.vc/blog/x402-economy-july-2026) — 分母差三个数量级；BlockRun 占笔数 ~82%；counts 跌、value 还在是质量改善。
-5. Sandmark, [The Agentic Finance Stack Is Built but Not Much Runs on It Yet](https://www.sandmark.com/news/features/agentic-finance-stack-built-not-much-runs-it-yet) — 栈建好了，跑的东西很少。
-6. Paul Timofeev / Shoal, [When Machines Move Money](https://www.shoal.gg/p/when-machines-move-money) — 卖铲人框架；x402 是否成功仍开放。
-7. Galaxy, [Agentic Payments: x402 and AI Agents](https://www.galaxy.com/insights/research/x402-ai-agents-crypto-payments) — 加密会被吸进现有支付，而不是另立一个 crypto 经济。
-8. Tokenized Ep.83, [The Headless Merchant Economy](https://newsletter.tokenizedpod.com/p/ep-83-the-headless-merchant-economy) — 早期市场是开发者工具/数据/交易，不是 agent 买菜。
-9. 美联储 FEDS Note, *The AI Buildout and the Economy*（2026-07）— 能力 → 投资 → 采用 → 生产率。推特上 Dylan Patel 是这套的高频版。
-10. Cloudflare, [Pay per crawl](https://blog.cloudflare.com/introducing-pay-per-crawl/) — 机器付费内容的供给侧开关。
+| 文章 | 链接 |
+|------|------|
+| Lucas Shin, Machine Economy 2030 | https://research.artemis.ai/p/machine-economy-2030 |
+| Lucas Shin, x402: Early Signs of Agentic Commerce | https://onchainlu.substack.com/p/x402-early-signs-of-agentic-commerce |
+| Visa × Artemis, Agentic Payments from the Ground Up（网页） | https://www.visa.com/en-us/thought-leadership/innovation/agentic-payments-from-the-ground-up |
+| Visa × Artemis, 完整 PDF | https://www.visa.com/content/dam/visa/reimagine-visa/thought-leadership/documents/agentic-payments-report.pdf |
+| a16z, The honest number behind AI agent payments | https://a16zcrypto.com/posts/article/ai-agent-payments-honest-number/ |
+| Gökhan Turhan, The x402 economy — July 2026 | https://gokhan.vc/blog/x402-economy-july-2026 |
+| Sandmark, The Agentic Finance Stack Is Built but Not Much Runs on It Yet | https://www.sandmark.com/news/features/agentic-finance-stack-built-not-much-runs-it-yet |
+| Paul Timofeev / Shoal, When Machines Move Money | https://www.shoal.gg/p/when-machines-move-money |
+| Galaxy, Agentic Payments: x402 and AI Agents | https://www.galaxy.com/insights/research/x402-ai-agents-crypto-payments |
+| Tokenized Ep.83, The Headless Merchant Economy | https://newsletter.tokenizedpod.com/p/ep-83-the-headless-merchant-economy |
+| Tokenized Ep.10, How AI Bots Buy Internet Services（Lucas Shin） | https://www.tokenizedpod.com/episodes/how-ai-bots-buy-internet-services |
+| 美联储 FEDS Note, The AI Buildout and the Economy | https://www.federalreserve.gov/econres/notes/feds-notes/the-ai-buildout-and-the-economy-publicly-available-data-to-assess-ais-impact-20260717.html |
+| Cloudflare, Pay per crawl | https://blog.cloudflare.com/introducing-pay-per-crawl/ |
+| BlockRun, The State of x402（PDF） | https://blockrun.ai/state-x402-2025.pdf |
+| Forkast, Visa/Artemis: The $0.14 Reality of Agent Commerce | https://forkast.news/visa-artemis-the-0-14-reality-of-agent-commerce/ |
+| CoinDesk, x402 微支付需求还没到 | https://www.coindesk.com/markets/2026/03/11/coinbase-backed-ai-payments-protocol-wants-to-fix-micropayment-but-demand-is-just-not-there-yet |
 
-现场看板（不是文章，每周看一眼）：
+### 协议 / 产品原文
 
-- Artemis x402：[Real vs Gamed](https://app.artemisanalytics.com/chart-builder/10063) 与 [asset/x402](https://app.artemisanalytics.com/asset/x402)
-- [x402scan.com](https://x402scan.com)
-- [lookx402.com](https://lookx402.com)
-- [agenteconomy.to/x402](https://agenteconomy.to/x402)（原始口径，只当分子分母对照）
+| 文章 | 链接 |
+|------|------|
+| x402 白皮书（PDF） | https://x402.org/wp-content/uploads/sites/10/2026/06/x402-whitepaper.pdf |
+| x402 官网 | https://x402.org |
+| Coinbase, The Rise of Onchain AI | https://www.coinbase.com/en-gb/blog/the-rise-of-onchain-ai-agents-apps-and-commerce |
+| CoinDesk, Erik Reppel：agent 会打掉广告模式 | https://www.coindesk.com/tech/2026/05/06/the-end-of-ads-coinbase-engineer-says-ai-agents-could-kill-the-internet-s-favorite-business-model |
+| Merit Systems, x402 thesis | https://merit.systems/blog/x402 |
+| Stripe 机器支付文档 | https://docs.stripe.com/payments/machine |
+| MPP 协议站 | https://mpp.dev |
+| Alchemy, x402 vs MPP | https://www.alchemy.com/blog/x402-vs-mpp-comparing-agent-payment-protocols |
+| Dexter, The Protocol War That Doesn't Matter | https://dexter.cash/blog/the-protocol-war-that-doesnt-matter |
+| Visa Consulting, The rise of Agentic Commerce Part 1（PDF） | https://corporate.visa.com/content/dam/VCOM/corporate/services/documents/vca-rise-of-agentic-commerce.pdf |
+
+### 产能层（电 / 算力，投资现在主要在这）
+
+| 文章 | 链接 |
+|------|------|
+| Dylan Patel / Dwarkesh, 算力三条瓶颈 | https://www.dwarkesh.com/p/dylan-patel |
+| Cointelegraph 转述 a16z 诚实数字 | https://cointelegraph.com/news/ai-agent-payment-volume-closer-to-1-6m-says-a16z |
+| Cryptopolitan, analysts temper x402 hype | https://www.cryptopolitan.com/x402-agentic-ai-commerce-growth/ |
+
+### 现场看板（不是文章）
+
+- Artemis Real vs Gamed：https://app.artemisanalytics.com/chart-builder/10063
+- Artemis x402 asset：https://app.artemisanalytics.com/asset/x402
+- x402scan：https://x402scan.com
+- lookx402：https://lookx402.com
+- agenteconomy.to：https://agenteconomy.to/x402
+- Gökhan 测量清单所在文：https://gokhan.vc/blog/x402-economy-july-2026
 
 ---
 
