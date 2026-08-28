@@ -1,0 +1,63 @@
+{
+  "captured_at": "2026-08-28T10:31:51.804779+00:00",
+  "identity": "0x8004A169FB4a3325136EB29fA0ceB6D2e539a432",
+  "reputation": "0x8004BAa17C55a88189AE136b182e5fdA19dE9b63",
+  "validation_scanned": "0x8004Cc8439f36fd5F9F049D9fF86523Df6dAAB58",
+  "validation_note": "Official explorer: mainnet Validation pending. This address is scanned for events only.",
+  "do_not_sum_chains": true,
+  "totalSupply_reverts": true,
+  "chains": [
+    {
+      "chain": "base",
+      "chain_id": 8453,
+      "block": 50561882,
+      "max_agent_id_ownerOf": 73285,
+      "owner_of_1": "0x89e9e1ab11dd1b138b1dce6d6a4a0926aafd5029",
+      "owner_of_max": "0xfea55c5c6a959af911af9a6ba3f0a4b245747fb0",
+      "owner_of_max_plus_1": null,
+      "recent_window_blocks": 2000,
+      "recent_mints_transfer_from_zero": 5,
+      "recent_new_feedback": 2,
+      "recent_validation_request": 0,
+      "recent_validation_response": 0,
+      "caveat": "max_agent_id assumes sequential mint; confirm with a mint log tokenId near max."
+    },
+    {
+      "chain": "ethereum",
+      "chain_id": 1,
+      "block": 25853159,
+      "max_agent_id_ownerOf": 50547,
+      "owner_of_1": "0x9ce7082814bda389f3ba548bdf2626006279569c",
+      "owner_of_max": "0xc5afbe89475781132456867c50b84e86578b8ec4",
+      "owner_of_max_plus_1": null,
+      "recent_window_blocks": 2000,
+      "recent_mints_transfer_from_zero": "error: https://ethereum.publicnode.com eth_getLogs failed: HTTP Error 403: Forbidden",
+      "recent_new_feedback": "error: https://ethereum.publicnode.com eth_getLogs failed: HTTP Error 403: Forbidden",
+      "recent_validation_request": "error: https://ethereum.publicnode.com eth_getLogs failed: HTTP Error 403: Forbidden",
+      "recent_validation_response": "error: https://ethereum.publicnode.com eth_getLogs failed: HTTP Error 403: Forbidden",
+      "caveat": "max_agent_id assumes sequential mint; confirm with a mint log tokenId near max."
+    },
+    {
+      "chain": "bsc",
+      "chain_id": 56,
+      "block": 118560120,
+      "max_agent_id_ownerOf": 311259,
+      "owner_of_1": "0x89e9e1ab11dd1b138b1dce6d6a4a0926aafd5029",
+      "owner_of_max": "0xe55816904796341bf8535e25f6c8b647927fc946",
+      "owner_of_max_plus_1": null,
+      "recent_window_blocks": 2000,
+      "recent_mints_transfer_from_zero": "error: {'code': -32005, 'message': 'limit exceeded'}",
+      "recent_new_feedback": "error: {'code': -32005, 'message': 'limit exceeded'}",
+      "recent_validation_request": "error: {'code': -32005, 'message': 'limit exceeded'}",
+      "recent_validation_response": "error: {'code': -32005, 'message': 'limit exceeded'}",
+      "caveat": "max_agent_id assumes sequential mint; confirm with a mint log tokenId near max."
+    }
+  ],
+  "dashboard_check_agenteconomy_2026_08_26": {
+    "total_agents_24_chains": 509272,
+    "bnb": 299326,
+    "base": 70113,
+    "ethereum": 68231,
+    "note": "Compare per-chain to ownerOf max. Ethereum dashboard was already too high vs ownerOf(68231) revert."
+  }
+}
