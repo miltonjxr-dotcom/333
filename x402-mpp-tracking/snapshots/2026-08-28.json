@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-08-28T09:49:52.059372+00:00",
+  "captured_at": "2026-08-28T10:15:38.236164+00:00",
   "rails_do_not_sum": [
     "x402 raw settlement (x402scan / PayAI)",
     "x402 wash-filtered catalog (x402watch)",
@@ -16,11 +16,11 @@
   "x402watch": {
     "landing": {
       "stats": {
-        "services_indexed": 92432,
-        "transactions_analyzed": 23363322,
-        "active_buyers": 11474,
+        "services_indexed": 92436,
+        "transactions_analyzed": 23363929,
+        "active_buyers": 11483,
         "real_volume_pct": 78.7,
-        "last_updated": "2026-08-28T09:49:56.355511+00:00"
+        "last_updated": "2026-08-28T10:15:43.004775+00:00"
       },
       "label_distribution_all": [
         {
@@ -69,14 +69,14 @@
     },
     "wash_report": {
       "stats": {
-        "total_active_buyers_30d": 11475,
+        "total_active_buyers_30d": 11483,
         "real_volume_pct": 78.7,
         "suspected_wash_count": 3,
         "self_test_count": 117,
-        "last_updated": "2026-08-28T09:47:28.916353+00:00"
+        "last_updated": "2026-08-28T10:15:45.619111+00:00"
       },
       "label_distribution_30d": {
-        "organic_user": 10798,
+        "organic_user": 10800,
         "self_test": 117,
         "developer": 80,
         "suspected_wash": 3,
@@ -90,30 +90,30 @@
     "categories": {
       "total_categories": 33,
       "total_services": 34876,
-      "total_volume_24h": 376.584208,
-      "total_tx_24h": 7084,
-      "last_updated": "2026-08-28T09:47:46.824664+00:00",
+      "total_volume_24h": 373.313596,
+      "total_tx_24h": 6921,
+      "last_updated": "2026-08-28T10:15:47.978794+00:00",
       "top": [
         {
           "category": "token_data",
           "services_count": 1024,
-          "volume_24h": 245.72106,
-          "tx_24h": 147,
-          "real_volume_pct": 58.9,
+          "volume_24h": 245.71706,
+          "tx_24h": 145,
+          "real_volume_pct": 59.0,
           "wash_pct": 0.0,
           "label_distribution": {
-            "ai_agent": 0.2684,
-            "analytics_bot": 0.0597,
-            "developer": 0.341,
-            "organic_user": 0.3207,
+            "ai_agent": 0.2683,
+            "analytics_bot": 0.0599,
+            "developer": 0.3404,
+            "organic_user": 0.3212,
             "verifier": 0.0101
           }
         },
         {
           "category": "trading_signals",
           "services_count": 460,
-          "volume_24h": 64.50935,
-          "tx_24h": 138,
+          "volume_24h": 64.50635,
+          "tx_24h": 135,
           "real_volume_pct": 94.1,
           "wash_pct": 0.0,
           "label_distribution": {
@@ -127,12 +127,12 @@
         {
           "category": "search_engine",
           "services_count": 120,
-          "volume_24h": 25.337,
-          "tx_24h": 4229,
-          "real_volume_pct": 98.0,
+          "volume_24h": 25.289,
+          "tx_24h": 4221,
+          "real_volume_pct": 98.1,
           "wash_pct": 0.0,
           "label_distribution": {
-            "ai_agent": 0.9536,
+            "ai_agent": 0.9537,
             "analytics_bot": 0.0133,
             "developer": 0.006,
             "organic_user": 0.0269,
@@ -144,15 +144,15 @@
         {
           "category": "premium_placeholder",
           "services_count": 10248,
-          "volume_24h": 13.18968,
-          "tx_24h": 375,
-          "real_volume_pct": 48.3,
+          "volume_24h": 13.191068,
+          "tx_24h": 377,
+          "real_volume_pct": 48.2,
           "wash_pct": 0.0,
           "label_distribution": {
-            "ai_agent": 0.0535,
-            "analytics_bot": 0.3516,
-            "developer": 0.1601,
-            "organic_user": 0.4292,
+            "ai_agent": 0.0536,
+            "analytics_bot": 0.3513,
+            "developer": 0.1608,
+            "organic_user": 0.4287,
             "verifier": 0.0056
           }
         },
@@ -173,63 +173,48 @@
         {
           "category": "wallet_analytics",
           "services_count": 1978,
-          "volume_24h": 6.4385,
-          "tx_24h": 315,
+          "volume_24h": 6.3885,
+          "tx_24h": 314,
           "real_volume_pct": 90.1,
           "wash_pct": 0.0,
           "label_distribution": {
-            "ai_agent": 0.4968,
+            "ai_agent": 0.4967,
             "analytics_bot": 0.0734,
             "developer": 0.0189,
-            "organic_user": 0.404,
+            "organic_user": 0.4041,
             "unlabeled": 0.0014,
             "verifier": 0.0055
           }
         },
         {
-          "category": "e_commerce",
-          "services_count": 256,
-          "volume_24h": 3.199,
-          "tx_24h": 183,
-          "real_volume_pct": 32.8,
-          "wash_pct": 0.0,
-          "label_distribution": {
-            "ai_agent": 0.0822,
-            "analytics_bot": 0.0073,
-            "developer": 0.6619,
-            "organic_user": 0.2463,
-            "verifier": 0.0023
-          }
-        },
-        {
           "category": "blockchain_infra",
           "services_count": 437,
-          "volume_24h": 2.02215,
-          "tx_24h": 240,
-          "real_volume_pct": 92.8,
+          "volume_24h": 2.17815,
+          "tx_24h": 261,
+          "real_volume_pct": 92.6,
           "wash_pct": 0.0,
           "label_distribution": {
-            "ai_agent": 0.2217,
+            "ai_agent": 0.2213,
             "analytics_bot": 0.0063,
-            "developer": 0.0527,
-            "organic_user": 0.7065,
-            "unlabeled": 0.0095,
+            "developer": 0.0526,
+            "organic_user": 0.7048,
+            "unlabeled": 0.0118,
             "verifier": 0.0033
           }
         },
         {
           "category": "financial_data",
           "services_count": 1333,
-          "volume_24h": 1.915,
-          "tx_24h": 883,
-          "real_volume_pct": 19.8,
-          "wash_pct": 78.7,
+          "volume_24h": 1.873,
+          "tx_24h": 866,
+          "real_volume_pct": 19.9,
+          "wash_pct": 78.6,
           "label_distribution": {
             "ai_agent": 0.0636,
             "analytics_bot": 0.0055,
             "developer": 0.0085,
-            "organic_user": 0.1345,
-            "self_test": 0.7868,
+            "organic_user": 0.1352,
+            "self_test": 0.786,
             "verifier": 0.0011
           }
         },
@@ -264,24 +249,38 @@
         {
           "category": "ai_search",
           "services_count": 62,
-          "volume_24h": 0.93,
-          "tx_24h": 51,
-          "real_volume_pct": 97.2,
+          "volume_24h": 0.809,
+          "tx_24h": 40,
+          "real_volume_pct": 97.3,
           "wash_pct": 0.4,
           "label_distribution": {
-            "ai_agent": 0.7815,
-            "analytics_bot": 0.0109,
-            "developer": 0.0086,
-            "organic_user": 0.1903,
+            "ai_agent": 0.7844,
+            "analytics_bot": 0.0098,
+            "developer": 0.0087,
+            "organic_user": 0.1885,
             "self_test": 0.0038,
             "verifier": 0.0049
           }
         },
         {
+          "category": "ai_inference",
+          "services_count": 1156,
+          "volume_24h": 0.755488,
+          "tx_24h": 124,
+          "real_volume_pct": 99.2,
+          "wash_pct": 0.8,
+          "label_distribution": {
+            "ai_agent": 0.1534,
+            "organic_user": 0.8383,
+            "self_test": 0.0079,
+            "verifier": 0.0004
+          }
+        },
+        {
           "category": "maps_location",
           "services_count": 209,
-          "volume_24h": 0.8,
-          "tx_24h": 16,
+          "volume_24h": 0.75,
+          "tx_24h": 15,
           "real_volume_pct": 98.6,
           "wash_pct": 0.0,
           "label_distribution": {
@@ -292,59 +291,31 @@
           }
         },
         {
-          "category": "ai_inference",
-          "services_count": 1156,
-          "volume_24h": 0.754488,
-          "tx_24h": 124,
-          "real_volume_pct": 99.2,
-          "wash_pct": 0.8,
-          "label_distribution": {
-            "ai_agent": 0.154,
-            "organic_user": 0.8377,
-            "self_test": 0.0079,
-            "verifier": 0.0004
-          }
-        },
-        {
           "category": "business_intelligence",
           "services_count": 3647,
-          "volume_24h": 0.55,
-          "tx_24h": 116,
+          "volume_24h": 0.575,
+          "tx_24h": 121,
           "real_volume_pct": 1.7,
           "wash_pct": 0.0,
           "label_distribution": {
-            "ai_agent": 0.0159,
+            "ai_agent": 0.0158,
             "analytics_bot": 0.9797,
             "organic_user": 0.0012,
-            "verifier": 0.0033
+            "verifier": 0.0032
           }
         },
         {
           "category": "nft_data",
           "services_count": 72,
-          "volume_24h": 0.32,
-          "tx_24h": 70,
-          "real_volume_pct": 98.9,
+          "volume_24h": 0.387,
+          "tx_24h": 84,
+          "real_volume_pct": 98.7,
           "wash_pct": 0.0,
           "label_distribution": {
             "ai_agent": 0.012,
             "analytics_bot": 0.0005,
-            "organic_user": 0.9771,
-            "unlabeled": 0.0104
-          }
-        },
-        {
-          "category": "agent_communication",
-          "services_count": 68,
-          "volume_24h": 0.18,
-          "tx_24h": 11,
-          "real_volume_pct": 8.3,
-          "wash_pct": 0.0,
-          "label_distribution": {
-            "ai_agent": 0.0181,
-            "analytics_bot": 0.9093,
-            "organic_user": 0.0648,
-            "verifier": 0.0078
+            "organic_user": 0.9747,
+            "unlabeled": 0.0128
           }
         },
         {
@@ -362,10 +333,39 @@
           }
         },
         {
+          "category": "agent_communication",
+          "services_count": 68,
+          "volume_24h": 0.1,
+          "tx_24h": 7,
+          "real_volume_pct": 8.2,
+          "wash_pct": 0.0,
+          "label_distribution": {
+            "ai_agent": 0.018,
+            "analytics_bot": 0.91,
+            "organic_user": 0.0643,
+            "verifier": 0.0077
+          }
+        },
+        {
+          "category": "e_commerce",
+          "services_count": 256,
+          "volume_24h": 0.079,
+          "tx_24h": 27,
+          "real_volume_pct": 32.8,
+          "wash_pct": 0.0,
+          "label_distribution": {
+            "ai_agent": 0.0822,
+            "analytics_bot": 0.0073,
+            "developer": 0.6619,
+            "organic_user": 0.2463,
+            "verifier": 0.0023
+          }
+        },
+        {
           "category": "defi_data",
           "services_count": 777,
-          "volume_24h": 0.056,
-          "tx_24h": 12,
+          "volume_24h": 0.054,
+          "tx_24h": 11,
           "real_volume_pct": 99.3,
           "wash_pct": 0.1,
           "label_distribution": {
@@ -458,48 +458,100 @@
     "caveat": "Channel events, not USD. Cumulative payers \u2260 this week's active payers."
   },
   "x402scan": {
+    "overall_30d": {
+      "tx": 17380000,
+      "volume_usd": 1320000,
+      "buyers": 21970,
+      "sellers": 22000,
+      "source": "https://www.x402scan.com/ homepage 2026-08-28T10:15Z; raw, unwashed"
+    },
     "payai_facilitator_24h": {
+      "tx": 1030000,
+      "volume_usd": 15260,
+      "buyers": 80,
+      "sellers": null,
+      "lifetime_tx": 6880000,
+      "lifetime_volume_usd": 123130,
+      "lifetime_buyers": 5340,
+      "lifetime_sellers": 4560,
+      "source": "https://www.x402scan.com/facilitator/payAI 2026-08-28T10:15Z"
+    },
+    "payai_facilitator_24h_morning": {
       "tx": 1120000,
       "volume_usd": 17090,
       "buyers": 86,
       "sellers": 48,
       "blockrun_share_tx_est": 0.99,
-      "source": "blockrun-tracking/snapshots/2026-08-28.json ~09:00 UTC; identity PayAI 1.12M + Figment 0.206M ~ BlockRun 1.33M"
+      "source": "09:00 UTC slice; identity then: PayAI 1.12M + Figment 0.206M ~ BlockRun 1.33M"
     },
-    "figment_facilitator_24h": {
+    "figment_facilitator_24h_morning": {
       "tx": 205900,
       "volume_usd": 3020,
       "buyers": 3,
-      "sellers": 1
+      "sellers": 1,
+      "source": "09:00 UTC; /facilitator/figment 404 at 10:15"
     },
     "coinbase_facilitator_24h": {
-      "tx": null,
-      "volume_usd": null,
-      "buyers": null,
+      "tx": 60850,
+      "volume_usd": 21900,
+      "buyers": 1740,
       "sellers": null,
-      "source": "https://www.x402scan.com/facilitator/coinbase"
+      "lifetime_tx": 8940000,
+      "lifetime_volume_usd": 780210,
+      "lifetime_buyers": 11700,
+      "lifetime_sellers": 12100,
+      "source": "https://www.x402scan.com/facilitator/coinbase 2026-08-28T10:15Z"
     },
     "sol_blockrun_24h": {
       "tx": 1330000,
       "volume_usd": 20130,
       "buyers": 4,
+      "window": "09:00 UTC; 10:15 server page only exposes 30d",
       "tx_30d": 7650000,
       "volume_usd_30d": 88160,
       "buyers_30d": 45,
-      "source": "x402scan sol.blockrun.ai copied from blockrun-tracking 2026-08-28"
+      "source": "30d confirmed x402scan server 239470e8 at 10:15; 24h from morning slice"
     },
     "base_blockrun_24h": {
       "tx": 1510,
       "volume_usd": 81.09,
       "buyers": 55,
-      "buyers_30d": 383,
-      "source": "x402scan blockrun.ai; 24h noisy vs 30d"
+      "window_24h": "09:00 UTC; 10:15 overview HTML empty",
+      "tx_30d": 7310000,
+      "volume_usd_30d": 170670,
+      "buyers_30d": 569,
+      "source": "30d buyers 569 from x402scan homepage featured row at 10:15 (morning copy had 383)"
     }
+  },
+  "mppscan_registry_noise": {
+    "tx": 136600,
+    "volume_usd": 2600,
+    "agents": 5900,
+    "servers": 379,
+    "source": "https://mppscan.com/ 2026-08-28T10:15Z",
+    "caveat": "Registry/catalog headline. Do not treat as Tempo organic GMV. Do not add to agenteconomy tempoMpp 45320 events. Top row lists OpenAI chat completions at $27.52 — not production OpenAI billing."
   },
   "stripe_offchain_mpp": {
     "disclosed": false,
     "note": "Card / SPT sessions are opaque unless Stripe or Tempo publishes them."
   },
-  "dual_rail": [],
-  "notes": "Week-0 baseline. x402watch catalog 24h ~$377 vs BlockRun Solana 24h ~$20.1k. Do not sum. MPP last7=133 events, max daily payers=3; cumulative 1849 payers is not this week's activity. ai_agent 190 vs memo 2026-08-05 snapshot of 381."
+  "dual_rail": [
+    {
+      "product": "OneSource api.onesource.io",
+      "evidence": "x402scan featured: USDC on Base via x402, or pathUSD/USDC.e on Tempo via MPP",
+      "address_overlap": "unproven",
+      "tempo_last7_consistent_with_usage": false
+    },
+    {
+      "product": "Agent402.Tools",
+      "evidence": "mppscan listing claims x402 + MPP dual offer",
+      "address_overlap": "unproven"
+    },
+    {
+      "product": "APIbase",
+      "evidence": "mppscan listing claims x402 (USDC Base) + MPP (USDC Tempo)",
+      "address_overlap": "unproven"
+    }
+  ],
+  "notes": "Friday 10:15 UTC official week-0 refresh. Coinbase 24h $21.9k / 1740 buyers vs PayAI 24h $15.3k / 80 buyers — tx still PayAI/BlockRun, dollars split. x402watch catalog 24h ~$373. MPP last7=133 events. ai_agent still 190. mppscan is registry noise."
 }
