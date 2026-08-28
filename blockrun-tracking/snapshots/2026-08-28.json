@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-08-28T09:30:31.463182+00:00",
+  "captured_at": "2026-08-28T09:30:56.895207+00:00",
   "payai_stats": {
     "cached_at": "2026-08-28T08:39:41.129Z",
     "settlements_24h": 1329008,
@@ -17,29 +17,37 @@
   },
   "x402scan": {
     "sol_blockrun": {
-      "tx_24h": null,
-      "volume_usd_24h": null,
-      "buyers_24h": null,
-      "tx_30d": null,
-      "volume_usd_30d": null,
-      "buyers_30d": null,
-      "source": "fill from https://www.x402scan.com/ (sol.blockrun.ai)"
+      "tx_24h": 1330000,
+      "volume_usd_24h": 20130,
+      "buyers_24h": 4,
+      "tx_30d": 7650000,
+      "volume_usd_30d": 88160,
+      "buyers_30d": 45,
+      "avg_ticket_usd_30d": 0.0115,
+      "source": "x402scan homepage + server 239470e8 (sol.blockrun.ai), ~09:00 UTC"
     },
     "base_blockrun": {
-      "tx_24h": null,
-      "volume_usd_24h": null,
-      "buyers_24h": null,
-      "tx_30d": null,
-      "volume_usd_30d": null,
-      "buyers_30d": null,
-      "source": "fill from blockrun.ai server page"
+      "tx_24h": 1510,
+      "volume_usd_24h": 81.09,
+      "buyers_24h": 55,
+      "tx_30d": 7310000,
+      "volume_usd_30d": 170660,
+      "buyers_30d": 383,
+      "source": "x402scan featured + earlier 24h table; 24h vs 30d mix \u2014 treat 24h as noisy"
     },
     "payai_facilitator_24h": {
-      "tx": null,
-      "volume_usd": null,
-      "buyers": null,
-      "sellers": null,
-      "source": "https://www.x402scan.com/facilitator/payAI"
+      "tx": 1120000,
+      "volume_usd": 17090,
+      "buyers": 86,
+      "sellers": 48,
+      "blockrun_share_tx_est": 0.99,
+      "source": "x402scan.com/facilitator/payAI + identity: 1.12M+0.206M Figment \u2248 1.33M BlockRun"
+    },
+    "figment_facilitator_24h": {
+      "tx": 205900,
+      "volume_usd": 3020,
+      "buyers": 3,
+      "sellers": 1
     }
   },
   "watch_wallets": [
@@ -54,6 +62,12 @@
       "note": "confirm merchant vs payer before treating as a user"
     }
   ],
-  "labels_today": [],
+  "labels_today": [
+    {
+      "address": "BhFRCUXHVm76PmXkSzus8T4LUGrD2MTW9Au6bocBox5U",
+      "label": "\u57fa\u7840\u8bbe\u65bd / \u7f51\u5173",
+      "confidence": "medium"
+    }
+  ],
   "notes": ""
 }

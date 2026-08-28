@@ -115,8 +115,25 @@ def main() -> None:
         "notes": "",
     }
     path = SNAP / f"{now.date().isoformat()}.json"
+    if path.exists():
+        old = json.loads(path.read_text())
+        for key in ("x402scan", "labels_today", "notes"):
+            if old.get(key) and not _has_values(out.get(key)):
+                out[key] = old[key]
+        if old.get("watch_wallets") and not out.get("watch_wallets"):
+            out["watch_wallets"] = old["watch_wallets"]
     path.write_text(json.dumps(out, indent=2) + "\n")
     print(path)
+
+
+def _has_values(node) -> bool:
+    if node is None:
+        return False
+    if isinstance(node, dict):
+        return any(_has_values(v) for k, v in node.items() if k != "source")
+    if isinstance(node, list):
+        return any(_has_values(v) for v in node)
+    return True
 
 
 if __name__ == "__main__":
