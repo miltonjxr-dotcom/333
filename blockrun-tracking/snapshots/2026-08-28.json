@@ -1,0 +1,59 @@
+{
+  "captured_at": "2026-08-28T09:30:31.463182+00:00",
+  "payai_stats": {
+    "cached_at": "2026-08-28T08:39:41.129Z",
+    "settlements_24h": 1329008,
+    "settlements_7d": 6167348,
+    "settlements_30d": 8011704,
+    "hosts": 1667,
+    "blockrun_in_top_merchants": [
+      {
+        "resourceHost": "sol.blockrun.ai",
+        "settlements": "50K+",
+        "volumeUsd": "$1K+"
+      }
+    ],
+    "caveat": "PayAI buckets (50K+) disagree with x402scan daily millions; do not use buckets for share."
+  },
+  "x402scan": {
+    "sol_blockrun": {
+      "tx_24h": null,
+      "volume_usd_24h": null,
+      "buyers_24h": null,
+      "tx_30d": null,
+      "volume_usd_30d": null,
+      "buyers_30d": null,
+      "source": "fill from https://www.x402scan.com/ (sol.blockrun.ai)"
+    },
+    "base_blockrun": {
+      "tx_24h": null,
+      "volume_usd_24h": null,
+      "buyers_24h": null,
+      "tx_30d": null,
+      "volume_usd_30d": null,
+      "buyers_30d": null,
+      "source": "fill from blockrun.ai server page"
+    },
+    "payai_facilitator_24h": {
+      "tx": null,
+      "volume_usd": null,
+      "buyers": null,
+      "sellers": null,
+      "source": "https://www.x402scan.com/facilitator/payAI"
+    }
+  },
+  "watch_wallets": [
+    {
+      "address": "BhFRCUXHVm76PmXkSzus8T4LUGrD2MTW9Au6bocBox5U",
+      "sol_lamports": 1524188,
+      "usdc": "0.000286",
+      "recent_sigs": 20,
+      "recent_errors": 3,
+      "newest_block_time": 1787893169,
+      "median_gap_sec_recent20": 0,
+      "note": "confirm merchant vs payer before treating as a user"
+    }
+  ],
+  "labels_today": [],
+  "notes": ""
+}
