@@ -1,0 +1,102 @@
+{
+  "captured_at": "2026-08-29T00:00:50.752346+00:00",
+  "payai_stats": {
+    "cached_at": "2026-08-28T23:59:01.768Z",
+    "settlements_24h": 1121346,
+    "settlements_7d": 6526676,
+    "settlements_30d": 8796397,
+    "hosts": 1676,
+    "blockrun_in_top_merchants": [
+      {
+        "resourceHost": "sol.blockrun.ai",
+        "settlements": "50K+",
+        "volumeUsd": "$1K+"
+      }
+    ],
+    "caveat": "PayAI buckets (50K+) disagree with x402scan daily millions; do not use buckets for share."
+  },
+  "x402scan": {
+    "sol_blockrun": {
+      "tx_24h": null,
+      "volume_usd_24h": null,
+      "buyers_24h": null,
+      "tx_30d": 8310000,
+      "volume_usd_30d": 99410,
+      "buyers_30d": 44,
+      "avg_ticket_usd_30d": 0.012,
+      "source": "x402scan homepage featured 30d row sol.blockrun.ai ~00:00 UTC 2026-08-29; server page HTML empty so 24h left null"
+    },
+    "base_blockrun": {
+      "tx_24h": null,
+      "volume_usd_24h": null,
+      "buyers_24h": null,
+      "tx_30d": 7220000,
+      "volume_usd_30d": 167890,
+      "buyers_30d": 572,
+      "source": "x402scan homepage featured 30d row blockrun.ai ~00:00 UTC; 24h not on page"
+    },
+    "payai_facilitator_24h": {
+      "tx": 872636,
+      "volume_usd": 17030,
+      "buyers": 81,
+      "sellers": 44,
+      "source": "https://www.x402scan.com/facilitators Past 24 Hours table ~00:01 UTC (PayAI detail page was 859.32k/$16.98k/80 buyers — do not mix with this row)"
+    },
+    "figment_facilitator_24h": {
+      "tx": 165468,
+      "volume_usd": 3240,
+      "buyers": 3,
+      "sellers": 1,
+      "source": "https://www.x402scan.com/facilitators Past 24 Hours ~00:01 UTC"
+    },
+    "coinbase_facilitator_24h": {
+      "tx": 62408,
+      "volume_usd": 37010,
+      "buyers": 1666,
+      "sellers": 591,
+      "source": "https://www.x402scan.com/facilitators Past 24 Hours ~00:01 UTC"
+    },
+    "facilitators_24h_total": {
+      "tx": 1118325,
+      "volume_usd": 64680,
+      "source": "x402scan facilitators header Past 24 Hours"
+    }
+  },
+  "watch_wallets": [
+    {
+      "address": "BhFRCUXHVm76PmXkSzus8T4LUGrD2MTW9Au6bocBox5U",
+      "sol_lamports": 1641756,
+      "usdc": "16908.806857",
+      "recent_sigs": 20,
+      "recent_errors": 0,
+      "newest_block_time": 1787961640,
+      "median_gap_sec_recent20": 0,
+      "extended_pulse": {
+        "n_sigs": 1000,
+        "errors": 0,
+        "span_sec": 117,
+        "rate_tx_per_sec": 8.54,
+        "median_gap_sec": 0,
+        "p90_gap_sec": 1
+      },
+      "note": "USDC jumped from ~0 yesterday to ~$16.9k; still ~8.5 tx/s. Treat as infra/treasury/hot wallet, not a consumer. Merchant vs payer still unresolved."
+    }
+  ],
+  "labels_today": [
+    {
+      "address": "BhFRCUXHVm76PmXkSzus8T4LUGrD2MTW9Au6bocBox5U",
+      "label": "基础设施 / 网关",
+      "confidence": "high",
+      "returning_from_yesterday": true
+    }
+  ],
+  "concentration": {
+    "sol_buyers_30d": 44,
+    "sol_buyers_30d_yesterday": 45,
+    "payai_24h_buyers": 81,
+    "figment_24h_buyers": 3,
+    "d1_watch_wallet_returning": true,
+    "payai_vs_self_report": "x402scan PayAI 24h 873k tx vs PayAI discovery 1.12M — do not mix calendars"
+  },
+  "notes": "Day 2/8. Sol 30d buyers 45→44. PayAI 24h buyers 86→81. Figment still 3 buyers / 1 seller. No new named top payer. BhFRCU returning at 8.5 tx/s; USDC refill does not change infra label. SKU still chat completions on sol server resources (not re-scraped 24h mix)."
+}
