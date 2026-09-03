@@ -6,7 +6,7 @@ The goal is not to watch “AI agent” narrative volume. It is to detect **real
 
 | Layer | Role |
 | --- | --- |
-| [`docs/weekly-cascade.md`](docs/weekly-cascade.md) | Weekly pack: Service Spend (not notional) → networks + protocols → SKU drill → commerce |
+| [`docs/REVIEW-PACK.md`](docs/REVIEW-PACK.md) | **完整方案（给外部 AI 审核）**：先验、分层、分母、免费栈、审计、警报、空洞 |
 | [`docs/source-landscape.md`](docs/source-landscape.md) | Census of Artemis / x402scan / x402-list / Dune / etc. — keep vs ignore |
 | [`config/sources.yaml`](config/sources.yaml) | Machine-readable source roles (not a GMV union) |
 | [`docs/cleaner-audit.md`](docs/cleaner-audit.md) | How to score website washers without trusting `real %` |
