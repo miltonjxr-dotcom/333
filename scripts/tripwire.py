@@ -4,7 +4,8 @@
 Fetches https://agenteconomy.to/data.json and prints a daily brief.
 
 This script is allowed to emit YELLOW flags only.
-It must never emit GREEN — green requires Allium T2–T4 (see playbook §6.3).
+It must never emit GREEN — green needs a transfer-level sample (playbook §6.3).
+Free desk: run scripts/free_quality_panel.py daily; do not spend Dune/Codex here.
 
 August 2026 is the worked false positive: tx count ripped, USD did not.
 """
@@ -14,9 +15,12 @@ from __future__ import annotations
 import json
 import statistics
 import sys
-import urllib.request
 from datetime import date, datetime, timezone
+from pathlib import Path
 from typing import Any
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from httpjson import get_json
 
 SOURCE = "https://agenteconomy.to/data.json"
 Z_WINDOW = 60
@@ -25,12 +29,7 @@ TICKET_COLLAPSE_WOW = 0.50
 
 
 def fetch() -> dict[str, Any]:
-    req = urllib.request.Request(
-        SOURCE,
-        headers={"User-Agent": "agent-economy-monitor/1.0"},
-    )
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+    return get_json(SOURCE, timeout=30)
 
 
 def zscore(series: list[float], latest: float) -> float | None:
@@ -97,7 +96,7 @@ def main() -> int:
             {
                 "id": "public_x402_tx_spike",
                 "level": "yellow",
-                "reason": f"x402 daily txs z={tx_z:.2f} (latest={latest_txs:,.0f}). Unconfirmed. Run Allium T2–T4 before any research memo.",
+                "reason": f"x402 daily txs z={tx_z:.2f} (latest={latest_txs:,.0f}). Unconfirmed. Free panel next; Dune sample only if still yellow after SKU check.",
             }
         )
 
@@ -198,7 +197,7 @@ def main() -> int:
         print("No yellow flags. Do not produce commentary.", file=sys.stderr)
     for f in flags:
         print(f"[{f['level'].upper()}] {f['id']}: {f['reason']}", file=sys.stderr)
-    print("GREEN requires Allium T3/T4 + confirmation gate.", file=sys.stderr)
+    print("GREEN forbidden on the free desk without a capped Dune sample.", file=sys.stderr)
     return 0
 
 

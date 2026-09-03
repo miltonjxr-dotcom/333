@@ -3,7 +3,7 @@
 Monitor top-down. A lower table is opened only if the table above moved, or once a week as a 10-minute scan.
 Never mix rows that answer different questions.
 
-This file is the weekly pack. Quality definitions live in [`agent-economy-monitoring-playbook.md`](agent-economy-monitoring-playbook.md). What to buy vs wash ourselves: [`data-cleaning.md`](data-cleaning.md).
+This file is the weekly pack. Quality definitions live in [`agent-economy-monitoring-playbook.md`](agent-economy-monitoring-playbook.md). Free-desk sources and Dune/Codex caps: [`data-cleaning.md`](data-cleaning.md).
 
 ---
 
@@ -81,25 +81,23 @@ Allium note: `is_agent_economy_circulation` on ACP-like flow means “this is no
 
 问题：这周有没有更多**真实机器服务支出**，以及需求是否在复购、供给是否在变宽？
 
-五个数，全部来自 Service Spend，全部带质量门。没有第六个「再加一个总美元」。
+五个数在**有逐笔账本**时才成立。本仓库按**免费桌**运行（无 Allium；Dune/Codex 额度见 [`quota.yaml`](../config/quota.yaml)）。
 
-| 指标 | 定义（本周） | 核心意义 | 不是这个 |
-| --- | --- | --- | --- |
-| **Service Spend** | x402 T3 USD + MPP `Settled` USD that is usage + L402 paid，折美元。T4 USD 作底（更严） | 真实机器服务支出 | T0 体积；ACP 本金；Gateway 再加一遍；Circle 全链 USDC |
-| **Paid Tx** | 上述 Service Spend 对应的笔数 | 真实付费次数 | 原始 x402 txs、MPP 全事件、ACP memos |
-| **Unique Buyers** | T3（及 MPP/L402 等价）独立付款方 | 需求方数量 | T0 unique from；同一 facilitator 集群 |
-| **Repeat Buyer Rate** | T4 buyers / T3 buyers（30d 窗口与 playbook T4 定义一致） | 是否形成真实复购，而非测试/激励刷量 | 未过滤的「连着打了两天」 |
-| **Unique Sellers** | T3 独立收款方（named / live catalog） | 供给生态规模 | 一次性 mint 型 payee、facilitator 自收 |
+| 指标 | 有账本时 | **免费桌实际填写** |
+| --- | --- | --- |
+| **Service Spend** | x402 T3 + MPP usage `Settled` + L402 paid | **不是** T0，也 **不是** x402watch 30d `real_volume`。看 **24h 类目美元**（F_sku）+ MPP Settled 笔数。脚注写「F 代理，非 T3」 |
+| **Paid Tx** | 上述笔数 | F_sku 24h txs；T0 笔数只当战役探测器 |
+| **Unique Buyers** | T3 独立付款方 | **每天填 null**。`organic_user` 人数是残差类，禁止当需求方 |
+| **Repeat Buyer Rate** | T4/T3 | **每天填 null**。没有 buyer×day 面板 |
+| **Unique Sellers** | T3 named payees | 目录 `last_seen` 7d 且类目不是 placeholder/other（去掉 virtuals/ACP URL） |
 
-辅看（同一屏脚注，不当第六个老板 KPI）：均价/票档、周环比。均价塌到 <$0.05 且 Paid Tx 暴增 → 战役，Service Spend 不动也当「未采用」。
+辅看：T0 均价。均价塌到 <$0.05 且 T0 笔数暴增 → 战役。F_sku 被单一类目（如 `token_data`）占 ≥50% → 也当战役，直到 Dune 抽样。
 
-闸门：
+闸门（免费桌加一条）：五个老板 KPI 里有两个是 null 是**正常的**。不要用 Codex 把 null 编成数。
 
-- 五个数都不动 → 下面只扫表 6，写「无」。
-- Service Spend 或 Unique Sellers 动了 → 必开表 1 和表 2。
-- 只有 Paid Tx 动、Service Spend 不动 → 记战役，不往下当采用。
-- Repeat Buyer Rate 升而 Unique Buyers 跌 → 集约（老客户加码），不是生态变宽。
-- Unique Buyers 升而 Repeat → 0、均价极低 → 空投/测试，不是 PMF。
+- F_sku 和 Unique Sellers 都不动 → 下面只扫表 6，写「无」。
+- 只有 T0 Paid Tx 动、F_sku 不动 → 记战役。
+- Unique Buyers / Repeat 在免费桌**不能**用来判断复购；那是 Dune 升级项。
 
 ---
 

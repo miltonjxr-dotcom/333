@@ -1,3 +1,6 @@
+-- OPTIONAL / PAID. Not on the free desk (docs/data-cleaning.md, config/quota.yaml).
+-- Do not schedule this. T3/T4 definition only, for if a warehouse is ever purchased.
+--
 -- Agent-economy quality panel on Allium crosschain.agents
 -- Native unit: one x402 token transfer.
 -- from_address = buyer, to_address = seller, transaction_from_address = facilitator.

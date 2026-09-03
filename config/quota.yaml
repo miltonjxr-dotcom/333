@@ -1,0 +1,35 @@
+# Monthly quota for scarce tools. Daily monitoring must not touch these.
+# Dune: never re-run agenteconomy.to query IDs; consume their JSON.
+# Codex: memos only. x402watch already classified categories.
+
+dune:
+  daily_queries: 0
+  weekly_queries_if_no_yellow: 0
+  monthly_ic_max_queries: 2
+  yellow_escalation_max_queries: 3
+  forbidden_query_ids:
+    # Published by agenteconomy.to/data.json meta.queries — already paid by them.
+    - 7895747  # x402 cumulative
+    - 7881006  # x402 daily
+    - 6731879  # base agentic
+    - 7881007  # virtuals ACP
+    - 7881124  # erc-8004 registry
+    - 7881008  # olas
+    - 7931767  # x402 token split
+    - 6166650  # x402 chains
+  prefer: "screenshot or CSV export of a public dashboard that has already run"
+
+codex:
+  daily_etl: false
+  classify_services: false
+  invent_t3_usd: false
+  monthly_memo_ok: true
+
+openrouter:
+  daily_data_api: false
+  weekly_eyeball_rankings: true
+  note: "Data API shares an API key/rate limit with inference. Do not poll daily."
+
+x402watch_http:
+  daily_job: false
+  note: "60 req/h/IP. Daily job uses GitHub x402watch-data raw files instead."

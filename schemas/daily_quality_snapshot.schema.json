@@ -14,7 +14,20 @@
     "as_of": { "type": "string", "format": "date-time" },
     "quality_available": {
       "type": "boolean",
-      "description": "False if T2–T4 could not be computed. Do not backfill from T0."
+      "description": "False on the free desk (no T2–T4). Do not backfill from T0 or x402watch real_volume."
+    },
+    "free_proxy": {
+      "type": "object",
+      "description": "F-series from agenteconomy + x402watch-data. Not Service Spend.",
+      "properties": {
+        "x402watch_snapshot_date": { "type": ["string", "null"] },
+        "f1_real_volume_30d_usd": { "type": ["number", "null"] },
+        "f_sku_usd_24h": { "type": ["number", "null"] },
+        "f_sku_txs_24h": { "type": ["number", "null"] },
+        "live_named_sellers_7d": { "type": ["integer", "null"] },
+        "unique_buyers": { "type": ["integer", "null"] },
+        "repeat_buyer_rate": { "type": ["number", "null"] }
+      }
     },
     "x402": {
       "type": "object",

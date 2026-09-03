@@ -87,13 +87,13 @@ Quality tiers answer **who paid whom without washing**. They do **not** answer *
 
 Circle Gateway is an overlay on a settlement network, not a sixth GMV venue. Repeat buyers are T4 / T3, never T0. SKU mix (inference / data / compute / other API) is a drill-down when the catalog has labels — not a second GMV.
 
-Primary IC series remains T4 USD and T3 unique payees, **restricted to Service Spend**. See [`weekly-cascade.md`](weekly-cascade.md) for the boss five KPIs.
+On the **free desk**, T4/T3 are not computed daily. IC looks at F-proxies in [`data-cleaning.md`](data-cleaning.md) and must keep Unique Buyers / Repeat Rate **null** until a Dune sample exists. See [`weekly-cascade.md`](weekly-cascade.md).
 
 ### 3.1 x402 four-tier filter
 
-Source of truth: Allium `crosschain.agents` (`x402_transfers`, `x402_servers`, `x402_facilitators`, `x402_metrics_daily`). Public mirrors (agenteconomy.to, Dune, x402scan) are **tripwires**, not GMV.
+T0–T4 are the **definition** of quality. They are not a daily feed on this desk (no Allium; Dune credits are rationed). Operating source: agenteconomy.to JSON + x402watch-data CC0 dumps. Dune is escalation only (`config/quota.yaml`).
 
-Field meanings (Allium):
+Field meanings (Allium / any transfer-level warehouse — not used daily):
 
 - `from_address` = buyer
 - `to_address` = seller
@@ -102,7 +102,7 @@ Field meanings (Allium):
 | Tier | Definition | Use |
 | --- | --- | --- |
 | **T0 Raw** | Every labeled x402 transfer | Sanity check only |
-| **T1 Hygiene** | Drop `from = to`, zero-value, Allium `is_inorganic`, **and** `is_agent_economy_circulation` (ACP is not Service Spend) | Vendor T1 is an input, not 表 0. See [`data-cleaning.md`](data-cleaning.md) |
+| **T1 Hygiene** | Drop `from = to`, zero-value, self-pay / 24h return; hold ACP circulation out of Service Spend | Not computed daily on the free desk. Allium flags are paid-only. |
 | **T2 Non-internal** | Drop closed loops and facilitator-cluster self-settlement (buyer and seller share a funder, or both are relayer EOAs) | Visa/Artemis-style adjusted |
 | **T3 Named** | T2 **and** seller sits in `x402_servers` with a live origin / category | Lower bound of “someone sold a thing with a name” |
 | **T4 Repeat** | T3 **and** buyer active on ≥3 distinct UTC days in trailing 30d, ≥5 T3 txs, not a facilitator EOA | Durable demand floor |
@@ -127,7 +127,7 @@ Extensive vs intensive:
 
 ### 3.3 Snapshot contract
 
-Every UTC day persist one row matching `schemas/daily_quality_snapshot.schema.json`. If T3/T4 cannot be computed (Allium down), **do not backfill from T0**. Leave quality fields null and mark `quality_available: false`. A missing quality row is better than a fake green.
+Every UTC day persist one row matching `schemas/daily_quality_snapshot.schema.json`. T3/T4 stay **null** (`quality_available: false`). Fill `free_proxy` from `scripts/free_quality_panel.py`. Do **not** backfill T3 from F1 or T0.
 
 ---
 
@@ -217,39 +217,37 @@ These are rare and usually more important than a volume spike.
 
 ## 6. Data stack and cadence
 
-Make vs buy is specified in [`data-cleaning.md`](data-cleaning.md). Short version: **buy the ledger, own Service Spend.** Do not publish a website’s “organic” or “real volume” as 表 0. Do not build a private 402 indexer on day one.
+This desk is **free-only**. Spec: [`data-cleaning.md`](data-cleaning.md). Quotas: [`config/quota.yaml`](../config/quota.yaml).
 
-### 6.1 Sources
+Short version: **do not buy a ledger; do not spend Dune daily; do not use Codex as a washer.** Consume published JSON/CC0 dumps. Own the interpretation. T3/T4 stay definitional until a capped Dune sample exists.
 
-| Need | Source | Cost / access | Freshness |
+### 6.1 Sources (operating)
+
+| Need | Source | Cost | Freshness |
 | --- | --- | --- | --- |
-| Transfer-level x402 | Allium `crosschain.agents.x402_transfers` + `_adjusted` | Paid | Daily batch |
-| T1 hygiene (input only) | Allium `NOT is_inorganic`; then **drop** `is_agent_economy_circulation` for Service Spend | Paid | Daily |
-| Catalog / sellers / SKU labels | Allium `x402_servers`; x402watch categories (labels, not GMV); x402scan registry (HTTP APIs themselves return **402**) | Mixed | Daily |
-| Public tripwire | `https://agenteconomy.to/data.json` | Free | Hourly |
-| Dune cross-check | `@thechriscen` x402 Payment Analytics; `@hashed_official` x402 / ACP / 8004; `@ax1research` Base agentic | Credits | Daily |
-| Inference demand | OpenRouter Data API `rankings-daily`, `app-rankings?category=coding&subcategory=cli-agent` | API key, CC BY 4.0 | Daily |
-| Identity | ERC-8004 `Registered` / reputation events via Allium or Dune `@hashed_official` 7881124 | Paid / credits | Daily |
-| MPP | Tempo feed via agenteconomy `tempoMpp.byType.Settled` — **own the Settled filter** | Free but thin | Hourly |
-| USDC / Agent Stack | Circle filings; Agent Stack paid-service count | Quarterly + IR | Slow |
-| Rules | CourtListener / PACER; PBOC / 支付清算协会; FIDO AP2 repo; Rain APA | Analyst time | Event |
-| Markets | CoinGecko / exchange: `VIRTUAL` and the R5 equities in `config/watchlist.yaml` | Standard | Real-time |
+| T0 pulse, MPP `Settled`, ACP memos/senders, 8004 mints | `https://agenteconomy.to/data.json` | Free (they spent the Dune credits) | Hourly |
+| SKU mix, 30d real/wash, live catalog | GitHub `printmoneylab/x402watch-data` CC0 | Free raw/git | Daily ~04:00 UTC |
+| SDK corroboration | npm download API for `x402` | Free | Weekly |
+| Inference corroboration | [openrouter.ai/rankings](https://openrouter.ai/rankings) eyeball | Free page | Weekly |
+| Transfer-level sample | Our Dune, **only** on yellow/monthly | Credits, capped | Rare |
+| Rules / markets | CourtListener, 公约, CoinGecko | Free | Event / real-time |
 
-Spend engineering on **T2–T4, economic-type stamps, and alerts**, not on re-extracting 402 logs. Allium T1 does not flag high-frequency buyers or A→B→C rings and **keeps ACP circulation as organic**.
+Do **not** daily: Allium, our Dune clones of their `queryId`s, OpenRouter Data API, x402watch HTTP (60 req/h). Optional paid SQL lives in `sql/optional_paid_allium_x402_quality_panel.sql` and is not scheduled.
 
 ### 6.2 Cadence
 
 | Clock | Who | Output |
 | --- | --- | --- |
-| 06:30 UTC daily | Job: `scripts/tripwire.py` + Allium quality SQL | Snapshot JSON + yellow/green flags |
-| 08:00 local, 15 min | Analyst on rotation | Scan greens; kill obvious S5; assign or pass |
-| Weekly, 45 min | PM + analyst | One-pager: T3/T4 trend, breadth, OpenRouter, watchlist P&L vs quality |
-| Monthly | IC | Thesis review: is creation still the crypto book? Did substitution get a revocation primitive? |
-| Event | Anyone | L-series pages immediately |
+| 06:30 UTC daily | `scripts/tripwire.py` + `scripts/free_quality_panel.py` | Snapshot JSON; **yellow only**; Dune queries = 0 |
+| 08:00 local, 15 min | Analyst | Read yellow + 24h SKU mix; kill S5; **no green** |
+| Weekly, 45 min | PM + analyst | F_sku trend, MPP Settled, ACP senders, npm, rankings page, tokens vs F-proxies |
+| Monthly | IC | Thesis review; optional ≤2 Dune queries |
+| Yellow escalation | Analyst | ≤3 Dune queries, then stop |
+| Event | Anyone | L-series |
 
-### 6.3 Public tripwire vs quality panel
+### 6.3 Tripwire vs quality
 
-`scripts/tripwire.py` only sees T0-like public aggregates. It is allowed to emit **yellow**. It is forbidden to emit **green**. Green is Allium-only (or a documented equivalent transfer-level warehouse).
+`scripts/tripwire.py` sees T0. `scripts/free_quality_panel.py` adds F-proxies. Both may emit **yellow**. Both are **forbidden to emit green**. Green needs a transfer-level sample under the Dune cap, plus the 2-of-3 gate. Codex is not part of this clock.
 
 ---
 
@@ -259,7 +257,7 @@ Time-box. The edge is *earlier research*, not a longer Twitter thread.
 
 **T+0 (30 min)**  
 Classify: S1/S2/S3 vs S5. If S5, write a three-line “campaign note” and stop.  
-Pull: top 20 T3 payees by 7d USD, their origin/category, top 20 T3 payers, facilitator, chain.  
+On the free desk: read F_sku 24h mix + tripwire. If still unexplained, **at most 3 Dune queries** for top payees/payers (see `config/quota.yaml`). Do not ask Codex to invent T3.  
 Check vetoes.
 
 **T+4h**  
