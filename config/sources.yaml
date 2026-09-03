@@ -12,11 +12,16 @@ daily:
     gmv: false
 
 weekly_eyeball:
-  - id: artemis_x402
-    url: https://app.artemisanalytics.com/asset/x402
-    job: wash_adjusted_live
+  - id: artemis_agentic_payments
+    url: https://www.artemis.ai/sectors/agentic-payments
+    job: wash_adjusted_live_x402_and_mpp
     gmv: false
-    note: Visa-partnered; proprietary heuristics; outage-tolerant (use report if down)
+    note: Canonical Artemis sector page. Real vs Gamed, MPP by type, x402 by category/facilitator/chain. No JSON dump. Do not quote combined x402+MPP tx count.
+  - id: artemis_x402_asset
+    url: https://app.artemisanalytics.com/asset/x402
+    job: wash_adjusted_x402_only
+    gmv: false
+    note: Sibling of the sector page; can 502. Prefer artemis_agentic_payments.
   - id: visa_artemis_report
     job: calibration_keep_rate
   - id: x402scan

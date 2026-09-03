@@ -36,7 +36,7 @@ Do **not** clone those Dune `queryId`s. The JSON is the free extract.
 
 | Source | URL | Job | Caveat |
 | --- | --- | --- | --- |
-| **Artemis x402 terminal** | `https://app.artemisanalytics.com/asset/x402` (also `app.artemis.xyz`) | Only **public live wash-adjusted** series co-signed by Visa (“Real vs Gamed”) | Heuristics proprietary; not T3; **outage possible** (2026-09-03 error page). When down, cite the report snapshot, don’t invent. |
+| **Artemis Agentic Payments (canonical)** | [`https://www.artemis.ai/sectors/agentic-payments`](https://www.artemis.ai/sectors/agentic-payments) | **Weekly #1 wash-adjusted eyeball.** Same Visa-partnered heuristics as the Apr-2026 report. Charts: Real vs Gamed (x402+MPP), unique merchants, USDC mix, **adjusted** volume by chain / facilitator / **category**, and **MPP by payment type** (the public version of our `Settled` vs channel split). | Charts are JS-rendered — **no public JSON dump**, so not a daily job. Heuristics proprietary (self-deal / test; a cited seller rule is ≥3 adjusted txs from ≥2 unique buyers). **Not T3** and not Service Spend. Headline “cumulative transactions across x402 and MPP” **mixes units** — read the protocol breakdown, don’t quote the combined count. Sibling asset page `app.artemisanalytics.com/asset/x402` is the same family; it 502’d on 2026-09-03 — **use this sector URL first**. Snowflake share is paid. |
 | **Visa × Artemis report** | Visa thought-leadership PDF | Calibration of keep-rate (~89% of raw USD dropped as of 2026-04-21) | Not a daily API |
 | **x402scan** (Merit) | `https://www.x402scan.com` | Seller/facilitator **directory** + raw indexed 30d; who is in the Bazaar | Mixed windows (30d vs “24h”); HTTP APIs often **402**; not wash-adjusted. Home 30d $1.44M vs T0 $41.6M cumulative is coverage, not “truth.” |
 | **Coinbase Bazaar / CDP discovery** | `https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources` | Upstream **named catalog** (T3 join key if we ever sample) | Discovery ≠ settlement quality |
@@ -77,7 +77,7 @@ Do **not** clone those Dune `queryId`s. The JSON is the free extract.
 | Question | First source | Second source | Never |
 | --- | --- | --- | --- |
 | Did T0 explode (campaign)? | agenteconomy daily txs + ticket | x402scan 30d txs vs USD | x402.org static 30d |
-| Is wash-adjusted USD moving? | Artemis terminal (if up) | Visa report + our F1 as *loose* check | Summing Dune + scan + list |
+| Is wash-adjusted USD moving? | [Artemis sector page](https://www.artemis.ai/sectors/agentic-payments) | Visa report + our F1 as *loose* check | Combined x402+MPP tx count; summing Dune + scan + list |
 | What did 24h dollars buy? | x402watch category dump | x402scan featured sellers (qualitative) | Facilitator volume |
 | Who takes facilitator rent? | x402-list settler 30d | x402scan facilitator page | T0 tx share |
 | Is the seller real/live? | Bazaar + x402scan + HTTP 402 probe | x402-list provenance (`imported:bazaar`) | 8004 mints |
