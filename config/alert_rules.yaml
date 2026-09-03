@@ -1,0 +1,117 @@
+# Alert thresholds for the agent-economy desk.
+# Tune quarterly. Do not retune because a token ripped.
+# Green alerts require the 2-of-3 confirmation gate in the playbook.
+# scripts/tripwire.py may emit yellow only.
+
+version: 1
+as_of: 2026-09-03
+zscore_window_days: 60
+min_history_days: 30
+
+confirmation_gate:
+  required_hits: 2
+  required_from:
+    - R2
+    - R4
+  quality:
+    t4_usd_7d_z: 2.0
+    t3_named_share_of_t2_jump_pp: 10
+  breadth:
+    unique_t3_payees_7d_z: 1.5
+    unique_t3_payers_must_not_fall: true
+    top1pct_buyer_share_must_not_rise: true
+  corroboration:
+    openrouter_cli_agent_7d_z: 2.0
+    new_named_origins_7d: 3
+    new_origin_live_hours: 72
+    mpp_settled_payees_wow_pct: 30
+
+vetoes:
+  wash_trap:
+    t0_txs_wow_pct: 100
+    t2_usd_wow_pct_max: 20
+  single_facilitator:
+    share_of_t2_usd: 0.50
+    max_buyer_eoas: 20
+  attention_only:
+    agent_basket_7d_pct: 30
+    require_t3_t4_unchanged: true
+  catalog_liveness_falling: true
+
+alerts:
+  S1_real_demand_pulse:
+    radar: R2
+    level_if_gate_passes: green
+    t4_usd_7d_z: 2.0
+    unique_t3_payees_7d_z: 1.5
+  S2_supply_appearance:
+    radar: R2
+    level_if_gate_passes: green
+    new_named_origins_7d: 5
+    live_hours: 72
+    combined_t3_usd_min: 1000
+  S3_market_broadening:
+    radar: R2
+    level_if_gate_passes: green
+    top1pct_buyer_share_drop_pp_14d: 10
+    t2_usd_must_not_fall: true
+  S4_ticket_mix_regime:
+    radar: R2
+    level_if_gate_passes: yellow
+    usd_share_1plus_jump_pp_30d: 15
+  S5_wash_trap:
+    radar: R2
+    level: yellow
+    auto_veto_green: true
+    t0_txs_wow_pct: 100
+    t2_usd_wow_pct_max: 20
+  S6_facilitator_dispersion:
+    radar: R2
+    level_if_gate_passes: yellow
+    hhi_drop_14d: 0.08
+    new_facilitator_t2_share: 0.10
+  C1_chain_rotation:
+    radar: R5
+    level_if_gate_passes: green
+    metric: t2_usd_share
+    non_leader_share: 0.40
+    consecutive_days: 3
+    note: "Use T2 USD share, never T0 tx share. Solana daily-tx flips are insufficient."
+  C2_stablecoin_break:
+    radar: R5
+    level_if_gate_passes: yellow
+    usdc_share_of_t2_below: 0.95
+    consecutive_days: 7
+  D1_agent_loop_inference:
+    radar: R1
+    level: yellow
+    cannot_be_green_alone: true
+    openrouter_cli_agent_7d_z: 2.0
+  I2_registration_spam:
+    radar: R3
+    level: ignore
+    mint_z: 3.0
+    reputation_with_proof_flat: true
+  M1_acp_commerce:
+    radar: R4
+    level_if_gate_passes: green
+    unique_senders_7d_pct: 50
+    memos_per_sender_must_not_explode: true
+  M2_memo_theater:
+    radar: R4
+    level: ignore
+    memos_wow_pct: 100
+    unique_senders_wow_pct_max: 10
+  P2_attention_trade:
+    radar: price
+    level: ignore_research
+    basket_7d_pct: 25
+    require_no_t3_t4_confirm: true
+
+public_tripwire:
+  emit: yellow
+  never_emit: green
+  x402_daily_txs_z: 3.0
+  x402_avg_ticket_collapse_pct_wow: 50
+  mpp_events_without_settled: true
+  acp_memos_without_senders: true

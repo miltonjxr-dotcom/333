@@ -1,0 +1,89 @@
+# Coverage universe. Core book vs satellite is a sizing rule, not a quality rule.
+# Tokens are expressions AFTER a green quality alert, not monitoring inputs.
+
+version: 1
+as_of: 2026-09-03
+
+core_book:
+  rails_and_l5:
+    - id: USDC
+      venue: circle_reserve
+      why: "99%+ of observed x402 T0/T2 settles in USDC. Reserve asset of machine payments."
+      trigger_alerts: [S1, S2, C2, C3, L5]
+    - id: CRCL
+      venue: equity
+      name: Circle
+      why: "Agent Stack paid services, USDC, Arc agent-finance after 2026-09-16 mainnet."
+      trigger_alerts: [S1, C2, C3, L5]
+    - id: COIN
+      venue: equity
+      name: Coinbase
+      why: "Base blockspace, CDP agent wallets, x402 origin, AgentCore wallet partner."
+      trigger_alerts: [S1, C1, C3, S6]
+    - id: SOL
+      venue: crypto
+      why: "Only after C1 on T2 USD share, not daily tx flips."
+      trigger_alerts: [C1]
+    - id: ETH
+      venue: crypto
+      note: "Weak beta via Base. Do not buy ETH to express agent payments."
+      trigger_alerts: []
+
+  traditional_finance_authorization:
+    - id: V
+      venue: equity
+      name: Visa
+      why: "Authorization infrastructure, TAP, token assurance. Moves on L-series and substitution."
+      trigger_alerts: [L1, L2, L3]
+    - id: MA
+      venue: equity
+      name: Mastercard
+      why: "BVNK = self-custody of stablecoin settlement; multi-rail."
+      trigger_alerts: [L1, L2, C2, L5]
+    - id: STRIPE
+      venue: private
+      why: "Shared Payment Token, Privy, Bridge, OpenRouter. Execution layer."
+      trigger_alerts: [S1, D1, L1]
+
+satellite:
+  marketplace:
+    - id: VIRTUAL
+      venue: crypto
+      chain: base
+      why: "Launch + routing asset for agent tokens; ACP commerce. Reflexive. Size small."
+      trigger_alerts: [M1]
+      kill: "M2 memo theater or unique senders flat 30d"
+  inference_and_decentralized_intelligence:
+    - id: TAO
+      venue: crypto
+      why: "Incentive layer for decentralized intelligence — related, not a payment rail."
+      trigger_alerts: [D1, D2]
+    - id: VVV
+      venue: crypto
+      why: "Attempts to financialize inference demand. Only with D1/D2."
+      trigger_alerts: [D1, D2]
+  autonomous_agent_networks:
+    - id: OLAS
+      venue: crypto
+      why: "On-chain autonomous services. Monitor unique operators, not weekly txs."
+      trigger_alerts: []
+
+do_not_monitor_as_inputs:
+  - "Long-tail agent ERC-20s paired to VIRTUAL"
+  - "Tweet volume / KOL counts"
+  - "Consultant agentic-commerce TAM"
+  - "Alipay in-garden assistant GMV"
+  - "Raw x402 transaction count"
+  - "ERC-8004 registration count"
+  - "Tempo MPP ChannelOpened count"
+
+event_calendar:
+  - date: 2026-09-16
+    item: "Circle Arc public mainnet (agent-finance tools claimed)"
+    alert: L5
+  - item: "AP2 / ACP / TAP spec: revocation of issued-but-unexecuted mandates"
+    alert: L1
+  - item: "First agent-attributed chargeback time series from a card network"
+    alert: L2
+  - item: "First judgment on agent ultra vires / wrongful purchase"
+    alert: L3
