@@ -65,7 +65,7 @@ KYA directories (Visa/MA)        First agent-overreach judgment
 | Radar | Native unit | Primary KPI | Investable if it breaks |
 | --- | --- | --- | --- |
 | **R1 Demand** | tokens, apps, downloads | OpenRouter agent-app tokens; reasoning-model share | Inference routers, GPU, API gateways |
-| **R2 Settlement quality** | USDC | T3/T4 x402 USD; unique independent payees | USDC, Base/Solana, facilitators, Circle Agent Stack |
+| **R2 Settlement quality (Layer 1 only)** | USDC | T3/T4 x402 USD vs MPP `Settled` USD vs L402 paid; unique payees; share among the three | USDC, Base/Solana/Tempo, facilitators |
 | **R3 Identity** | reputation events | 8004 feedback with payment proof / unique operators | KYA, agent wallets, reputation graphs |
 | **R4 Marketplace** | completed jobs | Virtuals unique senders + settled jobs, not memos | `VIRTUAL` only after quality, still reflexive |
 | **R5 Rails / capital** | chain share, float | Adjusted-volume chain flip; USDC share of machine payments | SOL vs BASE, CIRCLE, COIN, Tempo |

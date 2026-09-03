@@ -1,56 +1,51 @@
-# Protocol-layer watchlist (crypto desk)
+# Protocol monitoring by layer
 
-Names collide. This file is the canonical mapping for the monitor.
+A watchlist is only valid if every row is a peer: same job, comparable unit.
+Do not put ERC-8004 next to x402. Do not add Virtuals ACP into the payment-protocol board.
 
-## Three different things called "ACP"
+## Layer 1 — Payment / settlement protocols (the crypto daily board)
 
-| Acronym | Full name | Owner | Layer | On this desk? |
+Question these protocols all answer: **how does the machine actually move money after it has decided to pay?**
+
+| Protocol | Settlement style | Asset | Production weight (2026-09) | Native unit to compare |
 | --- | --- | --- | --- | --- |
-| **ACP (Virtuals)** | Agent Commerce Protocol | Virtuals Protocol | On-chain A2A job / escrow / memo | **P1 daily** |
-| **ACP (OpenAI)** | Agentic Commerce Protocol | OpenAI + Stripe + Meta | Off-chain merchant checkout | P2 weekly spec |
-| ACP (IBM, historical) | Agent Communication Protocol | IBM → merged into A2A | Messaging | Ignore |
+| **x402** | Per-request on-chain (HTTP 402) | USDC on Base/Solana/etc. | Dominant | T3/T4 USD, unique payees |
+| **MPP** | Session / channel, batch `Settled` | USDC on Tempo + fiat SPT + Lightning ext. | Early | `Settled` USD, unique payees |
+| **L402** | Per-request, Lightning invoice + macaroon | BTC sats | Older, smaller agent footprint | Paid invoices / sats, unique payees |
 
-**AP2 is not Virtuals.** AP2 = Google Agent Payments Protocol (authorization mandates, now at FIDO).
+These three can share one dashboard. Convert everything to **USD received by independent sellers**. Never compare x402 raw txs to MPP `ChannelOpened` or L402 challenge counts.
 
-Virtuals ACP v2 (Apr 2026) also claims to be the reference implementation of **ERC-8183** (proposed Ethereum standard for agent commerce). Monitor the on-chain jobs, not the ERC number.
+Not on this board yet (same *idea*, no durable volume):
 
-## Layers (compose, do not pick a winner)
+- s402, U402, v402 — HTTP-402 forks / supersets, specs exist, not a second GMV series
+- IETF `draft-httpauth-payment` — wire-format politics, weekly
+- lobster.cash — OpenClaw-specific envelope on existing rails
 
-```
-Identity / trust     ERC-8004, Visa TAP, Mastercard Verifiable Intent
-Authorization        Google AP2 (mandates), ACP-OpenAI allowances
-Commerce / checkout  UCP, ACP-OpenAI, Virtuals ACP (jobs)
-Settlement           x402, MPP (Stripe/Tempo)
-Transport / tools    MCP, A2A          ← not payment; do not page on these
-```
+Masumi escrow is **not** this layer (it is job+escrow, closer to Virtuals ACP).
 
-An agent can use AP2 to prove permission, Virtuals ACP or UCP to negotiate the job, and x402 or MPP to move USDC. Volume on one layer is not volume on another.
+Comparable KPIs for Layer 1 only:
 
-## P1 — daily, on-chain (this is the crypto book)
+1. Quality USD (x402 T3/T4 vs MPP Settled vs L402 paid)
+2. Unique payees (breadth)
+3. Average ticket / mix
+4. Share of machine-payment USD (x402 vs MPP vs L402)
+5. Rail (Base / Solana / Tempo / Lightning)
 
-| Protocol | Native unit to count | Kill-noise rule | Why it is on the book |
-| --- | --- | --- | --- |
-| **x402** | T3/T4 USDC, not raw txs | Wash trap S5 | Only HTTP-native stablecoin rail with scale |
-| **Virtuals ACP** | Unique counterparties + terminal jobs / escrow releases | Ignore memo spikes (M2) | Only public A2A commerce runtime with a token (`VIRTUAL`) |
-| **MPP** | `Settled` (+ unique payees) | Ignore ChannelOpened | Stripe/Tempo session rail; 384 Settled vs 45k events as of 2026-09-03 |
-| **ERC-8004** | Reputation/validation with payment proof | Ignore registration mints | Identity that can bind to x402 proofs |
-| **A2A x402 extension** | x402 txs that carry AP2 mandate metadata, if labeled | If unlabeled, it is just x402 | Bridge from Google authorization into crypto settlement |
+## Other layers — each gets its own board
 
-## P2 — weekly spec / adoption (moves equities and standards, rarely tokens)
+### Layer 0 — Identity / trust
 
-| Protocol | Watch for | Expression |
-| --- | --- | --- |
-| **Google AP2** | Revocation of issued-but-unexecuted mandates; mandate volume if any public telemetry | V/MA/UCP stack, not a token |
-| **UCP** | Merchant / Shopify adoption vs ACP-OpenAI | Substitution-side checkout standard |
-| **ACP (OpenAI/Stripe)** | Instant Checkout share; MoR language; 4% take | OpenAI/Stripe, not crypto GMV |
-| **Visa TAP** | Agent directory, agent score, TAP-compliant dispute shift | Visa |
-| **Mastercard Verifiable Intent** | Intent-bundle in disputes; BVNK settlement overlap | MA |
-| **ERC-8183** | If it becomes the canonical job/escrow ABI beyond Virtuals | Then ACP-Virtuals is a vendor, not the standard |
+Peers: ERC-8004, Visa TAP / Agent Directory, Mastercard KYA-style agent identity.
+Unit: identifiable agents that later *pay*, not NFT mints.
 
-## P3 — event only
+### Layer 2 — Authorization
 
-Alipay ACT / AHA (closed loop), Circle Agent Stack / Arc, Rain Agentic Payments Alliance notes, China 自律公约 enforcement.
+Peers: Google AP2 mandates, OpenAI ACP allowances, Mastercard Verifiable Intent.
+Unit: issued / revoked / executed mandates. A2A×x402 is an **adapter** from this layer into Layer 1 — count it as “x402 with mandate metadata”, never as a fourth payment protocol.
 
-## Do not put on the payment-protocol board
+### Layer 3 — Commerce / job orchestration
 
-MCP (tools), A2A core (messaging), Olas (agent network, not a payment standard), Masumi (Cardano escrow, too small unless T3-equivalent USD appears).
+Peers: Virtuals ACP, UCP, OpenAI ACP (checkout), Masumi jobs.
+Unit: completed jobs / checkouts with funds released, not memos.
+
+Run Layer 1 daily. Run 0 / 2 / 3 on their own cadence. A green alert is intra-layer (MPP taking USD share from x402). Cross-layer coincidence is corroboration, not a summed GMV.

@@ -6,7 +6,7 @@ The goal is not to watch “AI agent” narrative volume. It is to detect **real
 
 | Layer | Role |
 | --- | --- |
-| [`docs/protocol-layer.md`](docs/protocol-layer.md) | Which protocols to watch (x402, Virtuals ACP ≠ Google AP2) |
+| [`docs/protocol-layer.md`](docs/protocol-layer.md) | Same-layer boards: payment protocols (x402 / MPP / L402) are one board |
 | [`docs/agent-economy-monitoring-playbook.md`](docs/agent-economy-monitoring-playbook.md) | Investment thesis, quality definition, alert catalog, escalation SOP |
 | [`config/alert_rules.yaml`](config/alert_rules.yaml) | Machine-readable thresholds |
 | [`config/watchlist.yaml`](config/watchlist.yaml) | Coverage universe and how to express a view |

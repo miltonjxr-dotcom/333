@@ -1,96 +1,52 @@
-# Canonical protocol board for the agent-economy desk.
-# Virtuals = ACP (Agent Commerce Protocol). Google = AP2. Do not mix.
+# Same-layer boards. A protocol only sits next to peers that answer the same question.
 
 version: 1
 as_of: 2026-09-03
 
-naming_collisions:
-  ACP:
-    - id: virtuals_acp
-      full_name: Agent Commerce Protocol
-      owner: Virtuals Protocol
-    - id: openai_acp
-      full_name: Agentic Commerce Protocol
-      owner: OpenAI + Stripe + Meta
-    - id: ibm_acp
-      full_name: Agent Communication Protocol
-      owner: IBM
-      status: merged_into_a2a
-      monitor: false
-  AP2:
-    - id: google_ap2
-      full_name: Agent Payments Protocol
-      owner: Google / FIDO
-      note: "Not Virtuals. Authorization mandates, payment-agnostic."
+layer_1_payment_settlement:
+  question: "How does the machine move money after it has decided to pay?"
+  cadence: daily
+  comparable_kpi: quality_usd_and_unique_payees
+  members:
+    - id: x402
+      owner: Coinbase / x402 Foundation
+      style: per_request_onchain
+      asset: USDC
+      unit: t3_t4_usd
+    - id: mpp
+      owner: Stripe + Tempo
+      style: session_batch_settled
+      asset: USDC_fiat_lightning
+      unit: settled_usd
+    - id: l402
+      owner: Lightning Labs
+      style: per_request_lightning
+      asset: BTC_sats
+      unit: paid_invoices_usd
+  not_yet:
+    - s402
+    - u402
+    - v402
+    - ietf_draft_httpauth_payment
+    - lobster_cash
+  do_not_include:
+    - erc8004
+    - virtuals_acp
+    - google_ap2
+    - a2a_x402_as_separate_protocol
 
-p1_daily_onchain:
-  - id: x402
-    owner: Coinbase / x402 Foundation
-    layer: settlement
-    native_unit: t3_t4_usdc
-    do_not_count: raw_txs
-    token_expression: USDC
-    alerts: [S1, S2, S3, S4, S5, S6, C1, C2]
-  - id: virtuals_acp
-    owner: Virtuals Protocol
-    layer: commerce_runtime
-    native_unit: unique_counterparties_and_terminal_jobs
-    do_not_count: cumulative_memos
-    related_erc: ERC-8183
-    token_expression: VIRTUAL
-    alerts: [M1, M2]
-  - id: mpp
-    owner: Stripe + Tempo
-    layer: settlement_sessions
-    native_unit: settled_events
-    do_not_count: channel_opened
-    token_expression: Tempo_if_any / USDC
-    alerts: []
-  - id: erc8004
-    owner: Ethereum (MetaMask / EF / Coinbase contributors)
-    layer: identity
-    native_unit: reputation_with_payment_proof
-    do_not_count: registrations
-    token_expression: none
-    alerts: [I1, I2]
-  - id: a2a_x402
-    owner: Google AP2 × Coinbase x402 extension
-    layer: authorization_to_settlement_bridge
-    native_unit: x402_txs_with_ap2_mandate_metadata
-    do_not_count: unlabeled_x402
-    token_expression: none
+layer_0_identity:
+  question: "Who is this agent?"
+  cadence: weekly
+  members: [erc8004, visa_tap, mastercard_kya]
 
-p2_weekly_spec:
-  - id: google_ap2
-    layer: authorization
-    watch: mandate_revocation_primitive
-    expression: V_MA_UCP
-  - id: ucp
-    owner: Google + Shopify
-    layer: commerce_checkout
-    expression: substitution_equities
-  - id: openai_acp
-    layer: merchant_checkout
-    watch: instant_checkout_share_and_mor_language
-    expression: openai_stripe
-  - id: visa_tap
-    layer: agent_identity_on_card_rail
-    expression: V
-  - id: mastercard_verifiable_intent
-    layer: authorization_proof
-    expression: MA
-  - id: erc8183
-    layer: proposed_job_escrow_abi
-    watch: adoption_outside_virtuals
+layer_2_authorization:
+  question: "Did a human allow this spend?"
+  cadence: weekly_plus_events
+  members: [google_ap2, openai_acp_allowances, mastercard_verifiable_intent]
+  adapters_into_layer_1: [a2a_x402]
 
-p3_event:
-  - alipay_act
-  - circle_agent_stack
-  - rain_apa
-  - china_self_discipline_convention
-
-do_not_monitor_as_payment_protocols:
-  - mcp
-  - a2a_core
-  - olas
-  - masumi
+layer_3_commerce:
+  question: "How is the commercial job created, escrowed, and accepted?"
+  cadence: daily_for_virtuals_else_weekly
+  members: [virtuals_acp, ucp, openai_acp_checkout, masumi]
