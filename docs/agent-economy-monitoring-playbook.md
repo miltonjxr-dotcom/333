@@ -62,13 +62,13 @@ KYA directories (Visa/MA)        First agent-overreach judgment
                                  AI liability insurance pricing
 ```
 
-| Radar | Native unit | Primary KPI | Investable if it breaks |
+| Radar | Native unit | Primary KPI | If it breaks, *then* ask |
 | --- | --- | --- | --- |
 | **R1 Demand** | tokens, apps, downloads | OpenRouter agent-app tokens; reasoning-model share | Inference routers, GPU, API gateways |
-| **R2 Settlement quality (Layer 1 only)** | USDC | T3/T4 x402 USD vs MPP `Settled` USD vs L402 paid; unique payees; share among the three | USDC, Base/Solana/Tempo, facilitators |
+| **R2 Settlement quality (Layer 1 only)** | USDC | T3/T4 x402 USD vs MPP `Settled` USD vs L402 paid; unique payees; share among the three | Rails / facilitators — **conditional**; USDC as **share**, not a PnL sleeve |
 | **R3 Identity** | reputation events | 8004 feedback with payment proof / unique operators | KYA, agent wallets, reputation graphs |
-| **R4 Marketplace** | completed jobs | Virtuals unique senders + settled jobs, not memos | `VIRTUAL` only after quality, still reflexive |
-| **R5 Rails / capital** | chain share, float | Adjusted-volume chain flip; USDC share of machine payments | SOL vs BASE, CIRCLE, COIN, Tempo |
+| **R4 Marketplace** | completed jobs | Virtuals unique senders + settled jobs, not memos | `VIRTUAL` only after M1 (jobs + counterparties), still reflexive |
+| **R5 Rails / capital** | chain share, float | Quality-USD chain flip; USDC mix of machine payments | SOL / CRCL / COIN as **conditional beneficiaries**, not a core book |
 | **R6 Rules / liability** | events | Revocation primitive; first attributed chargeback; court on *wrong purchase* | V / MA, licensed PSPs, insurers |
 
 Crypto gets paid on R2–R5. Equities get paid on R5–R6. R1 is the earliest warning that R2 *might* follow. Token charts are not a radar.
@@ -87,7 +87,7 @@ Quality tiers answer **who paid whom without washing**. They do **not** answer *
 
 Circle Gateway is an overlay on a settlement network, not a sixth GMV venue. Repeat buyers are T4 / T3, never T0. SKU mix (inference / data / compute / other API) is a drill-down when the catalog has labels — not a second GMV.
 
-On the **free desk**, T4/T3 are not computed daily. IC looks at F-proxies in [`data-cleaning.md`](data-cleaning.md) and must keep Unique Buyers / Repeat Rate **null** until a Dune sample exists. See [`weekly-cascade.md`](weekly-cascade.md).
+On the **free desk**, T3/T4 are not computed daily. **Observed Service Spend is null.** Do not label F_sku USD or MPP Settled *counts* as Service Spend (dimension error). See [`weekly-cascade.md`](weekly-cascade.md).
 
 ### 3.1 x402 four-tier filter
 
@@ -269,11 +269,11 @@ Breadth: wallet clustering (shared funder) — if 20 payers collapse to 3 cluste
 Corroboration: OpenRouter apps, SDK, Circle/AWS changelog.
 
 **T+24h**  
-Investable expression (pick one primary):
+Ask whether any **conditional beneficiary** maps. This is not a core book. Pick at most one primary; “no expression” is allowed.
 
-| If the break is… | Expression | Do not express via |
+| If the break is… | Candidate beneficiary | Do not express via |
 | --- | --- | --- |
-| Named API/compute SKUs on Base/Solana | USDC float / CIRCLE, COIN (Base + CDP wallets), SOL if C1 on **T2 USD** | Random agent ERC-20s |
+| Named API/compute SKUs on Base/Solana | CRCL / COIN **if** S1; SOL **if** C1 on **T2/Observed Spend USD** | Random agent ERC-20s; long-USDC as PnL |
 | Facilitator rents spreading or concentrating | The facilitator’s token/equity if any; otherwise infrastructure names | x402 “protocol token” (there isn’t a rent-bearing one) |
 | Virtuals completed jobs + unique counterparties | `VIRTUAL`, small, with a kill if M2 returns | Every agent token that pairs to VIRTUAL |
 | Identity/reputation with payment proofs | Agent-wallet / KYA names | 8004 mint coins |
@@ -286,17 +286,20 @@ If no expression exists, that is an acceptable outcome. Log “watched, uninvest
 
 ---
 
-## 8. How the desk is allowed to get paid
+## 8. Potential expressions (downstream of a quality break)
 
-Picks and shovels, in order of how cleanly they map to a real S1:
+Monitoring order does not change: real payment → breadth → off-chain corroboration → **then** ask whether any instrument maps. Nothing below is a preset book. USDC is a **settlement-share / reserve metric**, not a capital-gain expression like CRCL or COIN.
 
-1. **Reserve asset and L5:** USDC, Circle Agent Stack, Coinbase CDP / Privy-class agent wallets. These sit on the money.
-2. **Blockspace that actually settles T2 USD:** Base first historically; Solana only after C1 on quality volume, not on tx count.
-3. **Facilitators and merchant catalogs:** where take-rate can appear. Treat concentration as both a risk and a moat.
-4. **Marketplace coordination:** `VIRTUAL` is the cleanest public-crypto expression of agent *launch + routing*, and also the most reflexive. Size as a satellite, not the core book.
-5. **Authorization / liability (traditional finance):** Visa as authorization infrastructure, Mastercard as multi-rail settlement + BVNK, Stripe as execution. These move on L-series and on substitution, not on x402 tweets.
+| If this breaks (quality-gated) | Candidate beneficiary | Not this | Kill / don’t treat as core |
+| --- | --- | --- | --- |
+| Named SKU Service Spend on Base (S1) | COIN (Base + CDP wallets), CRCL (USDC / Agent Stack / Arc after live usage) — **conditional** | Random agent ERC-20s | No S1: do not “do Circle/Coinbase research” from T0 |
+| C1 on **T2/observed Spend USD share** (not tx share) to Solana | SOL as a **conditional** rail expression | Daily tx flips | Tx-only “Solana flip” |
+| USDC share of quality machine payments | Track as **share**, not as a long-USDC PnL sleeve | Circle’s $14T on-chain volume | — |
+| Facilitator take-rate / HHI (S6) | That name’s token/equity if any | “x402 protocol token” | Sybil of an old facilitator |
+| Virtuals **completed jobs + unique counterparties** (M1) | `VIRTUAL`, small | Every VIRTUAL-paired agent coin | **M2 memo theater** or senders flat 30d |
+| L1–L4 rules / substitution | V, MA, licensed PSPs, insurers | On-chain beta | — |
 
-Core book vs satellite: core is (1)+(2)+L5 equities. Satellite is (4) and long-tail agent tokens. Long-tail tokens are not a monitoring input; they are a *downstream bet* after S1/M1.
+Long-tail agent tokens are not a monitoring input. “No expression” after a real break is an allowed outcome.
 
 ---
 
@@ -316,7 +319,7 @@ None of these are predicted. They are the off switches.
 
 ## 10. Daily analyst checklist (print this)
 
-- [ ] T3/T4 USD 7d vs 30d trend (not T0 txs)
+- [ ] Observed Service Spend (null on free desk) vs covered-SKU proxy vs MPP Settled **count** (do not add them)
 - [ ] Unique T3 payers / payees; top-1% share; facilitator HHI
 - [ ] Ticket mix; avg ticket on T2 (Aug-26 style collapse = campaign)
 - [ ] Chain share of **T2 USD**

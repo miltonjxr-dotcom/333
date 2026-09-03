@@ -6,6 +6,7 @@
     "date",
     "as_of",
     "quality_available",
+    "observed_service_spend_usd",
     "public_tripwire",
     "alerts"
   ],
@@ -16,13 +17,21 @@
       "type": "boolean",
       "description": "False on the free desk (no T2–T4). Do not backfill from T0 or x402watch real_volume."
     },
+    "observed_service_spend_usd": {
+      "type": ["number", "null"],
+      "description": "x402 T3 USD + MPP usage Settled USD + L402 paid. Always null on the free desk. Do not fill from F_sku USD or MPP Settled counts (dimension error)."
+    },
     "free_proxy": {
       "type": "object",
-      "description": "F-series from agenteconomy + x402watch-data. Not Service Spend.",
+      "description": "F-series from agenteconomy + x402watch-data. Not Service Spend. Do not add F_sku USD to MPP counts.",
       "properties": {
         "x402watch_snapshot_date": { "type": ["string", "null"] },
         "f1_real_volume_30d_usd": { "type": ["number", "null"] },
         "f_sku_usd_24h": { "type": ["number", "null"] },
+        "x402_covered_sku_spend_proxy_usd": {
+          "type": ["number", "null"],
+          "description": "Alias of f_sku_usd_24h. Covered catalog slice only — not x402 Service Spend."
+        },
         "f_sku_txs_24h": { "type": ["number", "null"] },
         "live_named_sellers_7d": { "type": ["integer", "null"] },
         "unique_buyers": { "type": ["integer", "null"] },
@@ -52,6 +61,14 @@
       "type": "object",
       "properties": {
         "settled": { "type": ["integer", "null"] },
+        "settled_paid_events": {
+          "type": ["integer", "null"],
+          "description": "Alias of settled. Count of Settled events — not USD."
+        },
+        "settled_usd": {
+          "type": ["number", "null"],
+          "description": "MPP usage Settled USD. Null until the public feed publishes it. Counts must not impersonate dollars."
+        },
         "channel_opened": { "type": ["integer", "null"] },
         "unique_payers": { "type": ["integer", "null"] },
         "unique_payees": { "type": ["integer", "null"] }

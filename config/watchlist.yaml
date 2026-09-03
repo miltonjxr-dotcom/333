@@ -1,31 +1,45 @@
-# Coverage universe. Core book vs satellite is a sizing rule, not a quality rule.
-# Tokens are expressions AFTER a green quality alert, not monitoring inputs.
+# Potential expressions / conditional beneficiaries.
+# Monitoring order: real payment → breadth → off-chain demand → then ask if any
+# instrument maps. Nothing here is a preset book. Tokens are not inputs.
 
 version: 1
 as_of: 2026-09-03
 
-core_book:
+# USDC is not a capital-gain twin of CRCL/COIN. Track share of quality
+# machine payments. Do not run a "long USDC" sleeve from this file.
+settlement_share_metric:
+  - id: USDC
+    venue: circle_reserve
+    role: share_metric_not_pnl
+    why: "Observed x402 T0/T2 mostly settles in USDC. Use as mix, not as a core PnL book."
+    trigger_alerts: [S1, S2, C2, C3, L5]
+    do_not: "Treat USDC as an equity-style expression of agent-economy GDP."
+
+potential_expressions:
   rails_and_l5:
-    - id: USDC
-      venue: circle_reserve
-      why: "99%+ of observed x402 T0/T2 settles in USDC. Reserve asset of machine payments."
-      trigger_alerts: [S1, S2, C2, C3, L5]
     - id: CRCL
       venue: equity
       name: Circle
-      why: "Agent Stack paid services, USDC, Arc agent-finance after 2026-09-16 mainnet."
+      role: conditional_beneficiary
+      why: "Agent Stack paid services, USDC issuer, Arc agent-finance after 2026-09-16 mainnet."
       trigger_alerts: [S1, C2, C3, L5]
+      gate: "Named SKU / Observed Service Spend on a Circle-relevant rail. T0 alone is not a gate."
     - id: COIN
       venue: equity
       name: Coinbase
+      role: conditional_beneficiary
       why: "Base blockspace, CDP agent wallets, x402 origin, AgentCore wallet partner."
       trigger_alerts: [S1, C1, C3, S6]
+      gate: "S1 on Base (or C1 on quality USD share). Do not open a Coinbase sleeve from T0 txs."
     - id: SOL
       venue: crypto
-      why: "Only after C1 on T2 USD share, not daily tx flips."
+      role: conditional_beneficiary
+      why: "Only after C1 on T2 / Observed Spend USD share, not daily tx flips."
       trigger_alerts: [C1]
+      gate: "C1 on quality USD share."
     - id: ETH
       venue: crypto
+      role: do_not_express
       note: "Weak beta via Base. Do not buy ETH to express agent payments."
       trigger_alerts: []
 
@@ -33,38 +47,47 @@ core_book:
     - id: V
       venue: equity
       name: Visa
+      role: conditional_beneficiary
       why: "Authorization infrastructure, TAP, token assurance. Moves on L-series and substitution."
       trigger_alerts: [L1, L2, L3]
     - id: MA
       venue: equity
       name: Mastercard
+      role: conditional_beneficiary
       why: "BVNK = self-custody of stablecoin settlement; multi-rail."
       trigger_alerts: [L1, L2, C2, L5]
     - id: STRIPE
       venue: private
+      role: conditional_beneficiary
       why: "Shared Payment Token, Privy, Bridge, OpenRouter. Execution layer."
       trigger_alerts: [S1, D1, L1]
 
-satellite:
   marketplace:
     - id: VIRTUAL
       venue: crypto
       chain: base
-      why: "Launch + routing asset for agent tokens; ACP commerce. Reflexive. Size small."
+      role: conditional_beneficiary
+      why: "Launch + routing asset for agent tokens; Virtuals ACP commerce. Reflexive. Size small."
       trigger_alerts: [M1]
+      gate: "completed jobs AND counterparties broaden"
       kill: "M2 memo theater or unique senders flat 30d"
+
   inference_and_decentralized_intelligence:
     - id: TAO
       venue: crypto
+      role: related_not_a_rail
       why: "Incentive layer for decentralized intelligence — related, not a payment rail."
       trigger_alerts: [D1, D2]
     - id: VVV
       venue: crypto
+      role: related_not_a_rail
       why: "Attempts to financialize inference demand. Only with D1/D2."
       trigger_alerts: [D1, D2]
+
   autonomous_agent_networks:
     - id: OLAS
       venue: crypto
+      role: related_not_a_rail
       why: "On-chain autonomous services. Monitor unique operators, not weekly txs."
       trigger_alerts: []
 
@@ -76,6 +99,7 @@ do_not_monitor_as_inputs:
   - "Raw x402 transaction count"
   - "ERC-8004 registration count"
   - "Tempo MPP ChannelOpened count"
+  - "A preset core book of USDC / CRCL / COIN"
 
 event_calendar:
   - date: 2026-09-16

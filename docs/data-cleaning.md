@@ -14,7 +14,7 @@ CoinGecko / public IR              or 1 API call/week if you         Visa whale 
 x402watch API: avoid; 60 req/h     already have a free key
 ```
 
-T3/T4 remain the **definition** of Service Spend. On this desk they are **not a daily series**. Without transfer-level rows you cannot compute unique T3 buyers, T4 repeat, facilitator-cluster T2, or fee vs $500 ACP notional. Pretending x402watch `real_volume` is T3 is how 表 0 gets lied to.
+T3/T4 remain the **definition** of Service Spend. They are **not a currently continuous observable** on this desk. Without transfer-level rows you cannot compute unique T3 buyers, T4 repeat, facilitator-cluster T2, or fee vs $500 ACP notional. Pretending x402watch `real_volume` is T3 is how 表 0 gets lied to.
 
 How to score a website’s washer without trusting `real %`: [`cleaner-audit.md`](cleaner-audit.md) and `python3 scripts/audit_cleaners.py`.
 
@@ -89,7 +89,7 @@ Daily (scripts/tripwire.py + scripts/free_quality_panel.py)
 Weekly
   npm downloads for `x402` (and agentkit if needed)
   OpenRouter rankings page (no API)
-  CoinGecko VIRTUAL — satellite only
+  CoinGecko VIRTUAL — potential expression only (M1 gate / M2 kill)
 
 Monthly / yellow
   At most a few Dune credits: top payees, chain USD not tx, or 8004 proofs
@@ -102,15 +102,20 @@ SQL in [`sql/optional_paid_allium_x402_quality_panel.sql`](../sql/optional_paid_
 
 ## Map boss KPIs onto what we can actually see
 
-| Boss KPI | Free proxy | Honest hole |
+Do **not** add F_sku USD to MPP Settled **counts**. That is a dimension error (USD + transactions). Observed Service Spend stays null until a transfer ledger (and MPP settled **USD**) exists.
+
+| Boss KPI | Free desk fill | Honest hole |
 | --- | --- | --- |
-| **Service Spend** | x402watch 24h category USD **plus** MPP `Settled` if the feed gives a size; never + ACP notional | 24h SKU USD is a **subset** of indexed services, not machine GDP. 30d `real_volume` is an upper-ish F1, still not Service Spend |
-| **Paid Tx** | 24h `total_tx` by category; MPP Settled count | Not T3 paid tx. T0 txs remain the wash trap |
+| **Observed Service Spend** | **null** | T3 + MPP usage Settled **USD** + L402 paid is the definition, not a daily series |
+| **x402 covered SKU spend proxy** | F_sku 24h category USD | Subset of indexed services. ~$325 / 77% `token_data` on 2026-09-03. **Not** x402 Service Spend |
+| **MPP settled paid events** | `Settled` **count** | Not USD. `ChannelOpened` is plumbing |
+| **MPP settled USD** | **null** until the feed publishes usage dollars | Do not impersonate USD with a count |
+| **Paid Tx (quality)** | F_sku 24h txs and MPP Settled **listed separately** | Not T3 paid tx. T0 txs remain the wash trap |
 | **Unique Buyers** | **null** daily | Label counts ≠ unique demand. `organic_user` is a residual class |
 | **Repeat Buyer Rate** | **null** daily | T4 needs a buyer×day panel |
 | **Unique Sellers** | Count of catalog rows `last_seen` in 7d, category not `premium_placeholder` / `other` | Directory size, not independent T3 payees |
 
-表 0 on the free desk is therefore **four numbers + two explicit nulls**, all stamped `quality_available: false` for T3/T4. A week where F_sku jumps because `token_data` printed $250 is a **campaign/cluster note**, not S1 green.
+表 0 on the free desk is therefore **Observed Spend = null**, split proxies (F_sku USD ≠ MPP count), and two buyer nulls, all stamped `quality_available: false` for T3/T4. A week where F_sku jumps because `token_data` printed $250 is a **campaign/cluster note**, not S1 green. F_sku is a **covered SKU proxy**, never a stand-in for x402 Service Spend.
 
 Drop Virtuals ACP URLs (`virtuals.io`, `acp-x402`) from seller counts when using the services dump. Their 30d real USD still **includes** whatever x402watch called real on those hosts — F1 is not ACP-clean. That is a known bias; do not “fix” it with Codex.
 

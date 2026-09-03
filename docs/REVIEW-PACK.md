@@ -16,12 +16,27 @@
 
 1. **两个市场、两个分母**（替代 vs 创造）是否应成为加密侧监测的先验？
 2. **Service Spend ≠ 质量美元 ≠ T0** 的三层分母是否够硬？ACP「$500 本金 / $1 费」是否被真正挡住？
-3. **同层才能同表**（x402/MPP/L402 一表；ACP 不进支付表；Gateway 不是第六条链）是否正确？
+3. **同层 + 同经济事件 + 同计量单位才能同表**（x402/MPP/L402 一表；OpenAI ACP 是授权不是商务；Virtuals ACP 不进支付表；Gateway 不是第六条链）是否正确？
 4. **免费桌**把 Unique Buyers / Repeat 标成 **null**、禁止绿灯，是否过于保守，还是唯一诚实做法？
-5. **数据源分工**（日更 JSON vs 周看 Artemis vs 禁止再跑 Dune）是否浪费了本可免费得到的信息？
-6. **投资表达**（核心：USDC/CRCL/COIN；卫星：VIRTUAL）是否把监测和质量混成了荐股？
+5. **数据源分工**（日更 JSON vs 周看 Artemis vs 日常 0 次 Dune、黄灯 ≤3、月 IC ≤2）是否浪费了本可免费得到的信息？
+6. **投资表达**写成 Potential Expressions / 条件化受益映射（USDC=份额指标；CRCL/COIN=conditional beneficiary；VIRTUAL 仍要 M1 门 / M2 杀）是否仍把监测和荐股混在一起？
 
-请不要审「文笔」或「再做一个全市场 GDP」。
+请不要审「文笔」或「再做一个全市场 GDP」。任何首页美元都**不能加总成 Agent Economy GDP**。
+
+### 外部审核（2026-09-03）已收，三处硬口径已改
+
+外部审核对上一版六问：**同意 3 / 需改口径 3 / 反对 0**。主方向成立；最大硬伤不是数据少，而是 proxy 被写成真值。本文件已按审核改：
+
+| # | 审核 | 本文件处理 |
+| --- | --- | --- |
+| 1 两个市场 | **同意** | 保持为**研究分区**，不是两个可直接计算的数字分母 |
+| 2 三分法 | **需改口径** | 定义保留（挡住 ACP $500 本金）；免费桌 **Observed Service Spend = null**，禁止 F_sku USD + MPP 笔数 |
+| 3 同层同表 | **需改口径** | 原则收紧；OpenAI ACP **只在 Layer 2**；Virtuals ACP 的 job/fee/notional 不同表 |
+| 4 Buyers / Repeat = null | **同意** | 保持；`organic_user` 不得填 Unique Buyers |
+| 5 日更 / 周看 / Dune | **同意** | 保持额度分层 |
+| 6 核心书 USDC/CRCL/COIN | **需改口径** | 降为条件化受益映射；USDC 不是 CRCL/COIN 同性质的资本利得表达 |
+
+已知空洞 7 条审核全部**接受**（F_sku 必须降级为 covered SKU proxy；T3/T4 是目标定义不是当前连续可观测指标）。
 
 ---
 
@@ -76,14 +91,16 @@
 ```
 功能                              场所
 支付协议  x402 / MPP / L402       结算网络  Base / Solana / Tempo / Arc / Lightning
-商务编排  Virtuals ACP / UCP / …  批处理    Circle Gateway  ← overlay，不是第六条链
-身份      ERC-8004 / TAP
-授权      AP2 / Verifiable Intent
+商务编排  Virtuals ACP / UCP / Masumi
+身份      ERC-8004 / TAP          批处理    Circle Gateway  ← overlay，不是第六条链
+授权      AP2 / OpenAI Agentic Commerce Protocol / Verifiable Intent
 ```
+
+**同层 + 同经济事件 + 同计量单位，才能同表比较。** 名字撞车不是同行。
 
 - 链和支付协议**平级**，不是父子。x402 跑在 Base **和** Solana；Tempo 上主要是 MPP。
 - A2A×x402 是授权层进入 x402 的适配器，不是第四个支付协议。
-- Google AP2 / OpenAI **Agentic** Commerce Protocol / Virtuals **ACP** 名字会撞；OpenAI ACP 是结账授权，Virtuals ACP 是 job 编排。
+- Google AP2 / OpenAI **Agentic Commerce Protocol** / Virtuals **ACP** 名字会撞；OpenAI ACP 是结账**授权**（Layer 2），Virtuals ACP 是 job **编排**（Layer 3）。Virtuals 的 completed job / fee / notional 不能因为也叫 ACP 就和授权协议放一起。
 
 ### 2.2 Layer 1 支付协议（唯一可日更同表的三人）
 
@@ -102,8 +119,8 @@
 | 层 | 同行 | 单位 |
 | --- | --- | --- |
 | 0 身份 | ERC-8004、Visa TAP、Mastercard KYA 类 | 后来**付过钱**的可识别 agent，不是 NFT mint（2026-09 注册约 54.9 万，是铸币指标） |
-| 2 授权 | AP2 mandate、OpenAI ACP allowance、Verifiable Intent | 签发 / 撤回 / 执行 |
-| 3 商务 | Virtuals ACP、Masumi、UCP、OpenAI 结账 ACP | **完结 job / 放款**，不是 memo（Virtuals 累计 memo 已超 1200 万） |
+| 2 授权 | AP2 mandate、**OpenAI Agentic Commerce Protocol**（结账 allowance）、Verifiable Intent | 签发 / 撤回 / 执行 |
+| 3 商务 | Virtuals ACP、Masumi、UCP。**不含** OpenAI ACP | **完结 job / 放款**，不是 memo（Virtuals 累计 memo 已超 1200 万）。fee ≠ notional |
 
 绿灯只在**层内**（例如 MPP 从 x402 抢 USD 份额）。跨层同时动是旁证，不是加总 GDP。
 
@@ -147,31 +164,34 @@ IC 理想主序列：T4 USD 与 T3 unique payees。广度好：付款方和收�
 
 Allium 自己也不打高频买家（那是 x402 正常形态）和 A→B→C 环。故厂商 `NOT is_inorganic` 仍只是 T1。
 
-### 3.3 老板五 KPI
+### 3.3 老板屏口径（定义 vs 免费桌）
 
-| KPI | 有逐笔账本时 | **本桌（免费）必须怎么填** |
-| --- | --- | --- |
-| Service Spend | T3 + MPP usage Settled + L402 paid | **不是 T0，不是 x402watch 30d real。** 用 24h 类目美元 F_sku + MPP Settled **笔数**；脚注「F 代理」 |
-| Paid Tx | 上述笔数 | F_sku 24h txs；T0 只当战役 |
-| Unique Buyers | T3 独立付款方 | **每天 null**。`organic_user` 是残差类 |
-| Repeat Buyer Rate | T4/T3 | **每天 null** |
-| Unique Sellers | T3 named | 目录 last_seen 7d、非 placeholder/other、去掉 virtuals/ACP URL |
+| KPI | 有逐笔账本时 | **本桌（免费）必须怎么填** | 量纲 |
+| --- | --- | --- | --- |
+| **Observed Service Spend** | T3 USD + MPP **usage Settled USD** + L402 paid | **null**。没有账本、MPP 饲料没有 Settled **美元**时禁止填 | USD |
+| **x402 covered SKU spend proxy** | （不是 Spend） | F_sku 24h 有类目目录切片。**不是** x402 Service Spend | USD |
+| **MPP settled paid events** | （不是 Spend） | `Settled` **笔数**。禁止与 F_sku 美元相加 | count |
+| **MPP settled USD** | MPP 用量 Settled 美元 | 饲料给出才填，否则 **null** | USD |
+| Paid Tx (quality) | 上述对应笔数 | 有 Observed Spend 才填；否则 F_sku txs 与 Settled **分列** | count |
+| Unique Buyers | T3 独立付款方 | **每天 null**。`organic_user` 是残差类 | — |
+| Repeat Buyer Rate | T4/T3 | **每天 null** | — |
+| Unique Sellers | T3 named | 目录 last_seen 7d、非 placeholder/other、去掉 virtuals/ACP URL | count |
 
-两个 null 是正常诚实，禁止用模型把 null 编成数。
+Buyers / Repeat 两个 null 是正常诚实。**Observed Service Spend 也是 null**：表 0 不能叫「真服务支出已测到」。禁止用模型把 null 编成数。禁止把 F_sku 美元与 MPP 笔数加总（量纲错误）。
 
-闸门：F_sku 与 Unique Sellers 都不动 → 只扫表 6。仅 T0 笔数动 → 战役。均价 <$0.05 且笔数暴增 → 战役。F_sku 单类目 ≥50% → 当集群，直到抽样。
+闸门：Observed Spend、F_sku、MPP Settled 笔数、catalog sellers 都不动 → 只扫表 6。仅 T0 笔数动 → 战役。均价 <$0.05 且笔数暴增 → 战役。F_sku 单类目 ≥50% → covered-SKU 集群，直到抽样。
 
 ---
 
 ## 4. 周报层级（从大到小）
 
-**总盘 → 结算网络 + 支付协议（并列）→ 协议×网络 →（有标签才）需求类型 → 商务编排 → 身份 → 主体 → 规则**
+**总盘（Observed Spend 常为 null + 分列代理）→ 结算网络 + 支付协议（并列）→ 协议×网络 →（有标签才）需求类型 → 商务编排（fee ≠ notional；OpenAI 结账 ACP 不在此表）→ 身份 → 主体 → 规则**
 
-下层仅在上层动了、或每周 10 分钟扫描时打开。同行才能同行。
+下层仅在上层动了、或每周 10 分钟扫描时打开。同行 = 同层 + 同经济事件 + 同单位。
 
 | 表 | 问题 | 行 | 列 / 规则 |
 | --- | --- | --- | --- |
-| 0 | 真服务支出有没有动 | — | 五 KPI，免费桌两 null |
+| 0 | 真服务支出有没有动 | — | Observed Spend **null**；F_sku USD 与 MPP 笔数分列；Buyers/Repeat **null** |
 | 1 | 钱落在哪条最终结算网 | Base / Solana / Tempo / Arc / Lightning | Service Spend、份额、sellers、WoW；**Gateway % 是列** |
 | 2 | 信封换了没 | x402 / MPP / L402 | Spend、份额、质量 Paid Tx、Buyers、Repeat、Sellers |
 | 2×1 | 交叉 | 单元格 | x402×Base vs Solana；MPP≈Tempo |
@@ -196,7 +216,7 @@ Allium 自己也不打高频买家（那是 x402 正常形态）和 A→B→C �
 | 作业 | 读什么 | 产出 |
 | --- | --- | --- |
 | `scripts/tripwire.py` | `https://agenteconomy.to/data.json` | T0 笔数 z、均价塌缩、MPP Settled/事件、ACP memo vs senders。**只许黄灯** |
-| `scripts/free_quality_panel.py` | 同上 + `printmoneylab/x402watch-data` | F1 30d real/wash、F_sku 24h 类目、7d named sellers。T3/T4 **null**。`quality_available: false` |
+| `scripts/free_quality_panel.py` | 同上 + `printmoneylab/x402watch-data` | `observed_service_spend_usd: null`、covered-SKU proxy（F_sku）、MPP Settled 笔数、`mpp_settled_usd: null`、7d named sellers。T3/T4 **null**。`quality_available: false` |
 
 禁止从 F1 或 T0 回填 T3。快照合同：`schemas/daily_quality_snapshot.schema.json`。
 
@@ -303,13 +323,20 @@ agenteconomy 同一 JSON 里 USDC 占比 98.46% 的分母只有 **4.7 万笔**�
 
 ---
 
-## 9. 投资表达（监测下游，不是输入）
+## 9. 潜在表达 / 条件化受益映射（监测下游，不是输入，不是核心书）
 
-核心书：USDC / CRCL（Agent Stack、Arc）、COIN（Base、CDP、x402 起源）、SOL **仅当质量美元份额翻转（C1）** 而非日笔数翻转。ETH 不当机器支付表达。
+监测顺序不变：先判断真实支付 → 广度 → 链下需求 → **最后**才问有没有可投资表达。下面不是预设仓位。没有表达是允许的结果。
 
-传统金融（替代与责任）：V、MA、Stripe（私有）。
+| 若质量门过了… | 候选受益 | 不是这个 | 杀死 / 不要当核心 |
+| --- | --- | --- | --- |
+| Base 上具名 SKU Service Spend（S1） | COIN、CRCL — **conditional beneficiary** | 随机 agent ERC-20 | 没有 S1 就不要从 T0 做 Circle/Coinbase 研究 |
+| C1：质量美元份额（不是笔数份额）翻到 Solana | SOL — **conditional** | 日笔数翻转 | 只看笔数的「Solana flip」 |
+| 质量机器支付的 USDC 占比 | **份额指标**，不是 long-USDC 资本利得袖 | Circle 全链上体积 | USDC ≠ CRCL/COIN 同性质表达 |
+| Facilitator 分成 / HHI（S6） | 该主体的代币/股权（若有） | 「x402 协议币」 | 旧 facilitator 的马甲 |
+| Virtuals **完结 job + 对手方变宽**（M1） | `VIRTUAL`，小仓 | 所有 VIRTUAL 配对 agent 币 | **M2 memo 剧场** 或 senders 30d 不动 |
+| L1–L4 规则 / 替代 | V、MA、持牌 PSP、保险 | 链上 beta | — |
 
-卫星：`VIRTUAL` 仅在完结 job+对手方变宽之后，小仓，M2 则杀。TAO/VVV 跟推理旁证，不是支付轨。不要把 VIRTUAL 配对的长尾 agent 币当监测输入。
+TAO/VVV 跟推理旁证，不是支付轨。不要把 VIRTUAL 配对的长尾 agent 币当监测输入。
 
 L5：钱在谁钱包里决定谁赔。AWS AgentCore 等产品把钱包留在 Coinbase/Stripe Privy 一侧是结构事实，需盯「谁持钥」变更（L6）。
 
@@ -327,13 +354,13 @@ L5：钱在谁钱包里决定谁赔。AWS AgentCore 等产品把钱包留在 Coi
 
 ## 11. 已知空洞（请审核人重点打）
 
-1. **没有日更 T3/T4。** 免费桌两 KPI 为 null。若你认为必须日更复购，请给出**不烧 Dune、不建索引**的算法，否则应同意 null。  
-2. **F_sku 覆盖窄。** 2026-09-03 24h 仅约 $325，且 77% 在 token_data，与 T0 月 $4 万、scan 30d $144 万不可比。  
-3. **Artemis 不可机读。** 周看依赖人工读图；与 F_sku 对不上时没有自动和解。  
-4. **Gateway % 目前无免费序列。** 规范有、数据无。  
-5. **ACP fee vs notional** 规范有，公开 JSON 仍主要是 memo/senders。  
-6. **绿灯在免费桌几乎发不出来** — 这是设计，不是 bug。若你认为应放绿灯，请说明用哪一分母。  
-7. Allium SQL 仅作 T3 定义存档，**不调度**。
+1. **没有日更 T3/T4。** 免费桌 Observed Spend / Buyers / Repeat 为 null。若你认为必须日更复购，请给出**不烧 Dune、不建索引**的算法，否则应同意 null。  
+2. **F_sku 覆盖窄。** 只能称 **covered SKU proxy**，绝不能代表 x402 Service Spend。2026-09-03 24h 仅约 $325，且 77% 在 token_data，与 T0 月 $43.7 万、scan 30d $144 万不可比。  
+3. **Artemis 不可机读。** 周看依赖人工读图；与 F_sku 对不上时没有自动和解。不能因为写了 Real/Gamed 就自动升级成 T3。  
+4. **Gateway % 目前无免费序列。** Schema 可留，当前值 **null**。不能为了填表找另一个近似 USD 比例。  
+5. **ACP fee vs notional** 规范有，公开 JSON 仍主要是 memo/senders。只能监控活动度，不能声称已看到 ACP 真实经济规模。  
+6. **绿灯在免费桌几乎发不出来** — 这是设计，不是 bug。False negative > false positive。若你认为应放绿灯，请说明用哪一分母。  
+7. Allium SQL 仅作 T3 定义存档，**不调度**。因此 **T3/T4 是目标定义，不是当前连续可观测指标。**
 
 ---
 
@@ -347,7 +374,7 @@ L5：钱在谁钱包里决定谁赔。AWS AgentCore 等产品把钱包留在 Coi
 | `docs/data-cleaning.md` | 免费清洗政策 |
 | `docs/source-landscape.md` | 网站普查 keep/ignore |
 | `docs/cleaner-audit.md` | 清洗审计方法 |
-| `config/quota.yaml` `sources.yaml` `alert_rules.yaml` `watchlist.yaml` | 配额、源岗位、阈值、表达 |
+| `config/quota.yaml` `sources.yaml` `alert_rules.yaml` `watchlist.yaml` | 配额、源岗位、阈值、条件化表达（不是核心书） |
 | `scripts/tripwire.py` `free_quality_panel.py` `audit_cleaners.py` | 日黄灯、F 代理、月审计 |
 | `sql/optional_paid_allium_x402_quality_panel.sql` | 付费账本定义，不跑 |
 | `schemas/daily_quality_snapshot.schema.json` | 日快照 |
@@ -356,4 +383,4 @@ L5：钱在谁钱包里决定谁赔。AWS AgentCore 等产品把钱包留在 Coi
 
 ## 13. 给审核 AI 的最短复述
 
-本方案监测**创造侧机器结算质量**，不监测「AI 购物」叙事。GMV 只允许 **Service Spend**；本金和 plumbing 分列。支付协议只有 x402 / MPP `Settled` / L402；ACP 是商务；Gateway 是叠加。质量阶梯 T0–T4 是定义。运行约束为免费：日更只消费 agenteconomy JSON 与 x402watch CC0；周看 Artemis sector 页；Dune/Codex 严格配额。网站 `real%` 不是准确度。老板屏在免费桌有两个强制 null。任何把首页美元加总成 Agent Economy GDP 的改法，视为审核失败。
+本方案监测**创造侧机器结算质量**，不监测「AI 购物」叙事。GMV 只允许 **Service Spend**；本金和 plumbing 分列。免费桌 **Observed Service Spend = null**；F_sku 只是 covered SKU proxy；MPP Settled 在没有美元时只报笔数，二者不得相加。支付协议只有 x402 / MPP `Settled` / L402。OpenAI Agentic Commerce Protocol 是 **Layer 2 结账授权**；Virtuals ACP 是 Layer 3 商务编排；Gateway 是叠加不是第六条链。同表要求：同层 + 同经济事件 + 同单位。质量阶梯 T0–T4 是**目标定义**，不是当前连续可观测指标。运行约束为免费：日更只消费 agenteconomy JSON 与 x402watch CC0；周看 Artemis sector 页；Dune 日常 0 次、黄灯 ≤3、月 IC ≤2。网站 `real%` 不是准确度。老板屏 Buyers / Repeat 强制 null。投资侧是 **Potential Expressions / 条件化受益映射**，不是核心书 USDC/CRCL/COIN。任何把首页美元加总成 Agent Economy GDP 的改法，视为审核失败。

@@ -180,9 +180,12 @@ def main() -> int:
         or datetime.now(timezone.utc).isoformat(),
         "quality_available": False,
         "quality_note": (
-            "Free desk: T3/T4 are null. Do not treat F1 30d real USD or T0 "
-            "as Service Spend. GREEN is forbidden."
+            "Free desk: Observed Service Spend is null. T3/T4 are null. "
+            "Do not treat F_sku USD, F1 30d real, T0, or MPP Settled counts "
+            "as Service Spend. Do not add USD to transaction counts. "
+            "GREEN is forbidden."
         ),
+        "observed_service_spend_usd": None,
         "x402": {
             "t0_txs": latest_day.get("txs"),
             "t0_usd": latest_day.get("vol"),
@@ -203,6 +206,7 @@ def main() -> int:
             "f1_wash_volume_30d_usd": rv.get("wash_volume_usdc"),
             "f1_developer_volume_30d_usd": rv.get("developer_volume_usdc"),
             "f_sku_usd_24h": f_sku_usd,
+            "x402_covered_sku_spend_proxy_usd": f_sku_usd,
             "f_sku_txs_24h": f_sku_txs,
             "f_sku_24h_by_category": sku_24h[:15],
             "f_sku_24h_rollup": rollup,
@@ -215,11 +219,13 @@ def main() -> int:
             "note": (
                 "F1 is x402watch 'real' (crawlers still in, ACP not stripped). "
                 "organic_user count is a residual class, not Unique Buyers. "
-                "24h SKU USD is the only free PMF slice."
+                "24h SKU USD is a covered-SKU proxy, not x402 Service Spend."
             ),
         },
         "tempo_mpp": {
             "settled": (mpp.get("byType") or {}).get("Settled"),
+            "settled_paid_events": (mpp.get("byType") or {}).get("Settled"),
+            "settled_usd": None,
             "channel_opened": (mpp.get("byType") or {}).get("ChannelOpened"),
             "unique_payers": mpp.get("uniquePayers"),
             "unique_payees": mpp.get("uniquePayees"),
@@ -274,15 +280,15 @@ def main() -> int:
 
     print("=== FREE DESK PANEL (T3/T4 unavailable) ===", file=sys.stderr)
     print(
-        f"x402watch={snap_day}  F1_30d_real=${rv.get('real_volume_usdc')}  "
-        f"F_sku_24h=${f_sku_usd:.2f} txs={f_sku_txs}  "
+        f"Observed Spend=null  x402watch={snap_day}  "
+        f"covered_SKU_proxy=${f_sku_usd:.2f} txs={f_sku_txs}  "
         f"live_named_sellers_7d={live_named}",
         file=sys.stderr,
     )
     print(
         f"T0 day={latest_day.get('day')} txs={latest_day.get('txs')}  "
-        f"MPP Settled={snapshot['tempo_mpp']['settled']}  "
-        f"unique_buyers=null  repeat=null",
+        f"MPP Settled events={snapshot['tempo_mpp']['settled']} "
+        f"MPP Settled USD=null  unique_buyers=null  repeat=null",
         file=sys.stderr,
     )
     print("GREEN forbidden. Dune queries this run=0. Codex calls=0.", file=sys.stderr)

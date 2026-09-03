@@ -1,7 +1,8 @@
 # Protocol monitoring by layer
 
-A watchlist is only valid if every row is a peer: same job, comparable unit.
+A watchlist is only valid if every row is a peer: **same layer, same economic event, same unit**.
 Do not put ERC-8004 next to x402. Do not add Virtuals ACP into the payment-protocol board.
+Do not put OpenAI Agentic Commerce Protocol (checkout **authorization**) on the same board as Virtuals ACP (job **orchestration**). The shared letters “ACP” are not a peer relationship.
 
 ## Layer 1 — Payment / settlement protocols (the crypto daily board)
 
@@ -42,12 +43,13 @@ Unit: identifiable agents that later *pay*, not NFT mints.
 
 ### Layer 2 — Authorization
 
-Peers: Google AP2 mandates, OpenAI ACP allowances, Mastercard Verifiable Intent.
+Peers: Google AP2 mandates, OpenAI Agentic Commerce Protocol (checkout allowances), Mastercard Verifiable Intent.
 Unit: issued / revoked / executed mandates. A2A×x402 is an **adapter** from this layer into Layer 1 — count it as “x402 with mandate metadata”, never as a fourth payment protocol.
 
 ### Layer 3 — Commerce / job orchestration
 
-Peers: Virtuals ACP, UCP, OpenAI ACP (checkout), Masumi jobs.
+Peers: Virtuals ACP, UCP, Masumi jobs.
+Not on this board: OpenAI Agentic Commerce Protocol — that is Layer 2 authorization, even though the acronym collides.
 Unit: completed jobs / checkouts with funds released, not memos.
 
 Run Layer 1 daily. Run 0 / 2 / 3 on their own cadence. A green alert is intra-layer (MPP taking USD share from x402). Cross-layer coincidence is corroboration, not a summed GMV.

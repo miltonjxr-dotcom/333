@@ -7,6 +7,8 @@ The goal is not to watch “AI agent” narrative volume. It is to detect **real
 | Layer | Role |
 | --- | --- |
 | [`docs/REVIEW-PACK.md`](docs/REVIEW-PACK.md) | **完整方案（给外部 AI 审核）**：先验、分层、分母、免费栈、审计、警报、空洞 |
+| [`docs/weekly-cascade.md`](docs/weekly-cascade.md) | Weekly pack: Service Spend (not notional) → networks + protocols → SKU drill → commerce |
+| [`docs/data-cleaning.md`](docs/data-cleaning.md) | Free desk: consume published JSON/CC0; Dune/Codex are rationed; no Allium |
 | [`docs/source-landscape.md`](docs/source-landscape.md) | Census of Artemis / x402scan / x402-list / Dune / etc. — keep vs ignore |
 | [`config/sources.yaml`](config/sources.yaml) | Machine-readable source roles (not a GMV union) |
 | [`docs/cleaner-audit.md`](docs/cleaner-audit.md) | How to score website washers without trusting `real %` |
@@ -15,7 +17,7 @@ The goal is not to watch “AI agent” narrative volume. It is to detect **real
 | [`docs/agent-economy-monitoring-playbook.md`](docs/agent-economy-monitoring-playbook.md) | Investment thesis, quality definition, alert catalog, escalation SOP |
 | [`config/quota.yaml`](config/quota.yaml) | Dune monthly caps; Codex not for ETL |
 | [`config/alert_rules.yaml`](config/alert_rules.yaml) | Machine-readable thresholds |
-| [`config/watchlist.yaml`](config/watchlist.yaml) | Coverage universe and how to express a view |
+| [`config/watchlist.yaml`](config/watchlist.yaml) | Potential expressions / conditional beneficiaries (not a core book) |
 | [`scripts/free_quality_panel.py`](scripts/free_quality_panel.py) | Daily F-proxies (yellow only; T3/T4 null) |
 | [`scripts/tripwire.py`](scripts/tripwire.py) | Public T0 tripwire (unconfirmed; never a buy signal) |
 | [`sql/optional_paid_allium_x402_quality_panel.sql`](sql/optional_paid_allium_x402_quality_panel.sql) | T3/T4 definition only — not scheduled |

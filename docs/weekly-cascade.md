@@ -32,14 +32,15 @@ What the review got slightly wrong:
 功能 (what)                         场所 (where the money sits)
 ────────────────────────────────    ────────────────────────────
 支付协议  x402 / MPP / L402         结算网络  Base / Solana / Tempo / Arc / Lightning
-商务编排  Virtuals ACP / UCP / …    批处理层  Circle Gateway  ← overlay，不是第六条链
+商务编排  Virtuals ACP / UCP / Masumi   批处理层  Circle Gateway  ← overlay，不是第六条链
 身份      ERC-8004 / TAP
-授权      AP2 / Verifiable Intent
+授权      AP2 / OpenAI Agentic Commerce Protocol / Verifiable Intent
 ```
 
-**链和支付协议是平级的两大类，不是上下级。**  
+**同层 + 同经济事件 + 同计量单位，才能同表比较。**  
 Base 不是 x402 的下级：x402 也跑在 Solana 上；Tempo 上主要是 MPP。  
-Gateway 也不是和 Base 平级的场所：它是结算网络上的聚单/净额层。
+Gateway 也不是和 Base 平级的场所：它是结算网络上的聚单/净额层。  
+OpenAI **Agentic Commerce Protocol** 是结账授权（Layer 2），Virtuals **ACP** 是 job 编排（Layer 3）——同名 ACP 不能同表。
 
 ### Settlement networks (表 1 rows — GMV lives here, once)
 
@@ -79,25 +80,28 @@ Allium note: `is_agent_economy_circulation` on ACP-like flow means “this is no
 
 ## Boss first screen (表 0 — 1 分钟)
 
-问题：这周有没有更多**真实机器服务支出**，以及需求是否在复购、供给是否在变宽？
+问题：这周有没有更多**真实机器服务支出**？在免费桌上，诚实答案往往是「Observed Service Spend 仍为 null」。
 
-五个数在**有逐笔账本**时才成立。本仓库按**免费桌**运行（无 Allium；Dune/Codex 额度见 [`quota.yaml`](../config/quota.yaml)）。
+**Observed Service Spend**（定义）：x402 T3 USD + MPP **usage Settled USD** + L402 paid。没有逐笔账本、且 MPP 饲料没有 Settled **美元**时，该格必须是 **null**。禁止把代理加总进这一格。
 
-| 指标 | 有账本时 | **免费桌实际填写** |
-| --- | --- | --- |
-| **Service Spend** | x402 T3 + MPP usage `Settled` + L402 paid | **不是** T0，也 **不是** x402watch 30d `real_volume`。看 **24h 类目美元**（F_sku）+ MPP Settled 笔数。脚注写「F 代理，非 T3」 |
-| **Paid Tx** | 上述笔数 | F_sku 24h txs；T0 笔数只当战役探测器 |
-| **Unique Buyers** | T3 独立付款方 | **每天填 null**。`organic_user` 人数是残差类，禁止当需求方 |
-| **Repeat Buyer Rate** | T4/T3 | **每天填 null**。没有 buyer×day 面板 |
-| **Unique Sellers** | T3 named payees | 目录 `last_seen` 7d 且类目不是 placeholder/other（去掉 virtuals/ACP URL） |
+| 格 | 免费桌填写 | 量纲 | 不是这个 |
+| --- | --- | --- | --- |
+| **Observed Service Spend** | **null** | USD | F_sku；T0 vol；x402watch 30d real；F_sku 美元 **加** Settled 笔数 |
+| **x402 covered SKU spend proxy** | F_sku 24h USD（有类目标签的目录切片） | USD | x402 Service Spend；机器 GDP |
+| **MPP settled paid events** | `Settled` **笔数** | count | 与 F_sku 美元相加；`ChannelOpened` |
+| **MPP settled USD** | 饲料给出用量美元才填，否则 **null** | USD | 用笔数冒充美元 |
+| **Paid Tx (quality)** | 有 Observed Spend 才填对应笔数；否则只报 F_sku txs 与 MPP Settled **分列** | count | T0 笔数（战役探测器，另格） |
+| **Unique Buyers** | **null** | — | `organic_user` 人数 |
+| **Repeat Buyer Rate** | **null** | — | T0 连打 |
+| **Unique Sellers (catalog proxy)** | last_seen 7d、非 placeholder、去掉 ACP URL | count | T3 named payees |
 
-辅看：T0 均价。均价塌到 <$0.05 且 T0 笔数暴增 → 战役。F_sku 被单一类目（如 `token_data`）占 ≥50% → 也当战役，直到 Dune 抽样。
+辅看：T0 均价。均价塌到 <$0.05 且 T0 笔数暴增 → 战役。F_sku 单类目 ≥50% → covered-SKU 集群，不是 S1。
 
-闸门（免费桌加一条）：五个老板 KPI 里有两个是 null 是**正常的**。不要用 Codex 把 null 编成数。
+闸门：两个 null（Buyers / Repeat）是正常的。**Observed Service Spend 为 null 时，表 0 的标题不得写成「真服务支出已测到」。** 打开表 1/2 看的是代理是否动，不是 GMV 已证实。
 
-- F_sku 和 Unique Sellers 都不动 → 下面只扫表 6，写「无」。
-- 只有 T0 Paid Tx 动、F_sku 不动 → 记战役。
-- Unique Buyers / Repeat 在免费桌**不能**用来判断复购；那是 Dune 升级项。
+- Observed Spend、F_sku、MPP Settled 笔数、catalog sellers **都不动** → 只扫表 6。
+- 仅 T0 笔数动、F_sku 与 Settled 不动 → 战役。
+- Unique Buyers / Repeat **不能**用来判断复购。
 
 ---
 
@@ -105,14 +109,14 @@ Allium note: `is_agent_economy_circulation` on ACP-like flow means “this is no
 
 ### 表 1 — 结算网络（5 分钟）
 
-问题：Service Spend 去了哪条**最终结算**轨？
+问题：Observed Service Spend（若仍为 null：则是哪条轨上的 **labeled proxy**）去了哪条**最终结算**轨？
 
 行（只这些）：Base、Solana、Tempo、Arc（上线后）、Lightning。  
-列：Service Spend、份额%、Unique Sellers、WoW。  
-**Overlay 列（不是行）：** Gateway-netted % of that network’s Service Spend。Arc 上线后若 Gateway 也结 Arc，同样是列，不是新行。
+列：Observed Service Spend（常 null）、或 **标明** 的链上代理（周看 Artemis adjusted 链份额 / scan 原始份额，不得写成 Spend）；catalog sellers；WoW。  
+**Overlay 列（不是行）：** Gateway-netted % — 无序列则 **null**，不准用别的美元比例顶上。
 
 异动：某条链 Service Spend 份额连续变化（Solana 吃 Base、Tempo/Arc 从 0 变成可测）。  
-这是区块空间 / L5 的表达（COIN–Base，CRCL–Arc，SOL，Tempo）。  
+质量门过了之后，才问条件化 L5 映射（Base↔COIN，Arc↔CRCL，Solana↔SOL）。这不是预设核心书。  
 Gateway % 升：Circle 批处理在抢单笔链上费，**不**额外加 GMV。
 
 ### 表 2 — 支付协议（5 分钟，与表 1 同级）
@@ -120,13 +124,13 @@ Gateway % 升：Circle 批处理在抢单笔链上费，**不**额外加 GMV。
 问题：信封换了没有？复购是不是真的？
 
 行：x402、MPP、L402。  
-列：Service Spend、占机器服务支出份额、Paid Tx（质量门）、Unique Buyers、Repeat Buyer Rate、Unique Sellers。  
-交叉（表 2×1，仍是连接器不是新层）：协议 × 结算网络（x402 在 Base vs Solana；MPP 几乎只有 Tempo）。
+列：Observed Service Spend（常 null）、质量 Paid Tx（分列，不与美元相加）、Unique Buyers（常 null）、Repeat（常 null）、Unique Sellers。  
+交叉（表 2×1，仍是连接器不是新层）：协议 × 结算网络。x402 的 covered-SKU proxy 与 MPP Settled **笔数**分列，量纲不同。
 
 异动：MPP 或 L402 从可忽略变成两位数份额；某协议 Repeat Rate 与 Spend 同向变。  
 禁止：x402 笔数 vs MPP `ChannelOpened`；把 Gateway 写成第四个支付协议。
 
-### 表 2b — 需求类型 / SKU（仅当表 0 的 Service Spend 动了，且有标签）
+### 表 2b — 需求类型 / SKU（仅当 covered-SKU proxy 或 Observed Spend 动了，且有标签）
 
 问题：增量美元买的是什么？PMF 在哪一类？
 
@@ -148,8 +152,9 @@ Gateway % 升：Circle 批处理在抢单笔链上费，**不**额外加 GMV。
 
 问题：有没有更多「完结的一单生意」？**费**是多少，**本金**是多少？
 
-行：Virtuals ACP、Masumi；（UCP / OpenAI ACP 有公开数再加）。  
-列：**完结 job 数**、**Fee / take**（协议或平台抽成）、**Notional / escrow**（账户里转过的本金，单独列）、独立对手方。丢掉 memo。
+行：Virtuals ACP、Masumi；（UCP 有公开完结单再加）。  
+**不要**把 OpenAI Agentic Commerce Protocol 放进本表——那是 Layer 2 结账**授权**，与 job 编排不是同一经济事件。  
+列：**完结 job 数**、**Fee / take**、**Notional / escrow**、独立对手方。丢掉 memo。无 fee/notional 公开数时，只报 senders/memos **活动度**，不得声称已测到 ACP 经济规模。
 
 规则：Notional 可以很大；老板屏和表 0 **只可以引用 Fee**，除非备忘录明确在写「托管规模」。  
 `$500` 本金 + `$1` 服务费 → Service Spend = `$1`（若费是买编排服务），Notional = `$500`。  
@@ -174,7 +179,7 @@ Arc 主网（2026-09-16）、AP2 撤回原语、拒付归因、公约。无则�
 
 | 本周只动了… | 打开 | 不打开 |
 | --- | --- | --- |
-| 表 0 Service Spend / Unique Sellers | 表 1 + 表 2 | 不必深挖表 5 |
+| 表 0 Observed Spend / covered-SKU / Settled 笔数 / catalog sellers | 表 1 + 表 2（代理须标明） | 不必深挖表 5 |
 | 仅 Repeat Rate（Spend 不动） | 脚注：老客加码 | 当采用 |
 | 仅某条结算网络份额 | 该网上的协议交叉；看 Gateway % | 别的链的主体 |
 | 仅 Gateway %（Spend 不动） | 一句「结法变了」 | 新 GMV |
@@ -185,6 +190,6 @@ Arc 主网（2026-09-16）、AP2 撤回原语、拒付归因、公约。无则�
 
 从上到下：
 
-**总盘（Service Spend 五 KPI）→ 结算网络 + 支付协议（并列）→ 协议×网络交叉 →（有标签才）需求类型 → 商务编排（fee ≠ notional）→ 身份 → 主体 → 规则**
+**总盘（Observed Spend 常为 null + 分列代理）→ 结算网络 + 支付协议（并列）→ 协议×网络交叉 →（有标签才）需求类型 → 商务编排（fee ≠ notional；OpenAI 结账 ACP 不在此表）→ 身份 → 主体 → 规则**
 
 每一张表内部的行必须是同类。链和协议永远分两张表。Gateway 永远是结算网络上的列，不是行。

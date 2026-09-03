@@ -44,9 +44,12 @@ layer_2_authorization:
   question: "Did a human allow this spend?"
   cadence: weekly_plus_events
   members: [google_ap2, openai_acp_allowances, mastercard_verifiable_intent]
+  note: "openai_acp_allowances = OpenAI Agentic Commerce Protocol (checkout authorization). Not a Layer 3 peer of Virtuals ACP."
   adapters_into_layer_1: [a2a_x402]
 
 layer_3_commerce:
   question: "How is the commercial job created, escrowed, and accepted?"
   cadence: daily_for_virtuals_else_weekly
-  members: [virtuals_acp, ucp, openai_acp_checkout, masumi]
+  members: [virtuals_acp, ucp, masumi]
+  do_not_include:
+    - openai_acp_checkout  # same protocol as layer_2 openai_acp_allowances; name collision ≠ peer
