@@ -7,7 +7,8 @@ The goal is not to watch “AI agent” narrative volume. It is to detect **real
 | Layer | Role |
 | --- | --- |
 | [`docs/weekly-cascade.md`](docs/weekly-cascade.md) | Weekly pack: Service Spend (not notional) → networks + protocols → SKU drill → commerce |
-| [`docs/data-cleaning.md`](docs/data-cleaning.md) | Free desk: consume published JSON/CC0; Dune/Codex are rationed; no Allium |
+| [`docs/source-landscape.md`](docs/source-landscape.md) | Census of Artemis / x402scan / x402-list / Dune / etc. — keep vs ignore |
+| [`config/sources.yaml`](config/sources.yaml) | Machine-readable source roles (not a GMV union) |
 | [`docs/cleaner-audit.md`](docs/cleaner-audit.md) | How to score website washers without trusting `real %` |
 | [`scripts/audit_cleaners.py`](scripts/audit_cleaners.py) | Monthly free scorecard (Dune=0, Codex=0) |
 | [`docs/protocol-layer.md`](docs/protocol-layer.md) | Same-layer boards: payment protocols (x402 / MPP / L402) are one board |

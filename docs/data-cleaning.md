@@ -18,6 +18,8 @@ T3/T4 remain the **definition** of Service Spend. On this desk they are **not a 
 
 How to score a website’s washer without trusting `real %`: [`cleaner-audit.md`](cleaner-audit.md) and `python3 scripts/audit_cleaners.py`.
 
+Which public sites exist and which we refuse to ingest: [`source-landscape.md`](source-landscape.md).
+
 ---
 
 ## Quota rules

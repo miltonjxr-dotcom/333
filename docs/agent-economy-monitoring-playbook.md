@@ -229,6 +229,8 @@ Short version: **do not buy a ledger; do not spend Dune daily; do not use Codex 
 | SKU mix, 30d real/wash, live catalog | GitHub `printmoneylab/x402watch-data` CC0 | Free raw/git | Daily ~04:00 UTC |
 | SDK corroboration | npm download API for `x402` | Free | Weekly |
 | Inference corroboration | [openrouter.ai/rankings](https://openrouter.ai/rankings) eyeball | Free page | Weekly |
+| Wash-adjusted live (eyeball) | Artemis x402 terminal | Free page; outage-tolerant | Weekly |
+| Catalog / facilitator floor | x402scan; Bazaar discovery; x402-list `/api/v1/facilitators` | Free; scan APIs may 402 | Weekly |
 | Transfer-level sample | Our Dune, **only** on yellow/monthly | Credits, capped | Rare |
 | Rules / markets | CourtListener, 公约, CoinGecko | Free | Event / real-time |
 
@@ -240,7 +242,7 @@ Do **not** daily: Allium, our Dune clones of their `queryId`s, OpenRouter Data A
 | --- | --- | --- |
 | 06:30 UTC daily | `scripts/tripwire.py` + `scripts/free_quality_panel.py` | Snapshot JSON; **yellow only**; Dune queries = 0 |
 | 08:00 local, 15 min | Analyst | Read yellow + 24h SKU mix; kill S5; **no green** |
-| Weekly, 45 min | PM + analyst | F_sku trend, MPP Settled, ACP senders, npm, rankings page, tokens vs F-proxies |
+| Weekly, 45 min | PM + analyst | F_sku trend, MPP Settled, ACP senders, npm, rankings page, **Artemis if up**, x402scan 30d vs T0, x402-list facilitator floor; tokens vs F-proxies |
 | Monthly | IC | Thesis review; `scripts/audit_cleaners.py`; optional ≤2 Dune queries |
 | Yellow escalation | Analyst | ≤3 Dune queries, then stop |
 | Event | Anyone | L-series |

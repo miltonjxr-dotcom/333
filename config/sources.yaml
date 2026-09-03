@@ -1,0 +1,47 @@
+# Curated agent-economy sources. Roles, not a GMV union.
+# Daily jobs must not grow this list without a new dump URL.
+
+daily:
+  - id: agenteconomy
+    url: https://agenteconomy.to/data.json
+    job: t0_pulse_mpp_settled_acp_senders
+    gmv: false
+  - id: x402watch_data
+    url: https://github.com/printmoneylab/x402watch-data
+    job: sku_mix_and_loose_real
+    gmv: false
+
+weekly_eyeball:
+  - id: artemis_x402
+    url: https://app.artemisanalytics.com/asset/x402
+    job: wash_adjusted_live
+    gmv: false
+    note: Visa-partnered; proprietary heuristics; outage-tolerant (use report if down)
+  - id: visa_artemis_report
+    job: calibration_keep_rate
+  - id: x402scan
+    url: https://www.x402scan.com
+    job: catalog_and_raw_indexed_30d
+    gmv: false
+  - id: bazaar
+    url: https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources
+    job: named_catalog
+  - id: x402_list_facilitators
+    url: https://x402-list.com/api/v1/facilitators
+    job: facilitator_usdc_settler_floor
+    license: CC-BY-4.0
+  - id: npm_x402
+    job: developer_funnel
+  - id: openrouter_rankings
+    url: https://openrouter.ai/rankings
+    job: inference_corroboration
+
+do_not_ingest:
+  - extra_dune_x402_boards
+  - x402_org_static_30d
+  - defillama_x402_as_gmv
+  - issuer_stats_blockrun_payai_dexter
+  - allium
+  - paid_x402_probe_apis
+  - erc8004_mint_explorers
+  - gokhan_dune_pipeline
