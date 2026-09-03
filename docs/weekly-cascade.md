@@ -3,7 +3,7 @@
 Monitor top-down. A lower table is opened only if the table above moved, or once a week as a 10-minute scan.
 Never mix rows that answer different questions.
 
-This file is the weekly pack. Quality definitions live in [`agent-economy-monitoring-playbook.md`](agent-economy-monitoring-playbook.md).
+This file is the weekly pack. Quality definitions live in [`agent-economy-monitoring-playbook.md`](agent-economy-monitoring-playbook.md). What to buy vs wash ourselves: [`data-cleaning.md`](data-cleaning.md).
 
 ---
 

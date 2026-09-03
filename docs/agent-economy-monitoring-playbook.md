@@ -217,22 +217,25 @@ These are rare and usually more important than a volume spike.
 
 ## 6. Data stack and cadence
 
+Make vs buy is specified in [`data-cleaning.md`](data-cleaning.md). Short version: **buy the ledger, own Service Spend.** Do not publish a website’s “organic” or “real volume” as 表 0. Do not build a private 402 indexer on day one.
+
 ### 6.1 Sources
 
 | Need | Source | Cost / access | Freshness |
 | --- | --- | --- | --- |
-| Transfer-level x402 | Allium `crosschain.agents.x402_*` | Paid | Daily batch |
-| Catalog / sellers | Allium `x402_servers`; x402scan registry (note: x402scan HTTP APIs themselves return **402**) | Mixed | Daily |
+| Transfer-level x402 | Allium `crosschain.agents.x402_transfers` + `_adjusted` | Paid | Daily batch |
+| T1 hygiene (input only) | Allium `NOT is_inorganic`; then **drop** `is_agent_economy_circulation` for Service Spend | Paid | Daily |
+| Catalog / sellers / SKU labels | Allium `x402_servers`; x402watch categories (labels, not GMV); x402scan registry (HTTP APIs themselves return **402**) | Mixed | Daily |
 | Public tripwire | `https://agenteconomy.to/data.json` | Free | Hourly |
 | Dune cross-check | `@thechriscen` x402 Payment Analytics; `@hashed_official` x402 / ACP / 8004; `@ax1research` Base agentic | Credits | Daily |
 | Inference demand | OpenRouter Data API `rankings-daily`, `app-rankings?category=coding&subcategory=cli-agent` | API key, CC BY 4.0 | Daily |
 | Identity | ERC-8004 `Registered` / reputation events via Allium or Dune `@hashed_official` 7881124 | Paid / credits | Daily |
-| MPP | Tempo RPC indexer via agenteconomy `tempoMpp.byType.Settled` | Free but thin | Hourly |
+| MPP | Tempo feed via agenteconomy `tempoMpp.byType.Settled` — **own the Settled filter** | Free but thin | Hourly |
 | USDC / Agent Stack | Circle filings; Agent Stack paid-service count | Quarterly + IR | Slow |
 | Rules | CourtListener / PACER; PBOC / 支付清算协会; FIDO AP2 repo; Rain APA | Analyst time | Event |
 | Markets | CoinGecko / exchange: `VIRTUAL` and the R5 equities in `config/watchlist.yaml` | Standard | Real-time |
 
-Do not build a private indexer on day one. Allium already labels facilitators and servers. Spend engineering on **tiers T2–T4 and alerts**, not on re-extracting 402 logs.
+Spend engineering on **T2–T4, economic-type stamps, and alerts**, not on re-extracting 402 logs. Allium T1 does not flag high-frequency buyers or A→B→C rings and **keeps ACP circulation as organic**.
 
 ### 6.2 Cadence
 

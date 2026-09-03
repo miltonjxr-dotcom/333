@@ -7,6 +7,7 @@ The goal is not to watch “AI agent” narrative volume. It is to detect **real
 | Layer | Role |
 | --- | --- |
 | [`docs/weekly-cascade.md`](docs/weekly-cascade.md) | Weekly pack: Service Spend (not notional) → networks + protocols → SKU drill → commerce |
+| [`docs/data-cleaning.md`](docs/data-cleaning.md) | Make vs buy: buy the ledger, own Service Spend; website “organic” is not 表 0 |
 | [`docs/protocol-layer.md`](docs/protocol-layer.md) | Same-layer boards: payment protocols (x402 / MPP / L402) are one board |
 | [`docs/agent-economy-monitoring-playbook.md`](docs/agent-economy-monitoring-playbook.md) | Investment thesis, quality definition, alert catalog, escalation SOP |
 | [`config/alert_rules.yaml`](config/alert_rules.yaml) | Machine-readable thresholds |

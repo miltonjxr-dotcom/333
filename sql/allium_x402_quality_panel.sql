@@ -1,8 +1,14 @@
 -- Agent-economy quality panel on Allium crosschain.agents
 -- Native unit: one x402 token transfer.
 -- from_address = buyer, to_address = seller, transaction_from_address = facilitator.
--- T0..T4 definitions: docs/agent-economy-monitoring-playbook.md §3.1
--- Do not publish T0 as GMV.
+-- usd_amount is Allium's USD column (not amount_usd).
+-- T0..T4 + Service Spend: docs/agent-economy-monitoring-playbook.md §3
+-- Make vs buy: docs/data-cleaning.md
+--   Buy T1: NOT is_inorganic (self-pay OR 24h reciprocal return).
+--   Own: drop is_agent_economy_circulation (ACP notional ≠ Service Spend),
+--        then T2 facilitator EOAs, T3 named catalog, T4 repeat.
+-- Allium does not flag high-frequency buyers or A→B→C rings.
+-- Do not publish T0 or Allium "organic" as GMV.
 
 WITH params AS (
   SELECT
@@ -20,9 +26,11 @@ t0 AS (
     LOWER(t.from_address) AS buyer,
     LOWER(t.to_address) AS seller,
     LOWER(t.transaction_from_address) AS facilitator_eoa,
-    t.amount_usd,
-    t.tx_hash
-  FROM crosschain.agents.x402_transfers t
+    t.usd_amount AS amount_usd,
+    t.transaction_hash AS tx_hash,
+    COALESCE(t.is_inorganic, FALSE) AS is_inorganic,
+    COALESCE(t.is_agent_economy_circulation, FALSE) AS is_agent_economy_circulation
+  FROM crosschain.agents.x402_transfers_adjusted t
   CROSS JOIN params p
   WHERE DATE(t.block_timestamp) BETWEEN p.start_date AND p.end_date
 ),
@@ -42,10 +50,13 @@ named_servers AS (
 ),
 
 t1 AS (
+  -- Vendor hygiene minus ACP circulation. This is still not T3 Service Spend.
   SELECT t0.*
   FROM t0
   WHERE t0.buyer <> t0.seller
     AND t0.amount_usd > 0
+    AND NOT t0.is_inorganic
+    AND NOT t0.is_agent_economy_circulation
 ),
 
 t2 AS (
