@@ -77,6 +77,18 @@ Crypto gets paid on R2–R5. Equities get paid on R5–R6. R1 is the earliest wa
 
 ## 3. Quality definition: the only GMV that matters
 
+Quality tiers answer **who paid whom without washing**. They do **not** answer **whether the dollars were a service price or capital in transit**. Table 0 of the weekly pack is **Service Spend**, not “all quality USDC that touched an agent.”
+
+| Economic type | Include in Service Spend? | Typical miss |
+| --- | --- | --- |
+| Named SKU / usage settlement (x402 T3, MPP `Settled` usage, L402 paid invoice) | Yes | — |
+| Job escrow, trading notional, agent-wallet DEX size (ACP $500 to trade, $1 fee) | **No** — fee may be Service Spend; notional stays on the commerce board | Counting Allium `is_agent_economy_circulation` as GMV |
+| Channel top-up, facilitator inventory, Gateway netting of already-counted spend | **No** | Double-counting Gateway + Base |
+
+Circle Gateway is an overlay on a settlement network, not a sixth GMV venue. Repeat buyers are T4 / T3, never T0. SKU mix (inference / data / compute / other API) is a drill-down when the catalog has labels — not a second GMV.
+
+Primary IC series remains T4 USD and T3 unique payees, **restricted to Service Spend**. See [`weekly-cascade.md`](weekly-cascade.md) for the boss five KPIs.
+
 ### 3.1 x402 four-tier filter
 
 Source of truth: Allium `crosschain.agents` (`x402_transfers`, `x402_servers`, `x402_facilitators`, `x402_metrics_daily`). Public mirrors (agenteconomy.to, Dune, x402scan) are **tripwires**, not GMV.

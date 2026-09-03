@@ -29,7 +29,9 @@ Comparable KPIs for Layer 1 only:
 2. Unique payees (breadth)
 3. Average ticket / mix
 4. Share of machine-payment USD (x402 vs MPP vs L402)
-5. Rail (Base / Solana / Tempo / Lightning)
+5. Rail (Base / Solana / Tempo / Lightning) — **settlement network**, GMV once
+6. Repeat buyer rate (T4 buyers / T3 buyers), not raw-tx repeat
+7. Circle Gateway as **% of that rail’s Service Spend that was netted**, never as a fourth protocol or a sixth chain
 
 ## Other layers — each gets its own board
 
