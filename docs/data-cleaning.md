@@ -16,6 +16,8 @@ x402watch API: avoid; 60 req/h     already have a free key
 
 T3/T4 remain the **definition** of Service Spend. On this desk they are **not a daily series**. Without transfer-level rows you cannot compute unique T3 buyers, T4 repeat, facilitator-cluster T2, or fee vs $500 ACP notional. Pretending x402watch `real_volume` is T3 is how 表 0 gets lied to.
 
+How to score a website’s washer without trusting `real %`: [`cleaner-audit.md`](cleaner-audit.md) and `python3 scripts/audit_cleaners.py`.
+
 ---
 
 ## Quota rules

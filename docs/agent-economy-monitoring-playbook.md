@@ -241,7 +241,7 @@ Do **not** daily: Allium, our Dune clones of their `queryId`s, OpenRouter Data A
 | 06:30 UTC daily | `scripts/tripwire.py` + `scripts/free_quality_panel.py` | Snapshot JSON; **yellow only**; Dune queries = 0 |
 | 08:00 local, 15 min | Analyst | Read yellow + 24h SKU mix; kill S5; **no green** |
 | Weekly, 45 min | PM + analyst | F_sku trend, MPP Settled, ACP senders, npm, rankings page, tokens vs F-proxies |
-| Monthly | IC | Thesis review; optional ≤2 Dune queries |
+| Monthly | IC | Thesis review; `scripts/audit_cleaners.py`; optional ≤2 Dune queries |
 | Yellow escalation | Analyst | ≤3 Dune queries, then stop |
 | Event | Anyone | L-series |
 

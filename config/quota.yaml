@@ -33,3 +33,10 @@ openrouter:
 x402watch_http:
   daily_job: false
   note: "60 req/h/IP. Daily job uses GitHub x402watch-data raw files instead."
+
+audit:
+  cadence: monthly
+  script: scripts/audit_cleaners.py
+  dune_queries: 0
+  optional_dune_sample_max: 1
+  note: "Score cleaners; do not mint a single accuracy %. Codex is not an auditor."
