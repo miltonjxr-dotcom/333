@@ -1,0 +1,6 @@
+# Development / validation tooling for the Agent Economy Monitor.
+# The runtime script (scripts/tripwire.py) uses only the Python standard library;
+# these packages are for validating the repository's config, schema, and data contracts.
+PyYAML==6.0.2
+jsonschema==4.23.0
+yamllint==1.35.1
