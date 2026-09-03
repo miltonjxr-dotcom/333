@@ -102,7 +102,7 @@ Field meanings (Allium):
 | Tier | Definition | Use |
 | --- | --- | --- |
 | **T0 Raw** | Every labeled x402 transfer | Sanity check only |
-| **T1 Hygiene** | Drop `from = to`, known faucet/test, zero-value, aborted | Remove the stupid wash |
+| **T1 Hygiene** | Drop `from = to`, zero-value, Allium `is_inorganic`, **and** `is_agent_economy_circulation` (ACP is not Service Spend) | Vendor T1 is an input, not 表 0. See [`data-cleaning.md`](data-cleaning.md) |
 | **T2 Non-internal** | Drop closed loops and facilitator-cluster self-settlement (buyer and seller share a funder, or both are relayer EOAs) | Visa/Artemis-style adjusted |
 | **T3 Named** | T2 **and** seller sits in `x402_servers` with a live origin / category | Lower bound of “someone sold a thing with a name” |
 | **T4 Repeat** | T3 **and** buyer active on ≥3 distinct UTC days in trailing 30d, ≥5 T3 txs, not a facilitator EOA | Durable demand floor |
