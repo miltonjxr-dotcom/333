@@ -34,6 +34,12 @@ x402watch_http:
   daily_job: false
   note: "60 req/h/IP. Daily job uses GitHub x402watch-data raw files instead."
 
+x402_list:
+  daily_job: false
+  weekly_eyeball: true
+  url: https://x402-list.com/api/v1/facilitators
+  note: "Facilitator USDC settler floor only. CC BY 4.0. Do not sum into 表 0."
+
 audit:
   cadence: monthly
   script: scripts/audit_cleaners.py
