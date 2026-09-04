@@ -1,0 +1,55 @@
+# Same-layer boards. A protocol only sits next to peers that answer the same question.
+
+version: 1
+as_of: 2026-09-03
+
+layer_1_payment_settlement:
+  question: "How does the machine move money after it has decided to pay?"
+  cadence: daily
+  comparable_kpi: quality_usd_and_unique_payees
+  members:
+    - id: x402
+      owner: Coinbase / x402 Foundation
+      style: per_request_onchain
+      asset: USDC
+      unit: t3_t4_usd
+    - id: mpp
+      owner: Stripe + Tempo
+      style: session_batch_settled
+      asset: USDC_fiat_lightning
+      unit: settled_usd
+    - id: l402
+      owner: Lightning Labs
+      style: per_request_lightning
+      asset: BTC_sats
+      unit: paid_invoices_usd
+  not_yet:
+    - s402
+    - u402
+    - v402
+    - ietf_draft_httpauth_payment
+    - lobster_cash
+  do_not_include:
+    - erc8004
+    - virtuals_acp
+    - google_ap2
+    - a2a_x402_as_separate_protocol
+
+layer_0_identity:
+  question: "Who is this agent?"
+  cadence: weekly
+  members: [erc8004, visa_tap, mastercard_kya]
+
+layer_2_authorization:
+  question: "Did a human allow this spend?"
+  cadence: weekly_plus_events
+  members: [google_ap2, openai_acp_allowances, mastercard_verifiable_intent]
+  note: "openai_acp_allowances = OpenAI Agentic Commerce Protocol (checkout authorization). Not a Layer 3 peer of Virtuals ACP."
+  adapters_into_layer_1: [a2a_x402]
+
+layer_3_commerce:
+  question: "How is the commercial job created, escrowed, and accepted?"
+  cadence: daily_for_virtuals_else_weekly
+  members: [virtuals_acp, ucp, masumi]
+  do_not_include:
+    - openai_acp_checkout  # same protocol as layer_2 openai_acp_allowances; name collision ≠ peer

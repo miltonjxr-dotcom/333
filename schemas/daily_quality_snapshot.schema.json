@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentEconomyDailyQualitySnapshot",
+  "type": "object",
+  "required": [
+    "date",
+    "as_of",
+    "quality_available",
+    "observed_service_spend_usd",
+    "public_tripwire",
+    "alerts"
+  ],
+  "properties": {
+    "date": { "type": "string", "format": "date" },
+    "as_of": { "type": "string", "format": "date-time" },
+    "quality_available": {
+      "type": "boolean",
+      "description": "False on the free desk (no T2–T4). Do not backfill from T0 or x402watch real_volume."
+    },
+    "observed_service_spend_usd": {
+      "type": ["number", "null"],
+      "description": "x402 T3 USD + MPP usage Settled USD + L402 paid. Always null on the free desk. Do not fill from F_sku USD or MPP Settled counts (dimension error)."
+    },
+    "free_proxy": {
+      "type": "object",
+      "description": "F-series from agenteconomy + x402watch-data. Not Service Spend. Do not add F_sku USD to MPP counts.",
+      "properties": {
+        "x402watch_snapshot_date": { "type": ["string", "null"] },
+        "f1_real_volume_30d_usd": { "type": ["number", "null"] },
+        "f_sku_usd_24h": { "type": ["number", "null"] },
+        "x402_covered_sku_spend_proxy_usd": {
+          "type": ["number", "null"],
+          "description": "Alias of f_sku_usd_24h. Covered catalog slice only — not x402 Service Spend."
+        },
+        "f_sku_txs_24h": { "type": ["number", "null"] },
+        "live_named_sellers_7d": { "type": ["integer", "null"] },
+        "unique_buyers": { "type": ["integer", "null"] },
+        "repeat_buyer_rate": { "type": ["number", "null"] }
+      }
+    },
+    "x402": {
+      "type": "object",
+      "properties": {
+        "t0_txs": { "type": ["number", "null"] },
+        "t0_usd": { "type": ["number", "null"] },
+        "t2_usd": { "type": ["number", "null"] },
+        "t3_usd": { "type": ["number", "null"] },
+        "t4_usd": { "type": ["number", "null"] },
+        "t3_payers": { "type": ["integer", "null"] },
+        "t3_payees": { "type": ["integer", "null"] },
+        "t2_avg_ticket": { "type": ["number", "null"] },
+        "top1pct_buyer_share": { "type": ["number", "null"] },
+        "usdc_share": { "type": ["number", "null"] },
+        "chain_t2_usd_share": {
+          "type": "object",
+          "additionalProperties": { "type": "number" }
+        }
+      }
+    },
+    "tempo_mpp": {
+      "type": "object",
+      "properties": {
+        "settled": { "type": ["integer", "null"] },
+        "settled_paid_events": {
+          "type": ["integer", "null"],
+          "description": "Alias of settled. Count of Settled events — not USD."
+        },
+        "settled_usd": {
+          "type": ["number", "null"],
+          "description": "MPP usage Settled USD. Null until the public feed publishes it. Counts must not impersonate dollars."
+        },
+        "channel_opened": { "type": ["integer", "null"] },
+        "unique_payers": { "type": ["integer", "null"] },
+        "unique_payees": { "type": ["integer", "null"] }
+      }
+    },
+    "virtuals_acp": {
+      "type": "object",
+      "properties": {
+        "memos": { "type": ["integer", "null"] },
+        "unique_senders": { "type": ["integer", "null"] }
+      }
+    },
+    "erc8004": {
+      "type": "object",
+      "properties": {
+        "registrations": { "type": ["integer", "null"] },
+        "reputation_with_payment_proof": { "type": ["integer", "null"] }
+      }
+    },
+    "openrouter": {
+      "type": "object",
+      "properties": {
+        "cli_agent_tokens": { "type": ["number", "null"] },
+        "reasoning_share": { "type": ["number", "null"] }
+      }
+    },
+    "public_tripwire": {
+      "type": "object",
+      "required": ["x402_daily_txs", "x402_month_avg_ticket"],
+      "properties": {
+        "x402_daily_txs": { "type": "number" },
+        "x402_month_avg_ticket": { "type": ["number", "null"] },
+        "note": { "type": "string" }
+      }
+    },
+    "alerts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "level"],
+        "properties": {
+          "id": { "type": "string" },
+          "level": { "enum": ["yellow", "green", "ignore"] },
+          "reason": { "type": "string" }
+        }
+      }
+    }
+  }
+}
