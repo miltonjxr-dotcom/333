@@ -217,6 +217,7 @@ Buyers / Repeat 两个 null 是正常诚实。**Observed Service Spend 也是 nu
 | --- | --- | --- |
 | `scripts/tripwire.py` | `https://agenteconomy.to/data.json` | T0 笔数 z、均价塌缩、MPP Settled/事件、ACP memo vs senders。**只许黄灯** |
 | `scripts/free_quality_panel.py` | 同上 + `printmoneylab/x402watch-data` | `observed_service_spend_usd: null`、covered-SKU proxy（F_sku）、MPP Settled 笔数、`mpp_settled_usd: null`、7d named sellers。T3/T4 **null**。`quality_available: false` |
+| `scripts/weekly_pack.py` | 上两源 + npm + x402-list | **自动填表 0**（markdown）。Artemis / rankings 仍人工。Dune=0 |
 
 禁止从 F1 或 T0 回填 T3。快照合同：`schemas/daily_quality_snapshot.schema.json`。
 
@@ -375,7 +376,7 @@ L5：钱在谁钱包里决定谁赔。AWS AgentCore 等产品把钱包留在 Coi
 | `docs/source-landscape.md` | 网站普查 keep/ignore |
 | `docs/cleaner-audit.md` | 清洗审计方法 |
 | `config/quota.yaml` `sources.yaml` `alert_rules.yaml` `watchlist.yaml` | 配额、源岗位、阈值、条件化表达（不是核心书） |
-| `scripts/tripwire.py` `free_quality_panel.py` `audit_cleaners.py` | 日黄灯、F 代理、月审计 |
+| `scripts/tripwire.py` `free_quality_panel.py` `weekly_pack.py` `audit_cleaners.py` | 日黄灯、F 代理、周表 0 自动填、月审计 |
 | `sql/optional_paid_allium_x402_quality_panel.sql` | 付费账本定义，不跑 |
 | `schemas/daily_quality_snapshot.schema.json` | 日快照 |
 

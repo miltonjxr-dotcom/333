@@ -5,6 +5,8 @@ Never mix rows that answer different questions.
 
 This file is the weekly pack. Quality definitions live in [`agent-economy-monitoring-playbook.md`](agent-economy-monitoring-playbook.md). Free-desk sources and Dune/Codex caps: [`data-cleaning.md`](data-cleaning.md).
 
+**Fill 表 0 automatically:** `python3 scripts/weekly_pack.py`. Do not build a Dune dashboard. The leftover is ~10 minutes on pages with no JSON dump (Artemis, OpenRouter).
+
 ---
 
 ## Review of the four-point critique (keep / change / reject)

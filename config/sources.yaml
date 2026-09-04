@@ -11,6 +11,17 @@ daily:
     job: sku_mix_and_loose_real
     gmv: false
 
+weekly_script:
+  - id: npm_x402
+    job: developer_funnel
+    note: Fetched by scripts/weekly_pack.py. Not 表 0.
+  - id: x402_list_facilitators
+    url: https://x402-list.com/api/v1/facilitators
+    job: facilitator_usdc_settler_floor
+    license: CC-BY-4.0
+    gmv: false
+    note: Weekly script. Floor only; do not add into 表 0.
+
 weekly_eyeball:
   - id: artemis_agentic_payments
     url: https://www.artemis.ai/sectors/agentic-payments
@@ -31,12 +42,6 @@ weekly_eyeball:
   - id: bazaar
     url: https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources
     job: named_catalog
-  - id: x402_list_facilitators
-    url: https://x402-list.com/api/v1/facilitators
-    job: facilitator_usdc_settler_floor
-    license: CC-BY-4.0
-  - id: npm_x402
-    job: developer_funnel
   - id: openrouter_rankings
     url: https://openrouter.ai/rankings
     job: inference_corroboration

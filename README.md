@@ -18,10 +18,19 @@ The goal is not to watch “AI agent” narrative volume. It is to detect **real
 | [`config/quota.yaml`](config/quota.yaml) | Dune monthly caps; Codex not for ETL |
 | [`config/alert_rules.yaml`](config/alert_rules.yaml) | Machine-readable thresholds |
 | [`config/watchlist.yaml`](config/watchlist.yaml) | Potential expressions / conditional beneficiaries (not a core book) |
+| [`scripts/weekly_pack.py`](scripts/weekly_pack.py) | **Weekly 表 0 auto-fill** (markdown). Human leftover: Artemis / rankings (~10 min) |
 | [`scripts/free_quality_panel.py`](scripts/free_quality_panel.py) | Daily F-proxies (yellow only; T3/T4 null) |
 | [`scripts/tripwire.py`](scripts/tripwire.py) | Public T0 tripwire (unconfirmed; never a buy signal) |
 | [`sql/optional_paid_allium_x402_quality_panel.sql`](sql/optional_paid_allium_x402_quality_panel.sql) | T3/T4 definition only — not scheduled |
 | [`schemas/daily_quality_snapshot.schema.json`](schemas/daily_quality_snapshot.schema.json) | Daily snapshot contract |
+
+## Weekly (mostly automatic)
+
+```bash
+python3 scripts/weekly_pack.py
+```
+
+Fills 表 0 from free JSON (agenteconomy + x402watch + npm + x402-list). Observed Spend / Buyers / Repeat stay null. Then spend ~10 minutes on the Artemis page linked in the output. Do not build a Dune dashboard.
 
 ## Rule that pays for the whole system
 

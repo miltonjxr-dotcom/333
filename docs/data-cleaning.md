@@ -86,10 +86,14 @@ Daily (scripts/tripwire.py + scripts/free_quality_panel.py)
        → F_sellers: services last_seen 7d with a non-placeholder category
        → Repeat Buyer Rate: UNKNOWN        (needs transfers; leave null)
 
-Weekly
-  npm downloads for `x402` (and agentkit if needed)
-  OpenRouter rankings page (no API)
-  CoinGecko VIRTUAL — potential expression only (M1 gate / M2 kill)
+Weekly (scripts/weekly_pack.py — auto-fills 表 0)
+  same daily sources, plus:
+       → F_sku / named sellers vs GitHub dump from 7 days ago
+       → T0 last-7d txs vs prior 7d (campaign detector)
+       → npm `x402` downloads
+       → x402-list facilitator **floor** (not 表 0)
+  leftover eyeball (~10 min, no JSON):
+       Artemis sector page, OpenRouter rankings, x402scan, 表 6 calendar
 
 Monthly / yellow
   At most a few Dune credits: top payees, chain USD not tx, or 8004 proofs

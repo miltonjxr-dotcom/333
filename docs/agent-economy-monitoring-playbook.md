@@ -242,7 +242,7 @@ Do **not** daily: Allium, our Dune clones of their `queryId`s, OpenRouter Data A
 | --- | --- | --- |
 | 06:30 UTC daily | `scripts/tripwire.py` + `scripts/free_quality_panel.py` | Snapshot JSON; **yellow only**; Dune queries = 0 |
 | 08:00 local, 15 min | Analyst | Read yellow + 24h SKU mix; kill S5; **no green** |
-| Weekly, 45 min | PM + analyst | F_sku trend, MPP Settled, ACP senders, npm, rankings page, **[Artemis sector](https://www.artemis.ai/sectors/agentic-payments)** (Real vs Gamed + MPP type + x402 category), x402scan 30d vs T0, x402-list facilitator floor; tokens vs F-proxies |
+| Weekly, ~10 min after script | PM + analyst | `python3 scripts/weekly_pack.py` fills 表 0. Then eyeball **[Artemis sector](https://www.artemis.ai/sectors/agentic-payments)** + OpenRouter rankings. Do not build a Dune dashboard. |
 | Monthly | IC | Thesis review; `scripts/audit_cleaners.py`; optional ≤2 Dune queries |
 | Yellow escalation | Analyst | ≤3 Dune queries, then stop |
 | Event | Anyone | L-series |

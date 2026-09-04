@@ -104,28 +104,20 @@ def avg_ticket(month: dict[str, Any]) -> float | None:
     return vol / txs
 
 
-def main() -> int:
-    agent = get_json(AGENT_JSON)
-    snap_day = resolve_snapshot_day()
-    buyer = load_x402watch_json("buyer-labels", snap_day)
-    cats = load_x402watch_json("category-benchmarks", snap_day)
-    services = load_x402watch_services(snap_day)
-    if buyer is None or cats is None:
-        raise RuntimeError(f"incomplete x402watch snapshot for {snap_day}")
-
-    x402 = agent.get("x402") or {}
-    daily = x402.get("daily") or []
-    monthly = x402.get("monthly") or []
-    today = date.today().isoformat()
+def pick_latest_complete_day(daily: list[dict[str, Any]]) -> dict[str, Any]:
+    """Skip a stub UTC-today row that would look like a crash."""
     latest_day = daily[-1] if daily else {}
+    today = date.today().isoformat()
     if (
         len(daily) >= 2
         and latest_day.get("day") == today
         and (latest_day.get("txs") or 0) < 0.2 * (daily[-2].get("txs") or 1)
     ):
-        latest_day = daily[-2]
-    last_month = monthly[-1] if monthly else {}
+        return daily[-2]
+    return latest_day
 
+
+def sku_from_category_benchmarks(cats: dict[str, Any]) -> tuple[list[dict[str, Any]], float, int, dict[str, float]]:
     rows = (cats.get("latest_hourly_snapshot_24h") or {}).get("rows") or []
     sku_24h = [
         {
@@ -137,37 +129,55 @@ def main() -> int:
         for r in rows
     ]
     sku_24h.sort(key=lambda r: r["usd"], reverse=True)
-    f_sku_usd = sum(r["usd"] for r in sku_24h)
-    f_sku_txs = sum(r["txs"] for r in sku_24h)
+    f_sku_usd = float(sum(r["usd"] for r in sku_24h))
+    f_sku_txs = int(sum(r["txs"] for r in sku_24h))
     rollup: dict[str, float] = {}
     for r in sku_24h:
         rollup[r["bucket"]] = rollup.get(r["bucket"], 0.0) + float(r["usd"])
+    return sku_24h, f_sku_usd, f_sku_txs, rollup
+
+
+def catalog_seller_counts(services: dict[str, Any] | None, snap_day: date) -> tuple[int | None, int | None, int | None]:
+    if not services or not services.get("services"):
+        return None, None, None
+    cutoff = (snap_day - timedelta(days=6)).isoformat()
+    live = 0
+    named = 0
+    acp = 0
+    for svc in services["services"]:
+        if is_acp_service(svc):
+            acp += 1
+            continue
+        last_seen = str(svc.get("last_seen") or "")
+        if last_seen[:10] < cutoff:
+            continue
+        live += 1
+        cat = svc.get("category") or ""
+        if cat not in PLACEHOLDER_CATS:
+            named += 1
+    return live, named, acp
+
+
+def build_panel() -> dict[str, Any]:
+    agent = get_json(AGENT_JSON)
+    snap_day = resolve_snapshot_day()
+    buyer = load_x402watch_json("buyer-labels", snap_day)
+    cats = load_x402watch_json("category-benchmarks", snap_day)
+    services = load_x402watch_services(snap_day)
+    if buyer is None or cats is None:
+        raise RuntimeError(f"incomplete x402watch snapshot for {snap_day}")
+
+    x402 = agent.get("x402") or {}
+    daily = x402.get("daily") or []
+    monthly = x402.get("monthly") or []
+    latest_day = pick_latest_complete_day(daily)
+    last_month = monthly[-1] if monthly else {}
+
+    sku_24h, f_sku_usd, f_sku_txs, rollup = sku_from_category_benchmarks(cats)
 
     rv = buyer.get("real_vs_wash_30d") or {}
     labels = {row["label"]: row.get("n_buyers") for row in buyer.get("label_distribution") or []}
-
-    live_sellers = None
-    live_named = None
-    acp_catalog_rows = None
-    if services and services.get("services"):
-        cutoff = (snap_day - timedelta(days=6)).isoformat()
-        live = 0
-        named = 0
-        acp = 0
-        for svc in services["services"]:
-            if is_acp_service(svc):
-                acp += 1
-                continue
-            last_seen = str(svc.get("last_seen") or "")
-            if last_seen[:10] < cutoff:
-                continue
-            live += 1
-            cat = svc.get("category") or ""
-            if cat not in PLACEHOLDER_CATS:
-                named += 1
-        live_sellers = live
-        live_named = named
-        acp_catalog_rows = acp
+    live_sellers, live_named, acp_catalog_rows = catalog_seller_counts(services, snap_day)
 
     mpp = agent.get("tempoMpp") or {}
     acp_feed = agent.get("virtualsAcp") or {}
@@ -275,18 +285,24 @@ def main() -> int:
                 }
             )
 
+    return snapshot
+
+
+def main() -> int:
+    snapshot = build_panel()
     json.dump(snapshot, sys.stdout, indent=2)
     sys.stdout.write("\n")
 
+    proxy = snapshot["free_proxy"]
     print("=== FREE DESK PANEL (T3/T4 unavailable) ===", file=sys.stderr)
     print(
-        f"Observed Spend=null  x402watch={snap_day}  "
-        f"covered_SKU_proxy=${f_sku_usd:.2f} txs={f_sku_txs}  "
-        f"live_named_sellers_7d={live_named}",
+        f"Observed Spend=null  x402watch={proxy.get('x402watch_snapshot_date')}  "
+        f"covered_SKU_proxy=${proxy.get('f_sku_usd_24h'):.2f} txs={proxy.get('f_sku_txs_24h')}  "
+        f"live_named_sellers_7d={proxy.get('live_named_sellers_7d')}",
         file=sys.stderr,
     )
     print(
-        f"T0 day={latest_day.get('day')} txs={latest_day.get('txs')}  "
+        f"T0 day txs={snapshot['x402'].get('t0_txs')}  "
         f"MPP Settled events={snapshot['tempo_mpp']['settled']} "
         f"MPP Settled USD=null  unique_buyers=null  repeat=null",
         file=sys.stderr,
