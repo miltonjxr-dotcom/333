@@ -370,7 +370,7 @@ L5：钱在谁钱包里决定谁赔。AWS AgentCore 等产品把钱包留在 Coi
 | 路径 | 内容 |
 | --- | --- |
 | `docs/agent-economy-monitoring-playbook.md` | 论题、T0–T4、警报、SOP |
-| `docs/weekly-cascade.md` | 周报层级 |
+| `docs/weekly-ai-prompt.md` | 每周丢给 AI 的固定提示词 |
 | `docs/protocol-layer.md` | 同层看板 |
 | `docs/data-cleaning.md` | 免费清洗政策 |
 | `docs/source-landscape.md` | 网站普查 keep/ignore |
