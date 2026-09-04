@@ -1,0 +1,97 @@
+{
+  "date_utc": "2026-09-04",
+  "pulled_at": "2026-09-04T00:00:00+00:00",
+  "sources": {
+    "x402scan_home": "https://www.x402scan.com/",
+    "x402scan_payai": "https://www.x402scan.com/facilitator/payAI",
+    "blockrun_discovery": "https://blockrun.ai/.well-known/x402",
+    "blockrun_resources": "https://api.blockrun.ai/v1/resources",
+    "solana_rpc": "https://api.mainnet-beta.solana.com",
+    "notes": "x402scan via WebFetch. Featured 30d: sol.blockrun.ai 16.95M tx / $216.41K / 48 buyers (id 4e7a72e6-…); blockrun.ai Base 6.48M / $143.25K / 373 buyers (id cbe8caef-…). Facilitators 24h: Figment #1 876,779 tx / $3.72K / 5 buyers / 1 seller; PayAI #2 851,437 / $11.34K / 317 buyers / 48 sellers; Coinbase 81,056 / $14.51K / 937 buyers. 24h server rows still absent. JSON APIs: discovery 7 resources; resources 6 tools; chat completions still listed."
+  },
+  "blockrun_solana": {
+    "origin": "https://sol.blockrun.ai",
+    "tx_24h": null,
+    "tx_30d": 16950000,
+    "volume_usd_24h": null,
+    "volume_usd_30d": 216410.06,
+    "buyers_24h": null,
+    "buyers_30d": 48,
+    "top_buyers": [],
+    "seller": "BhFRCUXHVm76PmXkSzus8T4LUGrD2MTW9Au6bocBox5U"
+  },
+  "blockrun_base": {
+    "origin": "https://blockrun.ai",
+    "tx_24h": null,
+    "tx_30d": 6480000,
+    "volume_usd_24h": null,
+    "volume_usd_30d": 143249.61,
+    "buyers_24h": null,
+    "buyers_30d": 373,
+    "top_buyers": []
+  },
+  "facilitators": {
+    "payai": {
+      "tx_24h": 851437,
+      "volume_usd_24h": 11336.94,
+      "buyers_24h": 317,
+      "sellers_24h": 48
+    },
+    "figment": {
+      "tx_24h": 876779,
+      "volume_usd_24h": 3718.91,
+      "buyers_24h": 5,
+      "sellers_24h": 1
+    },
+    "coinbase": {
+      "tx_24h": 81056,
+      "volume_usd_24h": 14514.56,
+      "buyers_24h": 937,
+      "sellers_24h": 639
+    }
+  },
+  "blockrun_sku": {
+    "discovery_resource_count": 7,
+    "resources_tool_count": 6,
+    "chat_completions_listed": true
+  },
+  "solana_watch": [
+    {
+      "address": "BhFRCUXHVm76PmXkSzus8T4LUGrD2MTW9Au6bocBox5U",
+      "role_hypothesis": "BlockRun Solana x402 seller / PayAI feed Server — 基础设施/网关, not a consumer",
+      "sol_balance": 0.090217885,
+      "usdc_ui": 10049.425815,
+      "recent_signatures_n": 1000,
+      "oldest_sig_age_seconds": 85,
+      "approx_tx_per_sec": 11.76,
+      "label": "基础设施/网关"
+    },
+    {
+      "address": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4",
+      "role_hypothesis": "fee-payer / router — 基础设施/网关",
+      "sol_balance": 8.155107001,
+      "usdc_ui": 32.39481,
+      "recent_signatures_n": 1000,
+      "oldest_sig_age_seconds": 129,
+      "approx_tx_per_sec": 7.75,
+      "label": "基础设施/网关"
+    },
+    {
+      "address": "93syNmtT1tTd5ZtPwHqzGf6CM7fKhMmArpv4AM4FtyNX",
+      "role_hypothesis": "gas tank / sponsor — 基础设施/网关",
+      "sol_balance": 77.401214257,
+      "usdc_ui": 0.0,
+      "recent_signatures_n": 1000,
+      "oldest_sig_age_seconds": 206,
+      "approx_tx_per_sec": 4.85,
+      "label": "基础设施/网关"
+    }
+  ],
+  "hypotheses_today": {
+    "H1_few_machine_wallets": "hold — Solana 30d buyers 48 (week range 43–50). 16.95M tx / 48 ≈ 353k tx/buyer. Featured table returned after 09-03 empty day; did not copy yesterday.",
+    "H2_payai_is_blockrun_solana": "weakened further — Figment 24h 876,779 tx overtakes PayAI 851,437. Combined Solana-facilitator ~1.73M tx. PayAI no longer the single pipe for BlockRun Solana scale.",
+    "H3_sku_still_chat": "hold (discovery still lists chat completions; 7 resources / 6 tools)",
+    "H4_base_more_human": "hold — Base 30d buyers 373 vs Solana 48 (~8×). Base 6.48M tx / 373 ≈ 17k tx/buyer vs Solana 353k.",
+    "H5_top_is_infra": "hold — BhFRCU still Server/seller; 11.8 tx/s; USDC $10.0k (refilled from 09-03 $4.0k). 2wKup 7.8 tx/s; 93sy 4.9 tx/s / 77 SOL / 0 USDC."
+  }
+}
