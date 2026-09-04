@@ -1,0 +1,103 @@
+{
+  "captured_at": "2026-08-30T00:00:35.728475+00:00",
+  "payai_stats": {
+    "cached_at": "2026-08-29T23:31:24.376Z",
+    "settlements_24h": 1126572,
+    "settlements_7d": 6810976,
+    "settlements_30d": 9879610,
+    "hosts": 1685,
+    "blockrun_in_top_merchants": [
+      {
+        "resourceHost": "sol.blockrun.ai",
+        "settlements": "50K+",
+        "volumeUsd": "$1K+"
+      }
+    ],
+    "caveat": "PayAI buckets (50K+) disagree with x402scan daily millions; do not use buckets for share."
+  },
+  "x402scan": {
+    "sol_blockrun": {
+      "tx_24h": null,
+      "volume_usd_24h": null,
+      "buyers_24h": null,
+      "tx_30d": 9400000,
+      "volume_usd_30d": 121130,
+      "buyers_30d": 44,
+      "avg_ticket_usd_30d": 0.0129,
+      "source": "x402scan homepage featured 30d row sol.blockrun.ai ~00:00 UTC 2026-08-30; server page HTML empty, 24h left null"
+    },
+    "base_blockrun": {
+      "tx_24h": null,
+      "volume_usd_24h": null,
+      "buyers_24h": null,
+      "tx_30d": 7040000,
+      "volume_usd_30d": 162270,
+      "buyers_30d": 576,
+      "source": "x402scan homepage featured 30d row blockrun.ai ~00:00 UTC; 24h not on page"
+    },
+    "payai_facilitator_24h": {
+      "tx": 886060,
+      "volume_usd": 18030,
+      "buyers": 99,
+      "sellers": 49,
+      "source": "https://www.x402scan.com/facilitators Past 24 Hours ~00:00 UTC (PayAI detail page 882.54k/$18.23k/100 buyers — do not mix)"
+    },
+    "figment_facilitator_24h": {
+      "tx": 161495,
+      "volume_usd": 3380,
+      "buyers": 4,
+      "sellers": 1,
+      "source": "https://www.x402scan.com/facilitators Past 24 Hours ~00:00 UTC"
+    },
+    "coinbase_facilitator_24h": {
+      "tx": 57078,
+      "volume_usd": 9520,
+      "buyers": 1507,
+      "sellers": 518,
+      "source": "https://www.x402scan.com/facilitators Past 24 Hours ~00:00 UTC"
+    },
+    "facilitators_24h_total": {
+      "tx": 1108516,
+      "volume_usd": 37870,
+      "source": "x402scan facilitators header Past 24 Hours"
+    }
+  },
+  "watch_wallets": [
+    {
+      "address": "BhFRCUXHVm76PmXkSzus8T4LUGrD2MTW9Au6bocBox5U",
+      "sol_lamports": 1820668,
+      "usdc": "10351.628555",
+      "recent_sigs": 20,
+      "recent_errors": 0,
+      "newest_block_time": 1788048024,
+      "median_gap_sec_recent20": 0,
+      "extended_pulse": {
+        "n_sigs": 1000,
+        "errors": 0,
+        "span_sec": 122,
+        "rate_tx_per_sec": 8.19,
+        "median_gap_sec": 0,
+        "p90_gap_sec": 1
+      },
+      "note": "USDC 16.9k→10.4k while still ~8.2 tx/s. Drain + firehose = infra/treasury, not a consumer. Merchant vs payer unresolved."
+    }
+  ],
+  "labels_today": [
+    {
+      "address": "BhFRCUXHVm76PmXkSzus8T4LUGrD2MTW9Au6bocBox5U",
+      "label": "基础设施 / 网关",
+      "confidence": "high",
+      "returning_from_yesterday": true
+    }
+  ],
+  "concentration": {
+    "sol_buyers_30d": 44,
+    "sol_buyers_30d_yesterday": 44,
+    "payai_24h_buyers": 99,
+    "payai_24h_buyers_yesterday": 81,
+    "figment_24h_buyers": 4,
+    "d1_watch_wallet_returning": true,
+    "payai_vs_self_report": "x402scan PayAI 24h 886k tx vs PayAI discovery 1.13M — do not mix calendars"
+  },
+  "notes": "Day 3/8. Sol 30d buyers stuck at 44. PayAI 24h buyers 81→99 (still ~9k tx/buyer). Figment 3→4 buyers / 1 seller. BhFRCU D2 returning, 8.2 tx/s, USDC draining. No new named top payer. Coinbase 24h $ 37k→9.5k (facilitator $, not BlockRun)."
+}

@@ -1,0 +1,73 @@
+{
+  "captured_at": "2026-08-28T09:30:56.895207+00:00",
+  "payai_stats": {
+    "cached_at": "2026-08-28T08:39:41.129Z",
+    "settlements_24h": 1329008,
+    "settlements_7d": 6167348,
+    "settlements_30d": 8011704,
+    "hosts": 1667,
+    "blockrun_in_top_merchants": [
+      {
+        "resourceHost": "sol.blockrun.ai",
+        "settlements": "50K+",
+        "volumeUsd": "$1K+"
+      }
+    ],
+    "caveat": "PayAI buckets (50K+) disagree with x402scan daily millions; do not use buckets for share."
+  },
+  "x402scan": {
+    "sol_blockrun": {
+      "tx_24h": 1330000,
+      "volume_usd_24h": 20130,
+      "buyers_24h": 4,
+      "tx_30d": 7650000,
+      "volume_usd_30d": 88160,
+      "buyers_30d": 45,
+      "avg_ticket_usd_30d": 0.0115,
+      "source": "x402scan homepage + server 239470e8 (sol.blockrun.ai), ~09:00 UTC"
+    },
+    "base_blockrun": {
+      "tx_24h": 1510,
+      "volume_usd_24h": 81.09,
+      "buyers_24h": 55,
+      "tx_30d": 7310000,
+      "volume_usd_30d": 170660,
+      "buyers_30d": 383,
+      "source": "x402scan featured + earlier 24h table; 24h vs 30d mix \u2014 treat 24h as noisy"
+    },
+    "payai_facilitator_24h": {
+      "tx": 1120000,
+      "volume_usd": 17090,
+      "buyers": 86,
+      "sellers": 48,
+      "blockrun_share_tx_est": 0.99,
+      "source": "x402scan.com/facilitator/payAI + identity: 1.12M+0.206M Figment \u2248 1.33M BlockRun"
+    },
+    "figment_facilitator_24h": {
+      "tx": 205900,
+      "volume_usd": 3020,
+      "buyers": 3,
+      "sellers": 1
+    }
+  },
+  "watch_wallets": [
+    {
+      "address": "BhFRCUXHVm76PmXkSzus8T4LUGrD2MTW9Au6bocBox5U",
+      "sol_lamports": 1524188,
+      "usdc": "0.000286",
+      "recent_sigs": 20,
+      "recent_errors": 3,
+      "newest_block_time": 1787893169,
+      "median_gap_sec_recent20": 0,
+      "note": "confirm merchant vs payer before treating as a user"
+    }
+  ],
+  "labels_today": [
+    {
+      "address": "BhFRCUXHVm76PmXkSzus8T4LUGrD2MTW9Au6bocBox5U",
+      "label": "\u57fa\u7840\u8bbe\u65bd / \u7f51\u5173",
+      "confidence": "medium"
+    }
+  ],
+  "notes": ""
+}

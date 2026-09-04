@@ -1,0 +1,105 @@
+{
+  "captured_at": "2026-09-03T00:00:36.125011+00:00",
+  "payai_stats": {
+    "cached_at": "2026-09-02T23:00:46.892Z",
+    "settlements_24h": 1292147,
+    "settlements_7d": 8730825,
+    "settlements_30d": 15067995,
+    "hosts": 1731,
+    "blockrun_in_top_merchants": [
+      {
+        "resourceHost": "sol.blockrun.ai",
+        "settlements": "50K+",
+        "volumeUsd": "$1K+"
+      }
+    ],
+    "caveat": "PayAI buckets (50K+) disagree with x402scan daily millions; do not use buckets for share."
+  },
+  "x402scan": {
+    "sol_blockrun": {
+      "tx_24h": null,
+      "volume_usd_24h": null,
+      "buyers_24h": null,
+      "tx_30d": null,
+      "volume_usd_30d": null,
+      "buyers_30d": null,
+      "source": "homepage featured table empty and server page HTML empty at 00:00 UTC; do not copy yesterday"
+    },
+    "base_blockrun": {
+      "tx_24h": null,
+      "volume_usd_24h": null,
+      "buyers_24h": null,
+      "tx_30d": null,
+      "volume_usd_30d": null,
+      "buyers_30d": null,
+      "source": "same: featured/server HTML empty"
+    },
+    "payai_facilitator_24h": {
+      "tx": 1148352,
+      "volume_usd": 8870,
+      "buyers": 347,
+      "sellers": 62,
+      "source": "https://www.x402scan.com/facilitators Past 24 Hours ~00:00 UTC"
+    },
+    "figment_facilitator_24h": {
+      "tx": 511100,
+      "volume_usd": 2070,
+      "buyers": 5,
+      "sellers": 1,
+      "source": "https://www.x402scan.com/facilitators Past 24 Hours"
+    },
+    "coinbase_facilitator_24h": {
+      "tx": 170600,
+      "volume_usd": 22280,
+      "buyers": 1111,
+      "sellers": 647,
+      "source": "https://www.x402scan.com/facilitators Past 24 Hours"
+    },
+    "facilitators_24h_total": {
+      "tx": 1827864,
+      "volume_usd": 39890,
+      "source": "x402scan facilitators header Past 24 Hours"
+    }
+  },
+  "watch_wallets": [
+    {
+      "address": "BhFRCUXHVm76PmXkSzus8T4LUGrD2MTW9Au6bocBox5U",
+      "sol_lamports": 3033264,
+      "usdc": "12340.211157",
+      "recent_sigs": 20,
+      "recent_errors": 0,
+      "newest_block_time": 1788393625,
+      "median_gap_sec_recent20": 0,
+      "extended_pulse": {"n_sigs": 1000, "errors": 0, "span_sec": 79, "rate_tx_per_sec": 12.65},
+      "note": "USDC 4.0k→12.3k (refilled). Still ~13 tx/s. Merchant/treasury, not a consumer."
+    },
+    {
+      "address": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4",
+      "sol_lamports": 7646592657,
+      "usdc": "30.194974",
+      "extended_pulse": {"n_sigs": 1000, "errors": 0, "span_sec": 191, "rate_tx_per_sec": 5.23},
+      "note": "Returning router. Rate 24→5 tx/s, still machine."
+    },
+    {
+      "address": "93syNmtT1tTd5ZtPwHqzGf6CM7fKhMmArpv4AM4FtyNX",
+      "sol_lamports": 83011722945,
+      "usdc": "0",
+      "extended_pulse": {"n_sigs": 1000, "errors": 0, "span_sec": 186, "rate_tx_per_sec": 5.37},
+      "note": "Returning gas tank. 0 USDC, ~83 SOL, 5 tx/s."
+    }
+  ],
+  "labels_today": [
+    {"address": "BhFRCUXHVm76PmXkSzus8T4LUGrD2MTW9Au6bocBox5U", "label": "基础设施 / 网关", "confidence": "high", "returning_from_yesterday": true},
+    {"address": "2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4", "label": "基础设施 / 网关", "confidence": "high", "returning_from_yesterday": true},
+    {"address": "93syNmtT1tTd5ZtPwHqzGf6CM7fKhMmArpv4AM4FtyNX", "label": "基础设施 / 网关", "confidence": "high", "returning_from_yesterday": true}
+  ],
+  "concentration": {
+    "sol_buyers_30d": null,
+    "payai_24h_buyers": 347,
+    "payai_24h_buyers_yesterday": 291,
+    "figment_24h_buyers": 5,
+    "d1_watch_wallet_returning": true,
+    "note": "PayAI $ 15.2k→8.9k while buyers 291→347. Figment tx 281k→511k with 5 buyers. More firehose, not users."
+  },
+  "notes": "Day 7/8. Featured 30d table empty — sol/base 30d left null. PayAI 24h $ keeps falling, buyer count rising. Three watch addresses all returning infra. H5 holds."
+}
