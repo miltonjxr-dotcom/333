@@ -1,0 +1,4 @@
+{
+  "name": "Agent Economy Monitor",
+  "install": "if [ -f requirements-dev.txt ]; then python3 -m pip install --user --upgrade -r requirements-dev.txt; fi"
+}
