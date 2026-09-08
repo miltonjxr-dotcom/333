@@ -195,22 +195,23 @@ NEAR 官方：2026-03-19 稿宣布与 Venice 集成，引 Voorhees。
 
 三方对「Venice 在卖可验证隐私、算力外包」没有矛盾。矛盾点只有营销口径：每家都容易让人以为自己是唯一底座。**一手材料是双源。**
 
-### 4.2 四档隐私里，NEAR 只出现在后两档
+### 4.2 四档隐私：NEAR 出现在「匿名网关」和「飞地」两条路上
 
-Venice 自己画的光谱（原文结构）：
+Venice 自己画的光谱，叠上选模型页的绿色 N（2026-09 界面）：
 
-| 档 | 谁默认能用 | 提示词在谁那里明文出现 | NEAR 在不在链路里 |
+| 档 | 界面怎么认 | 提示词明文在谁那里 | NEAR 在不在 |
 | --- | --- | --- | --- |
-| **Anonymous** | 全体 | 闭源实验室（GPT/Claude/Gemini 等）看得见内容；Venice 藏身份 | **不在。** 这是传统代理 |
-| **Private**（默认） | 全体 | Venice 自有 GPU 或零保留伙伴，靠合同 | **通常不在。** 这是 Venice 自己的私有/ZDR 推理 |
-| **TEE** | **Pro** | 只在飞地内解密；请求仍过 Venice 代理（故能保留搜索、记忆等） | **在，或在 Phala** |
-| **E2EE** | **Pro** | 设备上加密，过 Venice 时仍是密文，只在飞地打开 | **在，或在 Phala**；功能更少（无搜索/记忆） |
+| **Anonymous / 匿名** | 绿 N +「匿名」 | 闭源实验室看得见**内容**；身份被藏 | **在 Incognito 网关。** Claude / GPT / Gemini / Qwen Max 等走 NEAR 匿名网关，模型仍在 Anthropic/OpenAI/Google 侧跑 |
+| **Private / 私密** | 紫锁 +「私密」、无 N | Venice 自有 GPU 或 ZDR 伙伴 | **通常不在。** DeepSeek / GLM / Grok / Kimi 等是 Venice 自己的私有推理 |
+| **TEE** | Pro，`tee-*` | 只在飞地内解密 | **在，或在 Phala**（Private TEE） |
+| **E2EE** | Pro，`e2ee-*` | 设备加密，只在飞地打开 | **在，或在 Phala** |
 
 所以：
 
-- Venice 的**大部分会话**（Anonymous 用最强闭源模型，Private 用自家/ZDR）**根本不经过 NEAR**。
-- NEAR 只在用户愿意付 Pro、并主动选 TEE/E2EE 开源模型时进场。
-- 即便进场，还要和 Phala **分流**。公开材料没有「NEAR 占 TEE 流量百分之几」。
+- 带 **绿色 N +「匿名」** 的闭源模型：走 NEAR 的 Incognito 网关（藏身份，实验室仍看到提示词）。  
+- 带 **紫锁 +「私密」、无 N** 的开源/合作模型：走 Venice 自己的 Private 机房，不是 NEAR。  
+- **TEE / E2EE**（选模型 ID 为 `e2ee-*` / `tee-*`，Pro）：才是 NEAR 或 Phala 的硬件飞地。  
+- 因此「Venice 调用 NEAR」有两条完全不同的产品，不要把 1.3 万亿全站 token 算进飞地。
 
 这和超市进货很像：Venice 是店；货架上大部分商品来自别的厂家（OpenAI 等、Venice 自己的机房）；NEAR 和 Phala 是「有机认证专柜」的两个供货商。专柜可以很有品牌价值，占销售额的比例完全是另一件事——而那一比例**没有披露**。
 
@@ -250,7 +251,7 @@ Venice 自己画的光谱（原文结构）：
 | Venice 是 NEAR Cloud 的**应用层分发** | Venice 所有用户都在用 NEAR |
 | 对方官网点名 NEAR AI Cloud | NEAR 是 Venice 唯一 TEE 供应商 |
 | 证明「有人愿意把可验证隐私做成付费功能」 | 已证明这条渠道贡献了可观收入 |
-| 开源模型的机密托管有真实出口 | 闭源 GPT/Claude 的流量也进了 NEAR 飞地（Anonymous 档明确不进） |
+| 开源模型的机密托管有真实出口 | 绿 N「匿名」等于提示词也进了飞地（那是 Incognito 网关，实验室仍看见内容） |
 
 和 Brave 对比更能看清渠道类型：
 
@@ -267,11 +268,10 @@ Brave 证明「安全公司认技术」；Venice 证明「有消费产品把技�
 
 | 借了 | 没借（公开文档对不上） |
 | --- | --- |
-| 在 Intel TDX + NVIDIA Confidential Computing 飞地里跑**开源权重**模型 | IronClaw / Agent 运行时 |
-| 硬件 attestation（Intel quote、NVIDIA GPU 证据），Venice 用 `/api/v1/tee/attestation` 转给用户，字段里有 `tee_provider` | Agent Market、NEAR Intents、Chain Signatures |
-| E2EE：提示词在用户设备加密，只在飞地里解密。Venice 博客直接链到 `docs.near.ai/cloud/guides/e2ee-chat-completions` | 质押 NEAR 换额度（Venice 用的是自己的 VVV/DIEM） |
-| 飞地对输出做签名，Venice 提供 `/api/v1/tee/signature` | NEAR Private Chat 的消费端品牌 |
-| OpenAI 兼容的 chat completions（Venice 再包一层自己的 API） | Anonymous 档的 GPT/Claude/Gemini（那些走实验室，不进 NEAR 飞地） |
+| **Incognito 网关**：闭源模型（Claude/GPT/Gemini 等）经 TEE 里的网关转发，藏身份 | IronClaw / Agent 运行时 / Agent Market |
+| **Private TEE**：开源权重在 Intel TDX + NVIDIA 飞地里跑 | Chain Signatures、NEAR Intents |
+| 硬件 attestation；Venice `/api/v1/tee/attestation`（`tee_provider`） | 质押 NEAR 换额度（Venice 用 VVV/DIEM） |
+| E2EE（设备加密，只在飞地解密） | NEAR Private Chat 消费品牌 |
 
 开发者在 Venice 侧的用法：把模型 ID 换成 `tee-*` / `e2ee-*`（2026 年 9 月线上目录以 `e2ee-*` 为主），其余仍是 `https://api.venice.ai/api/v1`。用户不直接拿 NEAR 的 API Key。
 
