@@ -138,13 +138,103 @@ button {
   font-size: 15px;
 }
 
-.chart {
-  height: calc(100vh - 280px);
-  min-height: 420px;
+.chart-wrap {
+  position: relative;
   margin: 0 16px;
   border: 1px solid var(--line);
   border-radius: 8px;
   overflow: hidden;
+  background: var(--bg);
+}
+
+.chart {
+  height: calc(100vh - 280px);
+  min-height: 420px;
+}
+
+.ohlc-legend {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  right: 72px;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  color: var(--text);
+  text-shadow: 0 1px 2px #0b0e11;
+}
+
+.ohlc-legend i {
+  font-style: normal;
+  color: var(--muted);
+  margin-right: 4px;
+}
+
+.ohlc-legend b {
+  font-weight: 650;
+}
+
+.ohlc-date {
+  color: var(--gold);
+  font-weight: 650;
+}
+
+.ohlc-src {
+  color: var(--muted);
+}
+
+.ohlc-pin {
+  color: #111;
+  background: var(--gold);
+  border-radius: 4px;
+  padding: 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.tv-tooltip {
+  position: absolute;
+  z-index: 6;
+  min-width: 220px;
+  padding: 10px 12px;
+  background: rgba(22, 26, 30, 0.96);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.tv-tooltip .tt-date {
+  color: var(--gold);
+  font-weight: 650;
+  margin-bottom: 6px;
+}
+
+.tv-tooltip .tt-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.tv-tooltip .tt-row span:first-child {
+  color: var(--muted);
+}
+
+.tv-tooltip .tt-foot {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.hidden {
+  display: none !important;
 }
 
 .status {

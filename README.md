@@ -28,7 +28,7 @@ python3 -m pip install -r requirements.txt -r requirements-dev.txt
 python3 -m mkr_sky serve --host 0.0.0.0 --port 8000
 ```
 
-浏览器打开 `http://127.0.0.1:8000`。页面上可以切换日/周/小时周期，以及 SKY / MKR 两种价格口径。
+浏览器打开 `http://127.0.0.1:8000`。页面上可以切换日/周/小时周期，以及 SKY / MKR 两种价格口径。鼠标在图上移动或点击某一根 K 线，会显示该根的开、高、低、收、涨跌、振幅和成交量（和币安 / TradingView 类似）；点击可钉住，Esc 取消。
 
 导出 CSV / JSON：
 
