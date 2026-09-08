@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MKR × SKY 合并 K 线</title>
+    <link rel="stylesheet" href="styles.css?v=log1" />
+    <script src="lightweight-charts.js"></script>
+    <script src="kline.js?v=log1"></script>
+  </head>
+  <body>
+    <header class="top">
+      <div>
+        <h1>MKR × SKY 合并 K 线</h1>
+        <p class="sub">
+          按官方换算 <strong>1 MKR = 24,000 SKY</strong> 拼接。鼠标悬停或点击任意
+          K 线，查看当天开、高、低、收、涨跌和成交量。
+        </p>
+      </div>
+      <div class="controls">
+        <label>
+          周期
+          <select id="interval">
+            <option value="1h">1 小时</option>
+            <option value="4h">4 小时</option>
+            <option value="1d" selected>日线</option>
+            <option value="1w">周线</option>
+            <option value="1M">月线</option>
+          </select>
+        </label>
+        <fieldset class="seg" aria-label="价格口径">
+          <legend>价格口径</legend>
+          <button type="button" id="denom-sky" class="on" data-denom="sky">以 SKY 为准</button>
+          <button type="button" id="denom-mkr" data-denom="mkr">以 MKR 为准</button>
+        </fieldset>
+        <fieldset class="seg" aria-label="坐标">
+          <legend>坐标</legend>
+          <button type="button" id="scale-lin" class="on" data-scale="linear">线性</button>
+          <button type="button" id="scale-log" data-scale="log">对数</button>
+        </fieldset>
+        <button type="button" id="zoom-splice">看拼接点</button>
+      </div>
+    </header>
+
+    <section class="stats" id="stats">
+      <div class="stat">
+        <span class="k">最新价</span>
+        <span class="v" id="last-price">—</span>
+      </div>
+      <div class="stat">
+        <span class="k">较上根</span>
+        <span class="v" id="change">—</span>
+      </div>
+      <div class="stat">
+        <span class="k">覆盖</span>
+        <span class="v" id="coverage">—</span>
+      </div>
+      <div class="stat">
+        <span class="k">拼接点</span>
+        <span class="v" id="cutover">—</span>
+      </div>
+      <div class="stat">
+        <span class="k">拼接误差</span>
+        <span class="v" id="splice-err">—</span>
+      </div>
+      <div class="stat">
+        <span class="k">来源</span>
+        <span class="v" id="sources">—</span>
+      </div>
+    </section>
+
+    <main>
+      <div class="chart-wrap">
+        <div id="ohlc-legend" class="ohlc-legend" aria-live="polite">
+          <span class="ohlc-date" id="ohlc-date">—</span>
+          <span><i>开</i> <b id="ohlc-o">—</b></span>
+          <span><i>高</i> <b id="ohlc-h">—</b></span>
+          <span><i>低</i> <b id="ohlc-l">—</b></span>
+          <span><i>收</i> <b id="ohlc-c">—</b></span>
+          <span><i>涨跌</i> <b id="ohlc-chg">—</b></span>
+          <span><i>振幅</i> <b id="ohlc-amp">—</b></span>
+          <span><i>量</i> <b id="ohlc-v">—</b></span>
+          <span class="ohlc-src" id="ohlc-src">—</span>
+          <span class="ohlc-pin hidden" id="ohlc-pin">已钉住</span>
+        </div>
+        <div id="chart" class="chart"></div>
+        <div id="tooltip" class="tv-tooltip hidden" role="dialog"></div>
+      </div>
+      <p id="status" class="status">正在加载 Binance 历史 K 线…</p>
+    </main>
+
+    <footer>
+      <p>
+        MKR 段来自 Binance <code>MKRUSDT</code>（约 2020-07-23 至 2025-09-15 停牌），
+        SKY 段来自 <code>SKYUSDT</code>（2025-09-17 08:00 UTC 起）。重叠的周/月 K
+        线会把 MKR 的开盘与 SKY 的收盘拼成一根。延迟升级罚金不影响图表换算，始终用 24,000。
+      </p>
+    </footer>
+    <script src="app.js?v=log1"></script>
+  </body>
+</html>
