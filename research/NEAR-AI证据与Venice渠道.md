@@ -261,6 +261,117 @@ Brave 证明「安全公司认技术」；Venice 证明「有消费产品把技�
 
 ---
 
+## 4.6 Venice 到底借了 NEAR 的哪一层（功能清单）
+
+不是借「NEAR 公链」或 IronClaw，而是借 **NEAR AI Cloud 的机密推理机房**。按双方文档可以对上的能力：
+
+| 借了 | 没借（公开文档对不上） |
+| --- | --- |
+| 在 Intel TDX + NVIDIA Confidential Computing 飞地里跑**开源权重**模型 | IronClaw / Agent 运行时 |
+| 硬件 attestation（Intel quote、NVIDIA GPU 证据），Venice 用 `/api/v1/tee/attestation` 转给用户，字段里有 `tee_provider` | Agent Market、NEAR Intents、Chain Signatures |
+| E2EE：提示词在用户设备加密，只在飞地里解密。Venice 博客直接链到 `docs.near.ai/cloud/guides/e2ee-chat-completions` | 质押 NEAR 换额度（Venice 用的是自己的 VVV/DIEM） |
+| 飞地对输出做签名，Venice 提供 `/api/v1/tee/signature` | NEAR Private Chat 的消费端品牌 |
+| OpenAI 兼容的 chat completions（Venice 再包一层自己的 API） | Anonymous 档的 GPT/Claude/Gemini（那些走实验室，不进 NEAR 飞地） |
+
+开发者在 Venice 侧的用法：把模型 ID 换成 `tee-*` / `e2ee-*`（2026 年 9 月线上目录以 `e2ee-*` 为主），其余仍是 `https://api.venice.ai/api/v1`。用户不直接拿 NEAR 的 API Key。
+
+协议细节：Venice 文档写客户端用 secp256k1 + AES-GCM；NEAR 文档写 X25519 + XChaCha20。合理理解是 **Venice 代理把自家 API 协议接到 NEAR 飞地上**，用户感知的是 Venice 的头字段，飞地里仍是 NEAR 的机密推理。不必把两套密码学当成两套完全无关的产品。
+
+### 价格指纹：哪些 SKU 很像在转售 NEAR 标价
+
+2026 年 9 月 8 日对两边公开价目的快照（美元 / 百万 token）。四款主力开源模型的 Venice E2EE 价 ≈ NEAR Cloud 价 × **约 1.07**：
+
+| 模型 | Venice E2EE 输入/输出 | NEAR Cloud 输入/输出 | 加价 |
+| --- | --- | --- | --- |
+| DeepSeek V4 Flash | 0.182 / 0.373 | 0.17 / 0.35 | ~7% |
+| Qwen 3.6 35B | 0.182 / 1.18 | 0.17 / 1.10 | ~7% |
+| Qwen 3.8 27B | 0.47 / 3.53 | 0.44 / 3.30 | ~7% |
+| Kimi K2.6 | 0.87 / 4.12 | 0.81 / 3.85 | ~7% |
+| Qwen3-VL-30B | 0.25 / 0.90 | 0.15 / 0.55 | ~65%（不像同一份批发价） |
+| GLM 5.3 Flash | 0.16 / 0.54 | 0.075 / 0.25 | ~2.1 倍（更可能是另一家或不同量化） |
+| GLM 5.2 | 1.75 / 5.75 | 1.40 / 4.40 | ~25–31% |
+
+**约 7% 的整齐加价**是目前最接近「这些 SKU 在转售 NEAR 菜单」的公开证据，不是合同披露。加价明显更高的几款，更可能走 Phala、不同精度，或 Venice 留了更厚的零售差。线上 `e2ee-*` 一共 **11** 个（Venice 全目录约 115 个模型）。
+
+---
+
+## 4.7 频率和量：有全站数字，没有「走 NEAR」的拆分
+
+**Venice 官方（2026-07-01 Series A 稿）全站规模：**
+
+- 注册用户 350 万
+- **每月 1.3 万亿 token**（所有模式、所有模型合计）
+- 开发者 API 约 **200 万次/天**（峰值 210 万+）
+- 峰值约 30 万次推理/小时
+- 站点月访约 130–160 万、独立访客约 85–100 万
+
+这些是 **Venice 整家公司的推理**，主体是 Anonymous（GPT/Claude 等）和 Private（Venice 自有/ZDR GPU）。TEE/E2EE 从 2026 年 3 月才作为 **Pro 可选档**上线，默认不是它。
+
+**从未公开的：**
+
+- TEE/E2EE 占 1.3T 的百分之几
+- NEAR vs Phala 的分流
+- 每月打到 `cloud-api.near.ai` 的 token
+- Venice 付给 NEAR 的账单
+
+因此「大概用了多少」只能做**带假设的区间**，不能当事实。
+
+倾向认为 TEE 只占全站很小一块的理由（全是结构，不是泄密数据）：
+
+1. 默认档是 Private，不是 TEE。  
+2. 最强闭源模型在 Anonymous，质量导向的人不会为了隐私降到开源飞地。  
+3. TEE/E2EE 要 Pro，且 E2EE 关掉搜索/记忆，有功能税。  
+4. 飞地更慢（Venice 自己写了）。  
+5. 11 个 E2EE SKU vs 115 个总模型。  
+6. 和 Phala 双源，NEAR 拿不到 TEE 的 100%。
+
+若硬要给数量级（**假设**，供排除「Venice 的 1.3T 都进了 NEAR」这种误读）：
+
+| 假设：全站 token 里 TEE/E2EE 占比 | 再假设其中一半打到 NEAR | NEAR 侧大约每月 token |
+| --- | --- | --- |
+| 0.5%（很利基） | 50% | ~30 亿 |
+| 2%（偏谨慎的中位想象） | 50% | ~130 亿 |
+| 10%（已经算 TEE 很成功） | 50% | ~650 亿 |
+
+对比：1.3 万亿的 2% 仍只是零头。没有数据支持「已经到 10%」；也没有数据排除「还不到 0.5%」。
+
+---
+
+## 4.8 NEAR 每个月能从 Venice 赚多少：未披露，只能夹逼
+
+Venice 用户把钱付给 Venice（Pro / 积分 / DIEM）。NEAR 若赚钱，是 **Venice 作为 API 客户付给 Cloud 的批发推理费**，不是抽 VVV，也不是分 Pro 订阅。
+
+用上面的 token 假设 × 批发单价做夹逼。重叠 SKU 里便宜的 Flash 大约每百万 token 零点几美元，贵的 GLM 要数美元。下面用 **混合 $0.5 / 百万 token**（偏 Flash）和 **$1.5 / 百万 token**（偏大模型）两档：
+
+| TEE 占全站 | NEAR 占 TEE | 混合 $0.5/M | 混合 $1.5/M |
+| --- | --- | --- | --- |
+| 0.5% | 50% | 约 **0.2 万美元/月** | 约 **0.5 万美元/月** |
+| 2% | 50% | 约 **0.7 万美元/月** | 约 **2 万美元/月** |
+| 10% | 50% | 约 **3 万美元/月** | 约 **10 万美元/月** |
+| 10% | 80%（NEAR 几乎包圆对齐菜单的 SKU） | 约 **5 万美元/月** | 约 **16 万美元/月** |
+
+**这不是预测，是把「没有报表」翻译成数量级。** 公开信息能确定的只有：
+
+- 不是「每月百万美元级」那种已经能看见的大客户——否则以双方都爱发稿的风格，至少会吹一嘴 token。  
+- 也不是零：价格对齐的 SKU 还在架上，3 月上线后目录还在跟着 NEAR 菜单换代（V4 Flash、Qwen 3.6/3.8、Kimi K2.6）。  
+- 对 NEAR Cloud 而言，在「没有披露任何付费租户用量」的前提下，Venice 更像 **标杆分发 + 中小批发**，不是收入支柱。
+
+零售侧那约 7% 的加价归 Venice，不归 NEAR。
+
+---
+
+## 4.9 这条渠道的发展趋势
+
+能看见的方向：
+
+1. **SKU 在跟 NEAR Cloud 的当前菜单对齐。** 2026 年 3 月博客还是 GLM 4.7、Qwen3.5 122B、Gemma 3；9 月线上已是 DeepSeek V4 Flash、Qwen 3.6/3.8、Kimi K2.6 等，与 `cloud-api.near.ai/v1/models` 高度重叠。说明集成在维护，不是发完稿就停。  
+2. **产品形态稳定为「Pro 升级档 + 双供应商」。** 没有变成默认，也没有变成 NEAR 独家。  
+3. **Venice 公司本身在长，TEE 不一定同比例长。** 7 月官方已经是 350 万注册、每月 1.3T token、A 轮 10 亿美元估值。增长引擎是「不审查 + 不记日志 + 模型货架」，TEE 是其中一层加固。全站变大，NEAR 的批发额**可以**跟着 Pro 里选飞地的人变大，但斜率不会自动等于 1.3T 的斜率。  
+4. **NEAR 自己也有 Private Chat**，和 Venice 在消费入口上是弱竞争；Venice 的价值对 NEAR 仍是现成的隐私用户群和 API。  
+5. 观察「量起来了」的信号（现在都还没有）：Venice 或 NEAR 拆出 TEE token；`tee_provider` 统计；Privacy 页改成默认 TEE；Pro 以下也能用飞地；Brave 式的第二家大分发。
+
+---
+
 ## 五、若你要自己跟进，只盯这些可核对动作
 
 比看 NEAR 再发一篇稿更有信息量：
