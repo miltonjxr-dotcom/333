@@ -21,14 +21,22 @@ Maker 换成 Sky 之后，SKY 自己的 K 线太短，直接看参考价值偏�
 
 日线上，末根 MKR 收盘 `1813.7` ÷ 24,000 ≈ `0.0755708`，与 SKY 首根开盘 `0.07558` 几乎贴齐。
 
-## 运行
+## 怎么打开（在你自己的电脑上）
+
+之前说的 `http://127.0.0.1:8000` 是**你这台电脑**上的地址。云端起的服务到不了你的 Chrome，所以会提示「拒绝了连接请求」。
+
+最简单：下载本分支压缩包，解压后**双击** `web/index.html`（图表会直接向 Binance 拉 K 线，不用先起服务器）。
+
+https://github.com/miltonjxr-dotcom/333/archive/refs/heads/cursor/mkr-sky-kline-merge-cc83.zip
+
+或者在本机终端运行：
 
 ```bash
-python3 -m pip install -r requirements.txt -r requirements-dev.txt
-python3 -m mkr_sky serve --host 0.0.0.0 --port 8000
+python3 -m pip install -r requirements.txt
+python3 -m mkr_sky serve --host 127.0.0.1 --port 8000
 ```
 
-浏览器打开 `http://127.0.0.1:8000`。页面上可以切换日/周/小时周期，以及 SKY / MKR 两种价格口径。鼠标在图上移动或点击某一根 K 线，会显示该根的开、高、低、收、涨跌、振幅和成交量（和币安 / TradingView 类似）；点击可钉住，Esc 取消。
+Windows 也可以双击 `run.bat`。页面上可以切换日/周/小时周期，以及 SKY / MKR 两种价格口径。鼠标在图上移动或点击某一根 K 线，会显示该根的开、高、低、收、涨跌、振幅和成交量；点击可钉住，Esc 取消。
 
 导出 CSV / JSON：
 

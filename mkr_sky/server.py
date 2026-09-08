@@ -82,3 +82,4 @@ def index():
 
 if WEB_DIR.exists():
     app.mount("/static", StaticFiles(directory=WEB_DIR), name="static")
+    app.mount("/", StaticFiles(directory=WEB_DIR, html=True), name="web")

@@ -302,21 +302,39 @@
     load();
   }
 
+  async function loadFromBinance(interval) {
+    statusEl.textContent = "正在从 Binance 拉取 MKR / SKY 历史 K 线…";
+    return window.MkrSkyKline.fetchMerged(interval, denomination, (symbol, n) => {
+      statusEl.textContent = "正在拉取 " + symbol + "（已 " + n + " 根）…";
+    });
+  }
+
   async function load() {
     ensureChart();
     const interval = intervalEl.value;
-    statusEl.textContent = "正在拉取并合并 K 线…";
+    statusEl.textContent = "正在加载 K 线…";
     try {
-      const res = await fetch(
-        `/api/klines?interval=${encodeURIComponent(interval)}&denomination=${encodeURIComponent(denomination)}`
-      );
-      if (!res.ok) {
-        throw new Error(await res.text());
+      let data = null;
+      if (location.protocol !== "file:") {
+        try {
+          const res = await fetch(
+            "/api/klines?interval=" +
+              encodeURIComponent(interval) +
+              "&denomination=" +
+              encodeURIComponent(denomination)
+          );
+          if (res.ok) data = await res.json();
+        } catch (_err) {
+          data = null;
+        }
       }
-      const data = await res.json();
+      if (!data) data = await loadFromBinance(interval);
       render(data);
     } catch (err) {
-      statusEl.textContent = "加载失败：" + err.message;
+      statusEl.textContent =
+        "加载失败：" +
+        err.message +
+        "。不要只用 127.0.0.1 打开空白页；请双击 web/index.html，或先在本机运行 python3 -m mkr_sky serve。若 Binance 打不开，需要能访问国际行情的网络。";
     }
   }
 
