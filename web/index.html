@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>MKR × SKY 合并 K 线</title>
-    <link rel="stylesheet" href="styles.css?v=direct1" />
+    <link rel="stylesheet" href="styles.css?v=log1" />
     <script src="lightweight-charts.js"></script>
-    <script src="kline.js?v=direct1"></script>
+    <script src="kline.js?v=log1"></script>
   </head>
   <body>
     <header class="top">
@@ -32,6 +32,11 @@
           <legend>价格口径</legend>
           <button type="button" id="denom-sky" class="on" data-denom="sky">以 SKY 为准</button>
           <button type="button" id="denom-mkr" data-denom="mkr">以 MKR 为准</button>
+        </fieldset>
+        <fieldset class="seg" aria-label="坐标">
+          <legend>坐标</legend>
+          <button type="button" id="scale-lin" class="on" data-scale="linear">线性</button>
+          <button type="button" id="scale-log" data-scale="log">对数</button>
         </fieldset>
         <button type="button" id="zoom-splice">看拼接点</button>
       </div>
@@ -91,6 +96,6 @@
         线会把 MKR 的开盘与 SKY 的收盘拼成一根。延迟升级罚金不影响图表换算，始终用 24,000。
       </p>
     </footer>
-    <script src="app.js?v=direct1"></script>
+    <script src="app.js?v=log1"></script>
   </body>
 </html>

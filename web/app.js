@@ -11,6 +11,7 @@
   const tooltipEl = document.getElementById("tooltip");
   const pinBadge = document.getElementById("ohlc-pin");
   const denomButtons = document.querySelectorAll("[data-denom]");
+  const scaleButtons = document.querySelectorAll("[data-scale]");
   const zoomBtn = document.getElementById("zoom-splice");
 
   const legend = {
@@ -28,6 +29,7 @@
   const SRC_LABEL = { mkr: "MKR 换算", sky: "SKY 实盘", splice: "拼接根" };
 
   let denomination = "sky";
+  let logScale = localStorage.getItem("mkrSky.logScale") === "1";
   let chart;
   let candleSeries;
   let volumeSeries;
@@ -236,7 +238,12 @@
           labelBackgroundColor: "#2b3139",
         },
       },
-      rightPriceScale: { borderColor: "#2b3139" },
+      rightPriceScale: {
+        borderColor: "#2b3139",
+        mode: logScale
+          ? LightweightCharts.PriceScaleMode.Logarithmic
+          : LightweightCharts.PriceScaleMode.Normal,
+      },
       timeScale: {
         borderColor: "#2b3139",
         timeVisible: true,
@@ -292,6 +299,24 @@
     window.addEventListener("resize", () => {
       chart.applyOptions({ width: chartEl.clientWidth, height: chartEl.clientHeight });
     });
+  }
+
+  function applyPriceScale() {
+    if (!chart) return;
+    chart.priceScale("right").applyOptions({
+      mode: logScale
+        ? LightweightCharts.PriceScaleMode.Logarithmic
+        : LightweightCharts.PriceScaleMode.Normal,
+    });
+  }
+
+  function setLogScale(next) {
+    logScale = next;
+    localStorage.setItem("mkrSky.logScale", next ? "1" : "0");
+    scaleButtons.forEach((btn) => {
+      btn.classList.toggle("on", (btn.dataset.scale === "log") === next);
+    });
+    applyPriceScale();
   }
 
   function setDenom(next) {
@@ -397,6 +422,12 @@
 
   denomButtons.forEach((btn) => {
     btn.addEventListener("click", () => setDenom(btn.dataset.denom));
+  });
+  scaleButtons.forEach((btn) => {
+    btn.addEventListener("click", () => setLogScale(btn.dataset.scale === "log"));
+  });
+  scaleButtons.forEach((btn) => {
+    btn.classList.toggle("on", (btn.dataset.scale === "log") === logScale);
   });
   intervalEl.addEventListener("change", load);
   zoomBtn.addEventListener("click", () => {

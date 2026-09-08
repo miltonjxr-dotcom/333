@@ -36,7 +36,7 @@ python3 -m pip install -r requirements.txt
 python3 -m mkr_sky serve --host 127.0.0.1 --port 8000
 ```
 
-Windows 也可以双击 `run.bat`。页面上可以切换日/周/小时周期，以及 SKY / MKR 两种价格口径。鼠标在图上移动或点击某一根 K 线，会显示该根的开、高、低、收、涨跌、振幅和成交量；点击可钉住，Esc 取消。
+Windows 也可以双击 `run.bat`。页面上可以切换日/周/小时周期、SKY / MKR 口径，以及**线性 / 对数**坐标。鼠标在图上移动或点击某一根 K 线，会显示该根的开、高、低、收、涨跌、振幅和成交量；点击可钉住，Esc 取消。
 
 导出 CSV / JSON：
 
