@@ -1,0 +1,397 @@
+{
+  "asOfUtc": "2026-09-08T07:00:10.110656+00:00",
+  "question": "x402 (and MPP) protocol settlements by chain; Robinhood native check",
+  "methodology": {
+    "mainMarket": "agenteconomy.to/data.json which ingests Dune facilitator-attributed x402 settlements (not raw chain tx). x402scan stats API returns HTTP 402 so it was not used.",
+    "robinhood": "Robinhood Chain (eip155:4663) is absent from Dune payments.agentic_payments, CDP Facilitator, PayAI /supported, and x402scan facilitator address maps (Base/Solana only for Dexter/Primer). Native method: Blockscout + Exact Permit2 proxy 0x402085\u20260001 settle() receipts, filtered to USDG 0x5fc536\u2026d168; plus known facilitator EOAs.",
+    "doNotUse": "USDG Transfer count (160M) or Permit2 tx count (3.2M) \u2014 DEX/approval noise."
+  },
+  "coverageGaps": {
+    "duneOfficialChains": [
+      "base",
+      "polygon",
+      "solana",
+      "tempo(mpp)"
+    ],
+    "agenteconomyChainTableAsOf": "2026-08-19T10:27:46.041211Z",
+    "agenteconomyChainTableStaleNote": "Chain split last refreshed 2026-08-19; cumulative total is 2026-09-08 so ~21.3M later txs are not allocated by chain (likely Solana-heavy). Robinhood/Algorand/Stellar/Arc not in table.",
+    "x402scanRobinhood": false,
+    "cdpSupportsRobinhood": false,
+    "payaiSupportsRobinhood": false
+  },
+  "x402MainMarket": {
+    "source": "https://agenteconomy.to/data.json",
+    "duneQueries": {
+      "cumulative": "thechriscen/x402 Payment Analytics",
+      "daily": "hashed_official/x402 Analytics",
+      "chains": "thechriscen query 6166650"
+    },
+    "totalTxs": 185851240,
+    "totalVolumeUsd": 41694313,
+    "asOf": "2026-09-08T01:56:29.725345Z",
+    "facilitatorsTracked": 18,
+    "facilitatorShare": [
+      {
+        "name": "PayAI",
+        "share": 26.9,
+        "color": "#10B981"
+      },
+      {
+        "name": "Other",
+        "share": 25,
+        "color": "#6B7280"
+      },
+      {
+        "name": "Coinbase",
+        "share": 23.4,
+        "color": "#0052FF"
+      },
+      {
+        "name": "Dexter",
+        "share": 17.7,
+        "color": "#6366F1"
+      },
+      {
+        "name": "DayDreams",
+        "share": 6.3,
+        "color": "#F59E0B"
+      },
+      {
+        "name": "Pieverse",
+        "share": 0.7,
+        "color": "#EC4899"
+      }
+    ],
+    "chainsTracked": 12,
+    "cumulativeByChain": [
+      {
+        "chain": "Base",
+        "cumulativeTxs": 84969790,
+        "shareOfIndexedChainsPct": 51.6499
+      },
+      {
+        "chain": "Solana",
+        "cumulativeTxs": 48235859,
+        "shareOfIndexedChainsPct": 29.3208
+      },
+      {
+        "chain": "Polygon",
+        "cumulativeTxs": 29472684,
+        "shareOfIndexedChainsPct": 17.9153
+      },
+      {
+        "chain": "BNB",
+        "cumulativeTxs": 910185,
+        "shareOfIndexedChainsPct": 0.5533
+      },
+      {
+        "chain": "Celo",
+        "cumulativeTxs": 760020,
+        "shareOfIndexedChainsPct": 0.462
+      },
+      {
+        "chain": "Xlayer",
+        "cumulativeTxs": 134206,
+        "shareOfIndexedChainsPct": 0.0816
+      },
+      {
+        "chain": "Monad",
+        "cumulativeTxs": 21010,
+        "shareOfIndexedChainsPct": 0.0128
+      },
+      {
+        "chain": "Avalanche",
+        "cumulativeTxs": 4979,
+        "shareOfIndexedChainsPct": 0.003
+      },
+      {
+        "chain": "Arbitrum",
+        "cumulativeTxs": 1442,
+        "shareOfIndexedChainsPct": 0.0009
+      },
+      {
+        "chain": "Ethereum",
+        "cumulativeTxs": 522,
+        "shareOfIndexedChainsPct": 0.0003
+      },
+      {
+        "chain": "Sei",
+        "cumulativeTxs": 145,
+        "shareOfIndexedChainsPct": 0.0001
+      },
+      {
+        "chain": "Optimism",
+        "cumulativeTxs": 138,
+        "shareOfIndexedChainsPct": 0.0001
+      }
+    ],
+    "chainTableSum": 164510980,
+    "txsSinceChainTableRefresh": 21340260,
+    "dailyLast14": [
+      {
+        "day": "2026-08-26",
+        "txs": 1467034
+      },
+      {
+        "day": "2026-08-27",
+        "txs": 1528992
+      },
+      {
+        "day": "2026-08-28",
+        "txs": 1256764
+      },
+      {
+        "day": "2026-08-29",
+        "txs": 1285303
+      },
+      {
+        "day": "2026-08-30",
+        "txs": 1244492
+      },
+      {
+        "day": "2026-08-31",
+        "txs": 1359228
+      },
+      {
+        "day": "2026-09-01",
+        "txs": 1906277
+      },
+      {
+        "day": "2026-09-02",
+        "txs": 1453415
+      },
+      {
+        "day": "2026-09-03",
+        "txs": 1124974
+      },
+      {
+        "day": "2026-09-04",
+        "txs": 861356
+      },
+      {
+        "day": "2026-09-05",
+        "txs": 715515
+      },
+      {
+        "day": "2026-09-06",
+        "txs": 765871
+      },
+      {
+        "day": "2026-09-07",
+        "txs": 938804
+      },
+      {
+        "day": "2026-09-08",
+        "txs": 14604
+      }
+    ],
+    "txsSep1to7": 7766212,
+    "dailySep1to7": [
+      {
+        "day": "2026-09-01",
+        "txs": 1906277
+      },
+      {
+        "day": "2026-09-02",
+        "txs": 1453415
+      },
+      {
+        "day": "2026-09-03",
+        "txs": 1124974
+      },
+      {
+        "day": "2026-09-04",
+        "txs": 861356
+      },
+      {
+        "day": "2026-09-05",
+        "txs": 715515
+      },
+      {
+        "day": "2026-09-06",
+        "txs": 765871
+      },
+      {
+        "day": "2026-09-07",
+        "txs": 938804
+      }
+    ],
+    "sep8Partial": {
+      "day": "2026-09-08",
+      "txs": 14604
+    }
+  },
+  "mpp": {
+    "source": "agenteconomy tempoMpp (Tempo RPC indexer, channel lifecycle events \u2014 not 1:1 with API calls)",
+    "totalEvents": 45760,
+    "uniquePayers": 1850,
+    "uniquePayees": 90,
+    "byType": {
+      "ChannelOpened": 22852,
+      "CloseRequested": 3132,
+      "ChannelExpired": 2944,
+      "ChannelClosed": 15954,
+      "Settled": 384,
+      "TopUp": 494
+    },
+    "dailyLast5": [
+      {
+        "day": "2026-08-31",
+        "events": 90,
+        "payers": 1,
+        "payees": 1
+      },
+      {
+        "day": "2026-09-01",
+        "events": 35,
+        "payers": 2,
+        "payees": 1
+      },
+      {
+        "day": "2026-09-02",
+        "events": 143,
+        "payers": 2,
+        "payees": 2
+      },
+      {
+        "day": "2026-09-03",
+        "events": 80,
+        "payers": 2,
+        "payees": 2
+      },
+      {
+        "day": "2026-09-04",
+        "events": 8,
+        "payers": 1,
+        "payees": 1
+      }
+    ],
+    "onchainChain": "Tempo"
+  },
+  "robinhoodChain4663": {
+    "includedInMainIndexes": false,
+    "asset": {
+      "symbol": "USDG",
+      "address": "0x5fc5360D0400a0Fd4f2af552ADD042D716F1d168"
+    },
+    "x402ExactProxy": "0x402085c248EeA27D92E8b30b2C58ed07f9E20001",
+    "exactProxyAllTimeTxsBlockscout": 15163,
+    "uptoProxyTxs": 0,
+    "knownFacilitators": {
+      "canopy": {
+        "relayer": "0x43A047aE20bd92eD3a37610062b48Dc314fD17Ff",
+        "uniqueSettlementsAllTime": 21,
+        "lastSuccessfulPayment": "2026-07-13T05:07:02.356Z",
+        "calls7dOnDiscoveryServers": 0,
+        "discoveryServers": 3,
+        "circuitBreaker": true
+      },
+      "primer": {
+        "relayer": "0x37DfB4033D5dD98fd335F24d0d42E8fE68d587D6",
+        "supportedIncludesRobinhood": true,
+        "x402LikeTxsAllTimeOnAddress": 22,
+        "x402LikeTxs7d": 0
+      },
+      "dexter": {
+        "relayer": "0x402Feee072D655B85e08f1751AF9ddbCd249521f",
+        "supportedIncludesRobinhood": true,
+        "addressTxsAllTime": 7,
+        "note": "Last USDG-related calls 2026-07-19; 2026-09-02 tx is depositNative (not x402)."
+      }
+    },
+    "unlistedSettler": {
+      "address": "0xc231248d8f821Cf5e03Dcc11A9258ff8596b1dc3",
+      "blockscoutTxs": 11750,
+      "note": "Dominant msg.sender on recent Exact-proxy settle() USDG payments. Not in x402scan facilitator maps. Ticket sizes 0.005 / 0.01 / 0.02 USDG."
+    },
+    "last50ExactProxySettles": {
+      "window": "2026-09-05 to 2026-09-07",
+      "usdgSettles": 49,
+      "nonUsdgSettles": 1,
+      "usdgVolumeUsd": 0.380002,
+      "froms": {
+        "0x9b7ebb75866ac6acac8d11dbe6677cab6ab26606": 1,
+        "0x564a51e4e70af861647cccac1c61fc707671358c": 2,
+        "0xc231248d8f821cf5e03dcc11a9258ff8596b1dc3": 47
+      }
+    },
+    "ethGetLogsSettled8dLowerBound": {
+      "uniqueTxsApprox": 2949,
+      "note": "RPC 429 skipped some ranges; includes non-USDG tokens using the same proxy. Do not treat as USDG x402 count without receipt filter."
+    },
+    "interpretation": "Robinhood is missing from every dashboard you would normally use. Native scan shows real but tiny USDG x402: Canopy demo is dead since 2026-07-13, while an unlabeled settler 0xc231\u2026 is submitting Exact-proxy USDG settles at Canopy price points. Even 11.7k lifetime txs is noise vs ~7.8M x402 txs on indexed chains in Sep 1\u20137."
+  },
+  "facilitatorNetworkSupportLive": {
+    "payai": [
+      "arbitrum",
+      "arbitrum-sepolia",
+      "avalanche",
+      "avalanche-fuji",
+      "base",
+      "base-sepolia",
+      "eip155:1187947933",
+      "eip155:1329",
+      "eip155:137",
+      "eip155:1952",
+      "eip155:196",
+      "eip155:324705682",
+      "eip155:42161",
+      "eip155:421614",
+      "eip155:43113",
+      "eip155:43114",
+      "eip155:713715",
+      "eip155:80002",
+      "eip155:8453",
+      "eip155:84532",
+      "polygon",
+      "polygon-amoy",
+      "sei",
+      "sei-testnet",
+      "skale-base",
+      "skale-base-sepolia",
+      "solana",
+      "solana-devnet",
+      "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+      "solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1",
+      "xlayer",
+      "xlayer-testnet"
+    ],
+    "primer": [
+      "base",
+      "base-sepolia",
+      "eip155:1187947933",
+      "eip155:324705682",
+      "eip155:4663",
+      "eip155:46630",
+      "eip155:8453",
+      "eip155:84532",
+      "robinhood",
+      "robinhood-testnet",
+      "skale-base",
+      "skale-base-sepolia"
+    ],
+    "dexterHealthNetworks": [
+      "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+      "solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1",
+      "eip155:8453",
+      "eip155:84532",
+      "eip155:137",
+      "eip155:42161",
+      "eip155:10",
+      "eip155:43114",
+      "eip155:56",
+      "eip155:1187947933",
+      "eip155:324705682",
+      "eip155:480",
+      "eip155:143",
+      "eip155:4663"
+    ],
+    "cdpDocumented": [
+      "eip155:8453",
+      "eip155:137",
+      "eip155:42161",
+      "eip155:480",
+      "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp"
+    ]
+  }
+}
