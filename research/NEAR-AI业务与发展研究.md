@@ -26,6 +26,8 @@
 
 8. **OpenAI 兼容 API 不等于 OpenRouter 那门生意。** NEAR AI Cloud 的接口长得像聚合器，利润结构却是「带保险箱的推理主机」。聚合路由可以很大（OpenRouter 已被 Stripe 收购），但抽的是约 5% 过路费，且大客户会直连或自建。NEAR 若拼货架和价格会处下风；可验证隔离是另一张牌。聊天隐私对大众不是刚需、对企业是治理问题；Agent 持钥之后，隐私才从偏好升级为安全需求。展开见 [LLM API 聚合与 AI 隐私](LLM-API聚合与AI隐私.md)。
 
+9. **宣传中的客户名单，证据强度差一个数量级。** Brave、Venice 在自己官网点名 NEAR AI；百慕大政府官网写的是 Foundation 试点；Abound 由泰晤士报侧发稿。没有公开的收入或机密推理用量。Venice 只把 **Pro 的 TEE/E2EE 档** 批发给 NEAR **与** Phala，默认聊天并不走 NEAR。展开见 [NEAR AI 证据与 Venice 渠道](NEAR-AI证据与Venice渠道.md)。
+
 ---
 
 ## 一、先分清三个容易混在一起的名字
