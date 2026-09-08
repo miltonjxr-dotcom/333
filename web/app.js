@@ -9,11 +9,13 @@
   const sourcesEl = document.getElementById("sources");
   const chartEl = document.getElementById("chart");
   const denomButtons = document.querySelectorAll("[data-denom]");
+  const zoomBtn = document.getElementById("zoom-splice");
 
   let denomination = "sky";
   let chart;
   let candleSeries;
   let volumeSeries;
+  let lastData = null;
 
   function fmtTime(ms) {
     return new Date(ms).toISOString().slice(0, 16).replace("T", " ") + " UTC";
@@ -133,6 +135,7 @@
         text: "MKR → SKY",
       },
     ]);
+    lastData = data;
     chart.timeScale().fitContent();
 
     const last = candles[candles.length - 1];
@@ -156,5 +159,18 @@
     btn.addEventListener("click", () => setDenom(btn.dataset.denom));
   });
   intervalEl.addEventListener("change", load);
+  zoomBtn.addEventListener("click", () => {
+    if (!chart || !lastData || !lastData.candles.length) return;
+    const candles = lastData.candles;
+    const cut = lastData.cutover_ms;
+    let idx = candles.findIndex((c) => c.t >= cut);
+    if (idx < 0) idx = candles.length - 1;
+    const from = candles[Math.max(0, idx - 90)];
+    const to = candles[Math.min(candles.length - 1, idx + 40)];
+    chart.timeScale().setVisibleRange({
+      from: Math.floor(from.t / 1000),
+      to: Math.floor(to.t / 1000),
+    });
+  });
   load();
 })();
